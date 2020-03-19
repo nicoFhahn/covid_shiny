@@ -1,0 +1,86 @@
+input[type="number"] {
+  max-width: 80%;
+}
+
+div.outer {
+  position: fixed;
+  top: 41px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Customize fonts */
+body, label, input, button, select { 
+  font-family: 'Helvetica Neue', Helvetica;
+  font-weight: 200;
+}
+h1, h2, h3, h4 { font-weight: 400; }
+
+#controls {
+  /* Appearance */
+  background-color: white;
+  padding: 0 20px 20px 20px;
+  cursor: move;
+  /* Fade out while not hovering */
+  opacity: 0.65;
+  zoom: 0.9;
+  transition: opacity 500ms 1s;
+}
+#controls:hover {
+  /* Fade in while hovering */
+  opacity: 0.95;
+  transition-delay: 0;
+}
+
+/* Position and style citation */
+#cite {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 12px;
+}
+
+#mymap {
+  font-size: 120px;
+}
+
+/* If not using map tiles, show a white background */
+.leaflet-container {
+  background-color: white !important;
+}
+
+#total_cases, #text_default{
+  font-size: 1.5em;
+}
+
+#show_everything {
+  font-size:1em;
+}
+
+#all_default, #all_country {
+  font-size: 1.8em;
+  background-color: rgba(255,165,0,0.5);
+  text-align: center;
+  border-radius: 25% 10% 25% 10%;
+}
+
+#recovered_default, #recovered_country {
+  font-size: 1.8em;
+  background-color: rgba(0,89,0,0.5);
+  text-align: center;
+  border-radius: 25% 10% 25% 10%;
+}
+
+#death_default, #death_country {
+  font-size: 1.8em;
+  background-color: rgba(153,0,0,0.5);
+  text-align: center;
+  border-radius: 25% 10% 25% 10%;
+}
+
+#date {
+  text-align:left;
+}
