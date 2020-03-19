@@ -10,7 +10,7 @@ fillPage(
   tags$head(
     includeCSS("styles.css"),
     includeScript("gomap.js")
-    ),
+  ),
   use_googlefont("Oswald"),
   use_theme(create_theme(
     theme = "default",
@@ -22,7 +22,7 @@ fillPage(
     "mymap",
     width = "100%",
     height = "100vh"
-    ),
+  ),
   absolutePanel(
     id = "controls",
     class = "panel panel-default",
@@ -55,7 +55,7 @@ fillPage(
       )
     ),
     br(),
-    
+
     htmlOutput("show_everything"),
     br(),
     uiOutput("date_ui"),
@@ -64,7 +64,7 @@ fillPage(
       style = "font-size:1.25em;"
     ),
     plotlyOutput("everything_plot", height = "20em"),
-    
+
     h2(
       "Daily numbers:",
       style = "font-size:1.25em;"

@@ -7,11 +7,13 @@ library(fresh)
 library(readr)
 library(sf)
 library(plotly)
+library(stringr)
 # load the data
 source("server/load_data.r")
 # load the api key for mapbox
 try(load_dot_env("key.env"), silent = TRUE)
 key <- Sys.getenv("MAPBOX_KEY")
+# load the interface
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # load the server
 server <- function(input, output, session) {
