@@ -85,9 +85,10 @@ observeEvent(list(
         # add labels
         label = paste(
           corona_frame$`Province/State`, ":<br>",
-          "Confirmed cases:", corona_frame$confirmed, "<br>",
-          "Recovered cases:", corona_frame$recovered, "<br>",
-          "Deceased cases:", corona_frame$deaths
+          "Confirmed cases: ", corona_frame$confirmed, "<br>",
+          "Recovered cases: ", corona_frame$recovered, "<br>",
+          "Deceased cases: ", corona_frame$deaths,
+          sep = ""
         ) %>% lapply(htmltools::HTML),
         # style the labels
         labelOptions = labelOptions(
@@ -108,9 +109,10 @@ observeEvent(list(
         stroke = FALSE,
         label = paste(
           corona_frame$`Province/State`, ":<br>",
-          "Confirmed cases:", corona_frame$confirmed, "<br>",
-          "Recovered cases:", corona_frame$recovered, "<br>",
-          "Deceased cases:", corona_frame$deaths
+          "Confirmed cases: ", corona_frame$confirmed, "<br>",
+          "Recovered cases: ", corona_frame$recovered, "<br>",
+          "Deceased cases: ", corona_frame$deaths,
+          sep = ""
         ) %>% lapply(htmltools::HTML),
         labelOptions = labelOptions(
           style = list(
@@ -130,9 +132,10 @@ observeEvent(list(
         stroke = FALSE,
         label = paste(
           corona_frame$`Province/State`, ":<br>",
-          "Confirmed cases:", corona_frame$confirmed, "<br>",
-          "Recovered cases:", corona_frame$recovered, "<br>",
-          "Deceased cases:", corona_frame$deaths
+          "Confirmed cases: ", corona_frame$confirmed, "<br>",
+          "Recovered cases: ", corona_frame$recovered, "<br>",
+          "Deceased cases: ", corona_frame$deaths,
+          sep = ""
         ) %>% lapply(htmltools::HTML),
         labelOptions = labelOptions(
           style = list(

@@ -1,5 +1,4 @@
 library(leaflet)
-library(shinyWidgets)
 library(plotly)
 library(dotenv)
 library(shiny)
