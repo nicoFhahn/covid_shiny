@@ -18,7 +18,7 @@ runGitHub("covid_shiny", "nicoFhahn")
 ![alt text](https://i.imgur.com/LXsXsbY.png "Logo Title Text 1")
 
 ### Acknowledgments
-The Folks over at RStudio with the [SuperZIP demo](https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example) which heavily inspired the layout of this app.
+The folks over at RStudio with the [SuperZIP demo](https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example) which heavily inspired the layout of this app.
 
 ### Questions/issuses/contacts
 nico@f-hahn.de, or open a GitHub issue
