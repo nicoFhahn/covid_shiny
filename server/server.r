@@ -41,8 +41,20 @@ observeEvent(list(
     if (class(country) != "try-error") {
       # if a country was clicked, select the subset of corona data
       if (country != "world") {
-        country <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country, corona_sf)), ]
+        country_df <- countries[countries$ADMIN == country, ]
+        corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+        }
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ] 
+        }
+        if (nrow(corona_frame) == 0) {
+          corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
+          corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+          corona_frame[, ]$date <- unique(corona_sf$date)
+          corona_frame$geometry <- country_df$geometry
+        }
       }
     }
     # get a frame between the two dates
@@ -224,12 +236,24 @@ output$all_default <- renderText({
 
 output$all_country <- renderText({
   # get the country
-  a <- get_country()
+  country <- get_country()
   daterange <- input$date
   # calculate cases based on whether a country was clicked
-  if (a != "world") {
-    country <- countries[countries$ADMIN == a, ]
-    corona_frame <- corona_sf[unlist(st_contains(country, corona_sf)), ]
+  if (country != "world") {
+    country_df <- countries[countries$ADMIN == country, ]
+    corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+    if (nrow(corona_frame) == 0) {
+      corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+    }
+    if (nrow(corona_frame) == 0) {
+      corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ] 
+    }
+    if (nrow(corona_frame) == 0) {
+      corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
+      corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+      corona_frame[, ]$date <- unique(corona_sf$date)
+      corona_frame$geometry <- country_df$geometry
+    }
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$confirmed)
     cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$confirmed)
@@ -271,12 +295,24 @@ output$recovered_default <- renderText({
 })
 
 output$recovered_country <- renderText({
-  a <- get_country()
+  country <- get_country()
   daterange <- input$date
   # calculate the number of cases based on whether a country was clicked
-  if (a != "world") {
-    country <- countries[countries$ADMIN == a, ]
-    corona_frame <- corona_sf[unlist(st_contains(country, corona_sf)), ]
+  if (country != "world") {
+    country_df <- countries[countries$ADMIN == country, ]
+    corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+    if (nrow(corona_frame) == 0) {
+      corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+    }
+    if (nrow(corona_frame) == 0) {
+      corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ] 
+    }
+    if (nrow(corona_frame) == 0) {
+      corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
+      corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+      corona_frame[, ]$date <- unique(corona_sf$date)
+      corona_frame$geometry <- country_df$geometry
+    }
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$recovered)
     cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$recovered)
@@ -318,12 +354,24 @@ output$death_default <- renderText({
 })
 
 output$death_country <- renderText({
-  a <- get_country()
+  country <- get_country()
   daterange <- input$date
   # calculate the number of cases based on whether a country was clicked
-  if (a != "world") {
-    country <- countries[countries$ADMIN == a, ]
-    corona_frame <- corona_sf[unlist(st_contains(country, corona_sf)), ]
+  if (country != "world") {
+    country_df <- countries[countries$ADMIN == country, ]
+    corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+    if (nrow(corona_frame) == 0) {
+      corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+    }
+    if (nrow(corona_frame) == 0) {
+      corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ] 
+    }
+    if (nrow(corona_frame) == 0) {
+      corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
+      corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+      corona_frame[, ]$date <- unique(corona_sf$date)
+      corona_frame$geometry <- country_df$geometry
+    }
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$deaths)
     cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$deaths)
@@ -366,11 +414,18 @@ observeEvent(list(
     # get the country
     country <- try(get_country(), silent = TRUE)
     corona_frame <- corona_sf
+    print(country)
     if (class(country) != "try-error") {
       # select subset
       if (country != "world") {
         country_df <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+        }
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ] 
+        }
         if (nrow(corona_frame) == 0) {
           corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
           corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
@@ -480,7 +535,13 @@ observeEvent(list(
     if (class(country) != "try-error") {
       if (country != "world") {
         country_df <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+        }
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ] 
+        }
         if (nrow(corona_frame) == 0) {
           corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
           corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
