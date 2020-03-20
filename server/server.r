@@ -369,8 +369,14 @@ observeEvent(list(
     if (class(country) != "try-error") {
       # select subset
       if (country != "world") {
-        country <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country, corona_sf)), ]
+        country_df <- countries[countries$ADMIN == country, ]
+        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        if (nrow(corona_frame) == 0) {
+          corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
+          corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+          corona_frame[, ]$date <- unique(corona_sf$date)
+          corona_frame$geometry <- country_df$geometry
+        }
       }
     }
     corona_frame <- corona_frame[corona_frame$date >= daterange[1] & corona_frame$date <= daterange[2], ]
@@ -473,8 +479,14 @@ observeEvent(list(
     corona_frame <- corona_sf
     if (class(country) != "try-error") {
       if (country != "world") {
-        country <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country, corona_sf)), ]
+        country_df <- countries[countries$ADMIN == country, ]
+        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        if (nrow(corona_frame) == 0) {
+          corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
+          corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+          corona_frame[, ]$date <- unique(corona_sf$date)
+          corona_frame$geometry <- country_df$geometry
+        }
       }
     }
     corona_frame <- corona_frame[corona_frame$date >= daterange[1] & corona_frame$date <= daterange[2], ]
