@@ -416,11 +416,11 @@ output$all_default <- renderText({
   check2 <- daterange[2] == max(corona_sf$date)
   # calculate the number of cases
   if (all(c(check1, check2))) {
-    paste("<font size = 3em> confirmed:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$confirmed))
+    paste("<font size = 3em> confirmed:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$confirmed, na.rm = TRUE))
   } else {
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$confirmed)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$confirmed)
+    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$confirmed, na.rm = TRUE)
+    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$confirmed, na.rm = TRUE)
     paste("<font size = 3em> confirmed:</font><br>", cases_end - cases_beginning)
   }
 })
@@ -446,13 +446,13 @@ output$all_country <- renderText({
       corona_frame$geometry <- country_df$geometry
     }
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$confirmed)
-    cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$confirmed)
+    cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$confirmed, na.rm = TRUE)
+    cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$confirmed, na.rm = TRUE)
     paste("<font size = 3em> confirmed:</font><br>", cases_end - cases_beginning)
   } else {
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$confirmed)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$confirmed)
+    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$confirmed, na.rm = TRUE)
+    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$confirmed, na.rm = TRUE)
     paste("<font size = 3em> confirmed:</font><br>", cases_end - cases_beginning)
   }
 })
@@ -476,11 +476,11 @@ output$recovered_default <- renderText({
   check2 <- daterange[2] == max(corona_sf$date)
   # calculate the number of cases
   if (all(c(check1, check2))) {
-    paste("<font size = 3em> recovered:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$recovered))
+    paste("<font size = 3em> recovered:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$recovered, na.rm = TRUE))
   } else {
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered)
+    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered, na.rm = TRUE)
+    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered, na.rm = TRUE)
     paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
   }
 })
@@ -505,13 +505,13 @@ output$recovered_country <- renderText({
       corona_frame$geometry <- country_df$geometry
     }
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$recovered)
-    cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$recovered)
+    cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$recovered, na.rm = TRUE)
+    cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$recovered, na.rm = TRUE)
     paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
   } else {
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered)
+    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered, na.rm = TRUE)
+    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered, na.rm = TRUE)
     paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
   }
 })
@@ -535,11 +535,11 @@ output$death_default <- renderText({
   check2 <- daterange[2] == max(corona_sf$date)
   # calculate the number of cases
   if (all(c(check1, check2))) {
-    paste("<font size = 3em> deceased:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$deaths))
+    paste("<font size = 3em> deceased:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$deaths, na.rm = TRUE))
   } else {
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$deaths)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$deaths)
+    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$deaths, na.rm = TRUE)
+    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$deaths, na.rm = TRUE)
     paste("<font size = 3em> deceased:</font><br>", cases_end - cases_beginning)
   }
 })
@@ -564,13 +564,13 @@ output$death_country <- renderText({
       corona_frame$geometry <- country_df$geometry
     }
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$deaths)
-    cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$deaths)
+    cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$deaths, na.rm = TRUE)
+    cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$deaths, na.rm = TRUE)
     paste("<font size = 3em> deceased:</font><br>", cases_end - cases_beginning)
   } else {
     daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$deaths)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$deaths)
+    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$deaths, na.rm = TRUE)
+    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$deaths, na.rm = TRUE)
     paste("<font size = 3em> deceased:</font><br>", cases_end - cases_beginning)
   }
 })
