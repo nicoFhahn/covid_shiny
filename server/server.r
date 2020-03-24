@@ -52,7 +52,7 @@ observeEvent(list(
         }
         if (nrow(corona_frame) == 0) {
           corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
-          corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+          corona_frame[1:length(unique(corona_sf$date)), c(3, 5)] <- 0
           corona_frame[, ]$date <- unique(corona_sf$date)
           corona_frame$geometry <- country_df$geometry
         }
@@ -66,7 +66,7 @@ observeEvent(list(
     corona_frame2 <- corona_frame[corona_frame$date == min(corona_frame$date), ]
     # calculate the number of caes in the timeframe
     corona_frame1$confirmed <- corona_frame1$confirmed - corona_frame2$confirmed
-    corona_frame1$recovered <- corona_frame1$recovered - corona_frame2$recovered
+    # corona_frame1$recovered <- corona_frame1$recovered - corona_frame2$recovered
     corona_frame1$deaths <- corona_frame1$deaths - corona_frame2$deaths
     corona_frame <- corona_frame1
     # create the map
@@ -107,7 +107,7 @@ observeEvent(list(
             label = paste(
               corona_frame$`Province/State`, ":<br>",
               "Confirmed cases: ", corona_frame$confirmed, "<br>",
-              "Recovered cases: ", corona_frame$recovered, "<br>",
+              # "Recovered cases: ", corona_frame$recovered, "<br>",
               "Deceased cases: ", corona_frame$deaths,
               sep = ""
             ) %>% lapply(htmltools::HTML),
@@ -122,28 +122,28 @@ observeEvent(list(
             )
           ) %>%
           # do the same again
-          addCircles(
-            data = st_centroid(corona_frame),
-            fillOpacity = 0.5,
-            radius = ~ sqrt(recovered) * 1250,
-            color = "#5ac18e",
-            stroke = FALSE,
-            label = paste(
-              corona_frame$`Province/State`, ":<br>",
-              "Confirmed cases: ", corona_frame$confirmed, "<br>",
-              "Recovered cases: ", corona_frame$recovered, "<br>",
-              "Deceased cases: ", corona_frame$deaths,
-              sep = ""
-            ) %>% lapply(htmltools::HTML),
-            labelOptions = labelOptions(
-              style = list(
-                "font-family" = "Oswald",
-                "font-style" = "sans-serif",
-                "font-size" = "14px",
-                "border-color" = "rgba(0,0,0,0.5)"
-              )
-            )
-          ) %>%
+          # addCircles(
+          #   data = st_centroid(corona_frame),
+          #   fillOpacity = 0.5,
+          #   radius = ~ sqrt(recovered) * 1250,
+          #   color = "#5ac18e",
+          #   stroke = FALSE,
+          #   label = paste(
+          #     corona_frame$`Province/State`, ":<br>",
+          #     "Confirmed cases: ", corona_frame$confirmed, "<br>",
+          #     "Recovered cases: ", corona_frame$recovered, "<br>",
+          #     "Deceased cases: ", corona_frame$deaths,
+          #     sep = ""
+          #   ) %>% lapply(htmltools::HTML),
+          #   labelOptions = labelOptions(
+          #     style = list(
+          #       "font-family" = "Oswald",
+          #       "font-style" = "sans-serif",
+          #       "font-size" = "14px",
+          #       "border-color" = "rgba(0,0,0,0.5)"
+          #     )
+          #   )
+          # ) %>%
           # and again
           addCircles(
             data = st_centroid(corona_frame),
@@ -154,7 +154,7 @@ observeEvent(list(
             label = paste(
               corona_frame$`Province/State`, ":<br>",
               "Confirmed cases: ", corona_frame$confirmed, "<br>",
-              "Recovered cases: ", corona_frame$recovered, "<br>",
+              # "Recovered cases: ", corona_frame$recovered, "<br>",
               "Deceased cases: ", corona_frame$deaths,
               sep = ""
             ) %>% lapply(htmltools::HTML),
@@ -197,7 +197,7 @@ observeEvent(list(
             label = paste(
               corona_frame$`Province/State`, ":<br>",
               "Confirmed cases: ", corona_frame$confirmed, "<br>",
-              "Recovered cases: ", corona_frame$recovered, "<br>",
+              # "Recovered cases: ", corona_frame$recovered, "<br>",
               "Deceased cases: ", corona_frame$deaths,
               sep = ""
             ) %>% lapply(htmltools::HTML),
@@ -212,28 +212,28 @@ observeEvent(list(
             )
           ) %>%
           # do the same again
-          addCircles(
-            data = corona_frame,
-            fillOpacity = 0.5,
-            radius = ~ sqrt(recovered) * 1250,
-            color = "#5ac18e",
-            stroke = FALSE,
-            label = paste(
-              corona_frame$`Province/State`, ":<br>",
-              "Confirmed cases: ", corona_frame$confirmed, "<br>",
-              "Recovered cases: ", corona_frame$recovered, "<br>",
-              "Deceased cases: ", corona_frame$deaths,
-              sep = ""
-            ) %>% lapply(htmltools::HTML),
-            labelOptions = labelOptions(
-              style = list(
-                "font-family" = "Oswald",
-                "font-style" = "sans-serif",
-                "font-size" = "14px",
-                "border-color" = "rgba(0,0,0,0.5)"
-              )
-            )
-          ) %>%
+          # addCircles(
+          #   data = corona_frame,
+          #   fillOpacity = 0.5,
+          #   radius = ~ sqrt(recovered) * 1250,
+          #   color = "#5ac18e",
+          #   stroke = FALSE,
+          #   label = paste(
+          #     corona_frame$`Province/State`, ":<br>",
+          #     "Confirmed cases: ", corona_frame$confirmed, "<br>",
+          #     "Recovered cases: ", corona_frame$recovered, "<br>",
+          #     "Deceased cases: ", corona_frame$deaths,
+          #     sep = ""
+          #   ) %>% lapply(htmltools::HTML),
+          #   labelOptions = labelOptions(
+          #     style = list(
+          #       "font-family" = "Oswald",
+          #       "font-style" = "sans-serif",
+          #       "font-size" = "14px",
+          #       "border-color" = "rgba(0,0,0,0.5)"
+          #     )
+          #   )
+          # ) %>%
           # and again
           addCircles(
             data = corona_frame,
@@ -244,7 +244,7 @@ observeEvent(list(
             label = paste(
               corona_frame$`Province/State`, ":<br>",
               "Confirmed cases: ", corona_frame$confirmed, "<br>",
-              "Recovered cases: ", corona_frame$recovered, "<br>",
+              # "Recovered cases: ", corona_frame$recovered, "<br>",
               "Deceased cases: ", corona_frame$deaths,
               sep = ""
             ) %>% lapply(htmltools::HTML),
@@ -288,7 +288,7 @@ observeEvent(list(
           label = paste(
             corona_frame$`Province/State`, ":<br>",
             "Confirmed cases: ", corona_frame$confirmed, "<br>",
-            "Recovered cases: ", corona_frame$recovered, "<br>",
+            # "Recovered cases: ", corona_frame$recovered, "<br>",
             "Deceased cases: ", corona_frame$deaths,
             sep = ""
           ) %>% lapply(htmltools::HTML),
@@ -303,28 +303,28 @@ observeEvent(list(
           )
         ) %>%
         # do the same again
-        addCircles(
-          data = corona_frame,
-          fillOpacity = 0.5,
-          radius = ~ sqrt(recovered) * 1250,
-          color = "#5ac18e",
-          stroke = FALSE,
-          label = paste(
-            corona_frame$`Province/State`, ":<br>",
-            "Confirmed cases: ", corona_frame$confirmed, "<br>",
-            "Recovered cases: ", corona_frame$recovered, "<br>",
-            "Deceased cases: ", corona_frame$deaths,
-            sep = ""
-          ) %>% lapply(htmltools::HTML),
-          labelOptions = labelOptions(
-            style = list(
-              "font-family" = "Oswald",
-              "font-style" = "sans-serif",
-              "font-size" = "14px",
-              "border-color" = "rgba(0,0,0,0.5)"
-            )
-          )
-        ) %>%
+        # addCircles(
+        #   data = corona_frame,
+        #   fillOpacity = 0.5,
+        #   radius = ~ sqrt(recovered) * 1250,
+        #   color = "#5ac18e",
+        #   stroke = FALSE,
+        #   label = paste(
+        #     corona_frame$`Province/State`, ":<br>",
+        #     "Confirmed cases: ", corona_frame$confirmed, "<br>",
+        #     "Recovered cases: ", corona_frame$recovered, "<br>",
+        #     "Deceased cases: ", corona_frame$deaths,
+        #     sep = ""
+        #   ) %>% lapply(htmltools::HTML),
+        #   labelOptions = labelOptions(
+        #     style = list(
+        #       "font-family" = "Oswald",
+        #       "font-style" = "sans-serif",
+        #       "font-size" = "14px",
+        #       "border-color" = "rgba(0,0,0,0.5)"
+        #     )
+        #   )
+        # ) %>%
         # and again
         addCircles(
           data = corona_frame,
@@ -335,7 +335,7 @@ observeEvent(list(
           label = paste(
             corona_frame$`Province/State`, ":<br>",
             "Confirmed cases: ", corona_frame$confirmed, "<br>",
-            "Recovered cases: ", corona_frame$recovered, "<br>",
+            # "Recovered cases: ", corona_frame$recovered, "<br>",
             "Deceased cases: ", corona_frame$deaths,
             sep = ""
           ) %>% lapply(htmltools::HTML),
@@ -441,7 +441,7 @@ output$all_country <- renderText({
     }
     if (nrow(corona_frame) == 0) {
       corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
-      corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+      corona_frame[1:length(unique(corona_sf$date)), c(3, 5)] <- 0
       corona_frame[, ]$date <- unique(corona_sf$date)
       corona_frame$geometry <- country_df$geometry
     }
@@ -458,63 +458,63 @@ output$all_country <- renderText({
 })
 
 # either show default text or click based
-output$cases_recovered_ui <- renderUI({
-  if (is.null(input$mymap_click)) {
-    htmlOutput("recovered_default")
-  } else {
-    htmlOutput("recovered_country")
-  }
-})
-
-
-output$recovered_default <- renderText({
-  # get the daterange
-  daterange <- get_date()
-  # check if the first date changed
-  check1 <- daterange[1] == (min(corona_sf$date) + 1)
-  # check if the second date changed
-  check2 <- daterange[2] == max(corona_sf$date)
-  # calculate the number of cases
-  if (all(c(check1, check2))) {
-    paste("<font size = 3em> recovered:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$recovered, na.rm = TRUE))
-  } else {
-    daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered, na.rm = TRUE)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered, na.rm = TRUE)
-    paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
-  }
-})
-
-output$recovered_country <- renderText({
-  country <- get_country()
-  daterange <- input$date
-  # calculate the number of cases based on whether a country was clicked
-  if (country != "world") {
-    country_df <- countries[countries$ADMIN == country, ]
-    corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
-    if (nrow(corona_frame) == 0) {
-      corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
-    }
-    if (nrow(corona_frame) == 0) {
-      corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
-    }
-    if (nrow(corona_frame) == 0) {
-      corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
-      corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
-      corona_frame[, ]$date <- unique(corona_sf$date)
-      corona_frame$geometry <- country_df$geometry
-    }
-    daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$recovered, na.rm = TRUE)
-    cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$recovered, na.rm = TRUE)
-    paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
-  } else {
-    daterange[1] <- daterange[1] - 1
-    cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered, na.rm = TRUE)
-    cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered, na.rm = TRUE)
-    paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
-  }
-})
+# output$cases_recovered_ui <- renderUI({
+#   if (is.null(input$mymap_click)) {
+#     htmlOutput("recovered_default")
+#   } else {
+#     htmlOutput("recovered_country")
+#   }
+# })
+# 
+# 
+# output$recovered_default <- renderText({
+#   # get the daterange
+#   daterange <- get_date()
+#   # check if the first date changed
+#   check1 <- daterange[1] == (min(corona_sf$date) + 1)
+#   # check if the second date changed
+#   check2 <- daterange[2] == max(corona_sf$date)
+#   # calculate the number of cases
+#   if (all(c(check1, check2))) {
+#     paste("<font size = 3em> recovered:</font><br>", sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$recovered, na.rm = TRUE))
+#   } else {
+#     daterange[1] <- daterange[1] - 1
+#     cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered, na.rm = TRUE)
+#     cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered, na.rm = TRUE)
+#     paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
+#   }
+# })
+# 
+# output$recovered_country <- renderText({
+#   country <- get_country()
+#   daterange <- input$date
+#   # calculate the number of cases based on whether a country was clicked
+#   if (country != "world") {
+#     country_df <- countries[countries$ADMIN == country, ]
+#     corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+#     if (nrow(corona_frame) == 0) {
+#       corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+#     }
+#     if (nrow(corona_frame) == 0) {
+#       corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+#     }
+#     if (nrow(corona_frame) == 0) {
+#       corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
+#       corona_frame[1:length(unique(corona_sf$date)), c(3, 5)] <- 0
+#       corona_frame[, ]$date <- unique(corona_sf$date)
+#       corona_frame$geometry <- country_df$geometry
+#     }
+#     daterange[1] <- daterange[1] - 1
+#     cases_beginning <- sum(corona_frame[corona_frame$date == daterange[1], ]$recovered, na.rm = TRUE)
+#     cases_end <- sum(corona_frame[corona_frame$date == daterange[2], ]$recovered, na.rm = TRUE)
+#     paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
+#   } else {
+#     daterange[1] <- daterange[1] - 1
+#     cases_beginning <- sum(corona_sf[corona_sf$date == daterange[1], ]$recovered, na.rm = TRUE)
+#     cases_end <- sum(corona_sf[corona_sf$date == daterange[2], ]$recovered, na.rm = TRUE)
+#     paste("<font size = 3em> recovered:</font><br>", cases_end - cases_beginning)
+#   }
+# })
 
 # either show default text or click based
 output$cases_death_ui <- renderUI({
@@ -559,7 +559,7 @@ output$death_country <- renderText({
     }
     if (nrow(corona_frame) == 0) {
       corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
-      corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+      corona_frame[1:length(unique(corona_sf$date)), c(3, 5)] <- 0
       corona_frame[, ]$date <- unique(corona_sf$date)
       corona_frame$geometry <- country_df$geometry
     }
@@ -618,7 +618,7 @@ observeEvent(list(
         }
         if (nrow(corona_frame) == 0) {
           corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
-          corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+          corona_frame[1:length(unique(corona_sf$date)), c(3, 5)] <- 0
           corona_frame[, ]$date <- unique(corona_sf$date)
           corona_frame$geometry <- country_df$geometry
         }
@@ -632,16 +632,17 @@ observeEvent(list(
       group_by(date) %>%
       summarise(
         confirmed = sum(confirmed),
-        deaths = sum(deaths),
-        recovered = sum(recovered)
+        deaths = sum(deaths)# ,
+        # recovered = sum(recovered)
       )
-    colnames(corona_grouped) <- c("Date", "Confirmed", "Deaths", "Recovered")
+    # colnames(corona_grouped) <- c("Date", "Confirmed", "Deaths", "Recovered")
+    colnames(corona_grouped) <- c("Date", "Confirmed", "Deaths")
     # update the plot
     plotlyProxy("everything_plot", session) %>%
       # delete the old traces
       plotlyProxyInvoke("deleteTraces", list(0)) %>%
       plotlyProxyInvoke("deleteTraces", list(0)) %>%
-      plotlyProxyInvoke("deleteTraces", list(0)) %>%
+      # plotlyProxyInvoke("deleteTraces", list(0)) %>%
       # add new traces
       plotlyProxyInvoke("addTraces", list(
         x = corona_grouped$Date,
@@ -654,30 +655,30 @@ observeEvent(list(
         hoverinfo = "text",
         text = paste(
           "Confirmed cases:", corona_grouped$Confirmed, "<br>",
-          "Recovered cases:", corona_grouped$Recovered, "<br>",
+          # "Recovered cases:", corona_grouped$Recovered, "<br>",
           "Deceased cases:", corona_grouped$Deaths
         ),
         line = list(color = "rgba(255, 115, 115, 1)")
       )) %>%
+      # plotlyProxyInvoke("addTraces", list(
+      #   x = corona_grouped$Date,
+      #   y = corona_grouped$Recovered - corona_grouped$Deaths,
+      #   name = "Recovered",
+      #   type = "scatter",
+      #   mode = "none",
+      #   stackgroup = "one",
+      #   fillcolor = "rgba(90, 193, 142, 0.5)",
+      #   hoverinfo = "text",
+      #   text = paste(
+      #     "Confirmed cases:", corona_grouped$Confirmed, "<br>",
+      #     "Recovered cases:", corona_grouped$Recovered, "<br>",
+      #     "Deceased cases:", corona_grouped$Deaths
+      #   ),
+      #   line = list(color = "rgba(90, 193, 142, 1)")
+      # )) %>%
       plotlyProxyInvoke("addTraces", list(
         x = corona_grouped$Date,
-        y = corona_grouped$Recovered - corona_grouped$Deaths,
-        name = "Recovered",
-        type = "scatter",
-        mode = "none",
-        stackgroup = "one",
-        fillcolor = "rgba(90, 193, 142, 0.5)",
-        hoverinfo = "text",
-        text = paste(
-          "Confirmed cases:", corona_grouped$Confirmed, "<br>",
-          "Recovered cases:", corona_grouped$Recovered, "<br>",
-          "Deceased cases:", corona_grouped$Deaths
-        ),
-        line = list(color = "rgba(90, 193, 142, 1)")
-      )) %>%
-      plotlyProxyInvoke("addTraces", list(
-        x = corona_grouped$Date,
-        y = corona_grouped$Confirmed - corona_grouped$Deaths - corona_grouped$Recovered,
+        y = corona_grouped$Confirmed - corona_grouped$Deaths, #- corona_grouped$Recovered,
         name = "Confirmed",
         type = "scatter",
         mode = "none",
@@ -686,7 +687,7 @@ observeEvent(list(
         hoverinfo = "text",
         text = paste(
           "Confirmed cases:", corona_grouped$Confirmed, "<br>",
-          "Recovered cases:", corona_grouped$Recovered, "<br>",
+          # "Recovered cases:", corona_grouped$Recovered, "<br>",
           "Deceased cases:", corona_grouped$Deaths
         ),
         line = list(color = "rgba(255, 183, 51, 1)")
@@ -734,7 +735,7 @@ observeEvent(list(
         }
         if (nrow(corona_frame) == 0) {
           corona_frame[1:length(unique(corona_sf$date)), 1:2] <- country
-          corona_frame[1:length(unique(corona_sf$date)), c(3, 5, 6)] <- 0
+          corona_frame[1:length(unique(corona_sf$date)), c(3, 5)] <- 0
           corona_frame[, ]$date <- unique(corona_sf$date)
           corona_frame$geometry <- country_df$geometry
         }
@@ -747,23 +748,24 @@ observeEvent(list(
       group_by(date) %>%
       summarise(
         confirmed = sum(confirmed),
-        deaths = sum(deaths),
-        recovered = sum(recovered)
+        deaths = sum(deaths)# ,
+        # recovered = sum(recovered)
       )
-    colnames(corona_grouped) <- c("Date", "Confirmed", "Deaths", "Recovered")
+    # colnames(corona_grouped) <- c("Date", "Confirmed", "Deaths", "Recovered")
+    colnames(corona_grouped) <- c("Date", "Confirmed", "Deaths")
     corona_grouped2 <- corona_grouped
     # count the number of cases for each specific day
     for (i in nrow(corona_grouped2):2) {
       corona_grouped2[i, ]$Confirmed <- corona_grouped2[i, ]$Confirmed - corona_grouped2[i - 1, ]$Confirmed
       corona_grouped2[i, ]$Deaths <- corona_grouped2[i, ]$Deaths - corona_grouped2[i - 1, ]$Deaths
-      corona_grouped2[i, ]$Recovered <- corona_grouped2[i, ]$Recovered - corona_grouped2[i - 1, ]$Recovered
+      # corona_grouped2[i, ]$Recovered <- corona_grouped2[i, ]$Recovered - corona_grouped2[i - 1, ]$Recovered
     }
     # update the plot
     plotlyProxy("daily_plot", session) %>%
       # remove old traces
       plotlyProxyInvoke("deleteTraces", list(0)) %>%
       plotlyProxyInvoke("deleteTraces", list(0)) %>%
-      plotlyProxyInvoke("deleteTraces", list(0)) %>%
+      # plotlyProxyInvoke("deleteTraces", list(0)) %>%
       # add new traces
       plotlyProxyInvoke("addTraces", list(
         x = corona_grouped2$Date,
@@ -772,14 +774,14 @@ observeEvent(list(
         type = "bar",
         marker = list(color = "rgba(255, 183, 51, 0.7)")
       )) %>%
-      plotlyProxyInvoke("addTraces", list(
-        x = corona_grouped2$Date,
-        y = corona_grouped2$Recovered,
-        name = "Deceased",
-        type = "bar",
-        marker = list(color = "rgba(90, 193, 142, 0.7)"),
-        visible = FALSE
-      )) %>%
+      # plotlyProxyInvoke("addTraces", list(
+      #   x = corona_grouped2$Date,
+      #   y = corona_grouped2$Recovered,
+      #   name = "Deceased",
+      #   type = "bar",
+      #   marker = list(color = "rgba(90, 193, 142, 0.7)"),
+      #   visible = FALSE
+      # )) %>%
       plotlyProxyInvoke("addTraces", list(
         x = corona_grouped2$Date,
         y = corona_grouped2$Deaths,
@@ -795,21 +797,23 @@ observeEvent(list(
         updatemenus = list(
           list(
             y = 1.1,
-            x = 0.33,
+            x = 0.43,
             buttons = list(
               list(
                 method = "restyle",
-                args = list("visible", list(TRUE, FALSE, FALSE)),
+                # args = list("visible", list(TRUE, FALSE, FALSE)),
+                args = list("visible", list(TRUE, FALSE)),
                 label = "Confirmed"
               ),
+              # list(
+              #   method = "restyle",
+              #   args = list("visible", list(FALSE, TRUE, FALSE)),
+              #   label = "Recovered"
+              # ),
               list(
                 method = "restyle",
-                args = list("visible", list(FALSE, TRUE, FALSE)),
-                label = "Recovered"
-              ),
-              list(
-                method = "restyle",
-                args = list("visible", list(FALSE, FALSE, TRUE)),
+                # args = list("visible", list(FALSE, FALSE, TRUE)),
+                args = list("visible", list(FALSE, TRUE)),
                 label = "Deceased"
               )
             )

@@ -8,7 +8,7 @@ library(sf)
 library(plotly)
 library(stringr)
 # load the data
-source(file.path("server","load_data.r"), local = TRUE)
+source(file.path("server","load_data.R"), local = TRUE)
 # load the api key for mapbox
 try(load_dot_env("key.env"), silent = TRUE)
 key <- Sys.getenv("MAPBOX_KEY")

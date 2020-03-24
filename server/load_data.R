@@ -1,5 +1,7 @@
 # download the data
-confirmed <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv")
+# old confirmed data
+# confirmed <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv")
+confirmed <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
 # now a whole bunch of preprocessing
 # get the cases for the first day
 confirmed_long <- confirmed[, 1:5]
@@ -30,19 +32,23 @@ confirmed_long2 <- lapply(6:ncol(confirmed), function(i, ...) {
 confirmed_long <- rbind(confirmed_long, Reduce(rbind, confirmed_long2))
 
 # now do the same for the recovered and deceased cases
-recovered <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv")
-recovered_long <- recovered[, 1:5]
-colnames(recovered_long)[5] <- "recovered"
+# recovered will no longer be updated
+# recovered <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv")
+# recovered_long <- recovered[, 1:5]
+# colnames(recovered_long)[5] <- "recovered"
+# 
+# recovered_long2 <- lapply(6:ncol(recovered), function(i, ...) {
+#   recovered_new <- recovered[, c(1:4, i)]
+#   colnames(recovered_new)[5] <- "recovered"
+#   recovered_new
+# })
+# 
+# recovered_long <- rbind(recovered_long, Reduce(rbind, recovered_long2))
 
-recovered_long2 <- lapply(6:ncol(recovered), function(i, ...) {
-  recovered_new <- recovered[, c(1:4, i)]
-  colnames(recovered_new)[5] <- "recovered"
-  recovered_new
-})
 
-recovered_long <- rbind(recovered_long, Reduce(rbind, recovered_long2))
-
-deaths <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv")
+# old death
+# deaths <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv")
+deaths <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")
 deaths_long <- deaths[, 1:5]
 colnames(deaths_long)[5] <- "deaths"
 
@@ -55,13 +61,15 @@ deaths_long2 <- lapply(6:ncol(deaths), function(i, ...) {
 deaths_long <- rbind(deaths_long, Reduce(rbind, deaths_long2))
 
 # bind together to one data.frame
-corona <- cbind(confirmed_long, recovered_long$recovered, deaths_long$deaths)
+# corona <- cbind(confirmed_long, recovered_long$recovered, deaths_long$deaths)
+corona <- cbind(confirmed_long, deaths_long$deaths)
 # nicer colnames
-colnames(corona)[7:8] <- c("recovered", "deaths")
+# colnames(corona)[7:8] <- c("recovered", "deaths")
+colnames(corona)[7] <- c("deaths")
 # add a day 0 frame
 corona_0 <- corona[1:nrow(confirmed), ]
 corona_0$confirmed <- 0
-corona_0$recovered <- 0
+# corona_0$recovered <- 0
 corona_0$deaths <- 0
 corona_0$date <- min(corona$date) - 1
 corona <- rbind(corona_0, corona)

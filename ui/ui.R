@@ -42,15 +42,15 @@ fillPage(
     br(),
     fluidRow(
       column(
-        width = 4,
+        width = 6,
         uiOutput("cases_all_ui")
       ),
+      # column(
+      #   width = 4,
+      #   uiOutput("cases_recovered_ui")
+      # ),
       column(
-        width = 4,
-        uiOutput("cases_recovered_ui")
-      ),
-      column(
-        width = 4,
+        width = 6,
         htmlOutput("cases_death_ui")
       )
     ),
