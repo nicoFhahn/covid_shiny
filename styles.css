@@ -189,7 +189,7 @@ section.content {
 
 #tabset {
   border: 0px solid red;
-  border-bottom: 1px solid #00bb8b;
+  border-bottom: 0px solid #00bb8b;
 }
 
 a {
