@@ -100,7 +100,7 @@ section.content {
 
 .story_1 {
   padding-top:70%;
-  padding-bottom:140%;
+  padding-bottom:80vh;
   background-color:#161616;
   font-family: 'Open Sans', sans-serif;
   font-size:3.8vh;
@@ -110,7 +110,7 @@ section.content {
 }
 
 .story_2 {
-  padding-bottom:140%;
+  padding-bottom:80vh;
   background-color:#161616;
   font-family: 'Open Sans', sans-serif;
   color:#00bb8b;
@@ -119,10 +119,20 @@ section.content {
   line-height:4.875vh;
 }
 
+.story_3 {
+  padding-bottom:80vh;
+  background-color:#161616;
+  font-family: 'Open Sans', sans-serif;
+  color:#fb5a19;
+  font-size:3.8vh;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
 .date_1 {
   padding-top:20%;
   background-color:#161616;
-  padding-bottom: 8%;
+  padding-bottom: 3.4vh;
   font-family: 'Open Sans', sans-serif;
   font-size:2.2vh;
   color:#fb5a19;
@@ -131,7 +141,7 @@ section.content {
 
 .date_2 {
   background-color:#161616;
-  padding-bottom: 8%;
+  padding-bottom: 3.4vh;
   font-family: 'Open Sans', sans-serif;
   font-size:2.2vh;
   color:#fb5a19;
@@ -139,9 +149,9 @@ section.content {
 }
 
 .date_3 {
-  padding-top:140%;
+  padding-top:80vh;
   background-color:#161616;
-  padding-bottom: 8%;
+  padding-bottom: 3.4vh;
   font-family: 'Open Sans', sans-serif;
   font-size:2.2vh;
   color:#fb5a19;
@@ -150,7 +160,7 @@ section.content {
 
 .title_big {
   padding-top:14%;
-  padding-left:5%;
+  padding-left:11vh;
   padding-bottom:1%;
   background-color:#161616;
   font-family: 'Quicksand', sans-serif;
@@ -162,8 +172,8 @@ section.content {
 
 
 .title_medium {
-  padding-left:44.6%;
-  padding-bottom:12%;
+  padding-left:89.75vh;
+  padding-bottom:8%;
   background-color:#161616;
   font-size:4.8vh;
   font-family: 'Quicksand', sans-serif;
@@ -176,9 +186,9 @@ section.content {
 
 .title_small {
   background-color:#161616;
-  padding-left:5%;
-  padding-top:6%;
-  padding-bottom:50%;
+  padding-left:11vh;
+  padding-top:4%;
+  padding-bottom:4%;
   font-size:3vh;
   color:#00bb8b;
   font-family: 'Quicksand', sans-serif;
@@ -189,12 +199,11 @@ section.content {
 
 #tabset {
   border: 0px solid red;
-  border-bottom: 0px solid #00bb8b;
 }
 
 a {
     text-decoration: none!important;
-    padding-bottom:140%;
+    padding-bottom:80vh;
 }
 
 a:hover {
@@ -216,7 +225,7 @@ a:hover {
   padding: 1vh; /* Some padding */
   border-radius: 1vh; /* Rounded corners */
   font-size: 2vh; /* Increase font size */
-  border:1px solid #00bb8b;
+  /*border:1px solid #00bb8b;*/
   width: 6%;
 }
 
@@ -238,7 +247,7 @@ a:hover {
   padding: 1vh; /* Some padding */
   border-radius: 1vh; /* Rounded corners */
   font-size: 2vh; /* Increase font size */
-  border:1px solid #00bb8b;
+  /*border:1px solid #00bb8b; */
   width: 6%;
 }
 
@@ -250,7 +259,7 @@ a:hover {
 
 
 .final_1 {
-  padding-top:20%;
+  padding-top:15%;
   background-color:#161616;
   padding-bottom: 2%;
   font-family: 'Open Sans', sans-serif;
@@ -260,11 +269,25 @@ a:hover {
 }
 
 .final_2 {
-  padding-top:20%;
+  padding-top:15%;
   background-color:#161616;
   padding-bottom: 40%;
   font-family: 'Open Sans', sans-serif;
   font-size:2.2vh;
   color:#00bb8b;
   line-height:2.875vh;
+}
+
+#map_wuhan {
+  overflow:hidden !important;
+}
+
+.wrapper_2 {
+  padding-left:14.2vh;
+  padding-bottom: 40vh;
+  padding-top:1vh;
+}
+
+.wrapper_1 {
+  padding-left:9.7vh;
 }

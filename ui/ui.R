@@ -1,4 +1,9 @@
 fluidPage(
+  tags$head(
+    tags$style(
+      css
+    )
+  ),
   tags$style(
   HTML("
   .tabbable > .nav > li > a {
@@ -31,7 +36,7 @@ fluidPage(
         top = 900,
         left = 10,
         HTML(
-        '<a href = "https://github.com/nicoFhahn/covid_shiny"
+          '<a href = "https://github.com/nicoFhahn/covid_shiny"
         target="_blank">
         <button id="github"
         title="GitHub repository">GitHub</button></a>'),
@@ -67,6 +72,7 @@ fluidPage(
         ),
         column(
           width = 4,
+          div(class = "story_4"),
           includeHTML("html_files/text_2.html")
         )
       ),
