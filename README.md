@@ -11,7 +11,7 @@ You can run Covid-19 on your own machine using the following code:
 ```R
 packages = c(
 	"dotenv", "fresh", "highcharter", "htmltools", "leaflet", "leaflet.extras", "plotly",
-	"quantmod", "readr", "sf", "shiny", "shinyanimate", "shinyWidgets", "stringr"
+	"quantmod", "readr", "sass", "sf", "shiny", "shinyanimate", "shinyWidgets", "stringr"
 	)
 install.packages(packages, repos = "https://cran.rstudio.com/")
 library(shiny)
