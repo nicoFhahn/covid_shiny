@@ -3,7 +3,7 @@ input[type="number"] {
 }
 
 div.outer {
-  position: fixed;
+  /*position: fixed;*/
   top: 41px;
   left: 0;
   right: 0;
@@ -19,20 +19,14 @@ body, label, input, button, select {
 }
 h1, h2, h3, h4 { font-weight: 400; }
 
-#controls {
+#controls_panel {
   /* Appearance */
   background-color: white;
   padding: 0 20px 20px 20px;
   cursor: move;
   /* Fade out while not hovering */
-  opacity: 0.95;
+  opacity: 1;
   zoom: 0.9;
-  transition: opacity 500ms 1s;
-}
-#controls:hover {
-  /* Fade in while hovering */
-  opacity: 0.95;
-  transition-delay: 0;
 }
 
 /* Position and style citation */
@@ -49,7 +43,7 @@ h1, h2, h3, h4 { font-weight: 400; }
 
 /* If not using map tiles, show a white background */
 .leaflet-container {
-  background-color: white !important;
+  background-color: #161616 !important;
 }
 
 #total_cases, #text_default{
@@ -67,12 +61,7 @@ h1, h2, h3, h4 { font-weight: 400; }
   border-radius: 25% 10% 25% 10%;
 }
 
-#recovered_default, #recovered_country {
-  font-size: 1.8em;
-  background-color: rgba(0,89,0,0.5);
-  text-align: center;
-  border-radius: 25% 10% 25% 10%;
-}
+
 
 #death_default, #death_country {
   font-size: 1.8em;
@@ -83,4 +72,175 @@ h1, h2, h3, h4 { font-weight: 400; }
 
 #date {
   text-align:left;
+}
+
+section.content {
+  padding:0;
+}
+
+
+#test {
+  display:inline-block;
+  height: 15em;
+  background-color:#323233;
+}
+
+
+#shiny-tab-rawdata {
+  max-height: 100vh;
+  overflow-y:auto !important;
+  background-color:#323233;
+}
+
+.container-fluid {
+  padding-right:0px !important;
+  padding-left:0px !important;
+}
+
+
+.story_1 {
+  padding-top:70%;
+  padding-bottom:140%;
+  background-color:#161616;
+  font-family: 'Open Sans', sans-serif;
+  font-size:3.8vh;
+  color:#00bb8b;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
+.story_2 {
+  padding-bottom:140%;
+  background-color:#161616;
+  font-family: 'Open Sans', sans-serif;
+  color:#00bb8b;
+  font-size:3.8vh;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
+.date_1 {
+  padding-top:20%;
+  background-color:#161616;
+  padding-bottom: 8%;
+  font-family: 'Open Sans', sans-serif;
+  font-size:2.2vh;
+  color:#fb5a19;
+  line-height:2.875vh;
+}
+
+.date_2 {
+  background-color:#161616;
+  padding-bottom: 8%;
+  font-family: 'Open Sans', sans-serif;
+  font-size:2.2vh;
+  color:#fb5a19;
+  line-height:2.875vh;
+}
+
+.date_3 {
+  padding-top:140%;
+  background-color:#161616;
+  padding-bottom: 8%;
+  font-family: 'Open Sans', sans-serif;
+  font-size:2.2vh;
+  color:#fb5a19;
+  line-height:2.875vh;
+}
+
+.title_big {
+  padding-top:14%;
+  padding-left:5%;
+  padding-bottom:1%;
+  background-color:#161616;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  font-size:6.8vh;
+  color:#00bb8b;
+  line-height:4.875vh;
+}
+
+
+.title_medium {
+  padding-left:44.6%;
+  padding-bottom:12%;
+  background-color:#161616;
+  font-size:4.8vh;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  color:#00bb8b;
+  line-height:4.875vh;
+}
+
+
+
+.title_small {
+  background-color:#161616;
+  padding-left:5%;
+  padding-top:6%;
+  padding-bottom:50%;
+  font-size:3vh;
+  color:#00bb8b;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
+
+#tabset {
+  border: 0px solid red;
+  border-bottom: 1px solid #00bb8b;
+}
+
+a {
+    text-decoration: none!important;
+    padding-bottom:140%;
+}
+
+a:hover {
+  color: #006f52 !important;
+  text-decoration: none;
+  font-weight: none }
+  
+  
+#myBtn {
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #161616; /* Set a background color */
+  color: #00bb8b; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+  border:1px solid #00bb8b;
+}
+
+#myBtn:hover {
+  background-color: #00bb8b;
+  color: #161616;/* Add a dark-grey background on hover */
+}
+
+
+.final_1 {
+  padding-top:20%;
+  background-color:#161616;
+  padding-bottom: 2%;
+  font-family: 'Open Sans', sans-serif;
+  font-size:2.2vh;
+  color:#00bb8b;
+  line-height:2.875vh;
+}
+
+.final_2 {
+  padding-top:20%;
+  background-color:#161616;
+  padding-bottom: 40%;
+  font-family: 'Open Sans', sans-serif;
+  font-size:2.2vh;
+  color:#00bb8b;
+  line-height:2.875vh;
 }
