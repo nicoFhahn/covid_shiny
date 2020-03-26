@@ -279,8 +279,6 @@ observeEvent(list(
         }
       }
     }
-    corona_frame <- corona_frame[corona_frame$date >= daterange[1] &
-                                   corona_frame$date <= daterange[2], ]
     # remove geometry col
     corona_frame$geometry <- NULL
     # group the data
@@ -290,7 +288,12 @@ observeEvent(list(
         confirmed = sum(confirmed),
         deaths = sum(deaths)
       )
+    last_day <- corona_grouped[corona_grouped$date == daterange[1] - 1, ]
+    corona_grouped <- corona_grouped[corona_grouped$date >= daterange[1] &
+                                     corona_grouped$date <= daterange[2], ]
     colnames(corona_grouped) <- c("date", "confirmed", "deaths")
+    corona_grouped$confirmed <- corona_grouped$confirmed - last_day$confirmed
+    corona_grouped$deaths <- corona_grouped$deaths - last_day$deaths
     # update the plot
     plotlyProxy("everything_plot", session) %>%
       # delete the old traces
@@ -371,8 +374,6 @@ observeEvent(list(
         }
       }
     }
-    corona_frame <- corona_frame[corona_frame$date >= daterange[1] &
-                                   corona_frame$date <= daterange[2], ]
     corona_frame$geometry <- NULL
     # group it
     corona_grouped <- corona_frame %>%
@@ -382,18 +383,21 @@ observeEvent(list(
         deaths = sum(deaths)
       )
     colnames(corona_grouped) <- c("date", "confirmed", "deaths")
+    last_day <- corona_grouped[corona_grouped$date == daterange[1] - 1, ]
+    corona_grouped <- corona_grouped[
+      corona_grouped$date >= daterange[1] &
+        corona_grouped$date <= daterange[2], ]
     corona_grouped2 <- corona_grouped
     # count the number of cases for each specific day
     for (i in nrow(corona_grouped2):2) {
       corona_grouped2[i, ]$confirmed <- corona_grouped2[i, ]$confirmed -
         corona_grouped2[i - 1, ]$confirmed
-      corona_grouped2[i, ]$deaths <- corona_grouped2[i, ]$deaths -
-        corona_grouped2[i - 1, ]$deaths
     }
+    corona_grouped2$confirmed[1] <- corona_grouped2$confirmed[1] -
+      last_day$confirmed
     # update the plot
-    plotlyProxy("daily_plot", session) %>%
+    plotlyProxy("daily_plot_confirmed", session) %>%
       # remove old traces
-      plotlyProxyInvoke("deleteTraces", list(0)) %>%
       plotlyProxyInvoke("deleteTraces", list(0)) %>%
       # add new traces
       plotlyProxyInvoke("addTraces", list(
@@ -403,39 +407,86 @@ observeEvent(list(
         type = "bar",
         marker = list(color = "rgba(255, 183, 51, 0.7)")
       )) %>%
+      # set the layout
+      plotlyProxyInvoke(
+        "relayout",
+        showlegend = FALSE,
+        yaxis = list(
+          title = "New cases",
+          fixedrange = TRUE
+        ),
+        xaxis = list(fixedrange = TRUE)
+      )
+  }
+})
+
+
+observeEvent(list(
+  input$date,
+  input$mymap_click
+), {
+  if (!is.null(input$date)) {
+    # first get the specifiy dataset again
+    daterange <- get_date()
+    country <- try(get_country(), silent = TRUE)
+    corona_frame <- corona_sf
+    if (class(country) != "try-error") {
+      if (country != "world") {
+        country_df <- countries[countries$ADMIN == country, ]
+        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
+        }
+        if (nrow(corona_frame) == 0) {
+          corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
+        }
+        if (nrow(corona_frame) == 0) {
+          corona_frame[seq_len(length(unique(corona_sf$date))), 1:2] <- country
+          corona_frame[seq_len(length(unique(corona_sf$date))), c(3, 5)] <- 0
+          corona_frame[, ]$date <- unique(corona_sf$date)
+          corona_frame$geometry <- country_df$geometry
+        }
+      }
+    }
+    corona_frame$geometry <- NULL
+    # group it
+    corona_grouped <- corona_frame %>%
+      group_by(date) %>%
+      summarise(
+        confirmed = sum(confirmed),
+        deaths = sum(deaths)
+      )
+    colnames(corona_grouped) <- c("date", "confirmed", "deaths")
+    last_day <- corona_grouped[corona_grouped$date == daterange[1] - 1, ]
+    corona_grouped <- corona_grouped[
+      corona_grouped$date >= daterange[1] &
+        corona_grouped$date <= daterange[2], ]
+    corona_grouped2 <- corona_grouped
+    # count the number of cases for each specific day
+    for (i in nrow(corona_grouped2):2) {
+      corona_grouped2[i, ]$deaths <- corona_grouped2[i, ]$deaths -
+        corona_grouped2[i - 1, ]$deaths
+    }
+    corona_grouped2$deaths[1] <- corona_grouped2$deaths[1] -
+      last_day$deaths
+    # update the plot
+    plotlyProxy("daily_plot_deaths", session) %>%
+      # remove old traces
+      plotlyProxyInvoke("deleteTraces", list(0)) %>%
+      # add new traces
       plotlyProxyInvoke("addTraces", list(
         x = corona_grouped2$date,
         y = corona_grouped2$deaths,
         name = "Deceased",
         type = "bar",
-        marker = list(color = "rgba(255, 115, 115, 0.7)"),
-        visible = FALSE
+        marker = list(color = "rgba(255, 115, 115, 0.7)")
       )) %>%
       # set the layout
       plotlyProxyInvoke(
         "relayout",
-        # add dropdown menu
-        updatemenus = list(
-          list(
-            y = 1.1,
-            x = 0.43,
-            buttons = list(
-              list(
-                method = "restyle",
-                args = list("visible", list(TRUE, FALSE)),
-                label = "Confirmed"
-              ),
-              list(
-                method = "restyle",
-                args = list("visible", list(FALSE, TRUE)),
-                label = "Deceased"
-              )
-            )
-          )
-        ),
         showlegend = FALSE,
         yaxis = list(
-          title = "Daily cases",
+          title = "Deaths",
           fixedrange = TRUE
         ),
         xaxis = list(fixedrange = TRUE)
