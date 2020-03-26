@@ -27,7 +27,12 @@ fluidPage(
         top = 900,
         left = 10,
         HTML(
-        '<a href = "#top"><button id="myBtn"
+        '<a href = "https://github.com/nicoFhahn/covid_shiny"
+        target="_blank">
+        <button id="github"
+        title="GitHub repository">GitHub</button></a>'),
+        HTML(
+          '<a href = "#top"><button id="myBtn"
         title="jump to top">jump to top</button></a>'),
         style = "z-index: 420;"
       ),
@@ -361,7 +366,9 @@ fluidPage(
           "Daily numbers:",
           style = "font-size:1.25em;"
         ),
-        plotlyOutput("daily_plot", height = "10em"),
+        plotlyOutput("daily_plot_confirmed", height = "10em"),
+        br(),
+        plotlyOutput("daily_plot_deaths", height = "10em"),
         br(),
         h2(
           "Created by Nico Hahn with data from Johns Hopkins University",
