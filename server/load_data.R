@@ -1,6 +1,4 @@
 # download the data
-# old confirmed data
-# confirmed <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv")
 confirmed <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
 # now a whole bunch of preprocessing
 # get the cases for the first day
@@ -21,9 +19,9 @@ confirmed_long2 <- lapply(6:ncol(confirmed), function(i, ...) {
   colnames(confirmed_new)[5] <- "confirmed"
   date <- str_split(colnames(confirmed)[i], "/")[[1]]
   date_new <- paste(ifelse(nchar(date[1]) == 2, date[1], paste(0, date[1], sep = "")),
-                    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
-                    paste("20", date[3], sep = ""),
-                    sep = "/"
+    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
+    paste("20", date[3], sep = ""),
+    sep = "/"
   )
   confirmed_new$date <- as.Date(date_new, format = "%m/%d/%Y")
   confirmed_new
@@ -32,15 +30,20 @@ confirmed_long2 <- lapply(6:ncol(confirmed), function(i, ...) {
 confirmed_long <- rbind(confirmed_long, Reduce(rbind, confirmed_long2))
 
 # old death
-# deaths <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv")
 deaths <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")
 if (any(!confirmed$`Country/Region` %in% deaths$`Country/Region`)) {
   frames <- deaths[1:sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`), ]
-  frames$`Province/State` <- confirmed$`Province/State`[!confirmed$`Country/Region` %in% deaths$`Country/Region`]
-  frames$`Country/Region` <- confirmed$`Country/Region`[!confirmed$`Country/Region` %in% deaths$`Country/Region`]
-  frames$Lat <- confirmed$Lat[!confirmed$`Country/Region` %in% deaths$`Country/Region`]
-  frames$Long <- confirmed$Long[!confirmed$`Country/Region` %in% deaths$`Country/Region`]
-  frames[1:sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`), 5:ncol(frames)] <- 0
+  frames$`Province/State` <- confirmed$`Province/State`[
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
+  frames$`Country/Region` <- confirmed$`Country/Region`[
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
+  frames$Lat <- confirmed$Lat[
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
+  frames$Long <- confirmed$Long[
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
+  frames[seq_len(
+    sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`)),
+    5:ncol(frames)] <- 0
   deaths <- rbind(deaths, frames)
 }
 
@@ -55,15 +58,12 @@ deaths_long2 <- lapply(6:ncol(deaths), function(i, ...) {
 deaths_long <- rbind(deaths_long, Reduce(rbind, deaths_long2))
 
 # bind together to one data.frame
-# corona <- cbind(confirmed_long, recovered_long$recovered, deaths_long$deaths)
 corona <- cbind(confirmed_long, deaths_long$deaths)
 # nicer colnames
-# colnames(corona)[7:8] <- c("recovered", "deaths")
 colnames(corona)[7] <- c("deaths")
 # add a day 0 frame
-corona_0 <- corona[1:nrow(confirmed), ]
+corona_0 <- corona[seq_len(nrow(confirmed)), ]
 corona_0$confirmed <- 0
-# corona_0$recovered <- 0
 corona_0$deaths <- 0
 corona_0$date <- min(corona$date) - 1
 corona <- rbind(corona_0, corona)
@@ -93,6 +93,5 @@ daily_cases2 <- data_pre %>%
   group_by(date, `Country/Region`) %>%
   summarise(
     confirmed = sum(confirmed),
-    deaths = sum(deaths)# ,
-    # recovered = sum(recovered)
+    deaths = sum(deaths)
   )

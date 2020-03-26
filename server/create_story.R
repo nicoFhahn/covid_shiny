@@ -4,15 +4,13 @@ daily_cases <- data_pre %>%
   group_by(date) %>%
   summarise(
     confirmed = sum(confirmed),
-    deaths = sum(deaths)# ,
-    # recovered = sum(recovered)
+    deaths = sum(deaths)
   )
 daily_cases2 <- data_pre %>%
   group_by(date, `Country/Region`) %>%
   summarise(
     confirmed = sum(confirmed),
-    deaths = sum(deaths)# ,
-    # recovered = sum(recovered)
+    deaths = sum(deaths)
   )
 
 infected_world <- daily_cases[daily_cases$date == max(daily_cases$date), ]$confirmed
