@@ -9,12 +9,16 @@ If you do not have such a key, the app will display a dark basemap from carto.
 # Run it on your machine
 You can run Covid-19 on your own machine using the following code:
 ```R
-packages = c("dotenv", "fresh", "leaflet", "plotly", "readr", "sf", "shiny", "stringr")
+packages = c(
+	"dotenv", "fresh", "highcharter", "htmltools", "leaflet", "leaflet.extras", "plotly",
+	"quantmod", "readr", "sf", "shiny", "shinyanimate", "shinyWidgets", "stringr"
+	)
 install.packages(packages, repos = "https://cran.rstudio.com/")
 library(shiny)
 runGitHub("covid_shiny", "nicoFhahn")
 ```
-# Screenshot
+# Screenshots
+![alt text](https://i.imgur.com/QqJylwk.png "Logo Title Text 1")
 ![alt text](https://i.imgur.com/LXsXsbY.png "Logo Title Text 1")
 
 ### Acknowledgments
