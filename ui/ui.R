@@ -5,7 +5,7 @@ fluidPage(
     )
   ),
   tags$style(
-  HTML("
+    HTML("
   .tabbable > .nav > li > a {
   background-color: #161616;  color:#00bb8b;
   border:none;
@@ -25,6 +25,8 @@ fluidPage(
   ")
   ),
   withAnim(),
+  use_waiter(),
+  waiter_show_on_load(do.call(sample(spinners, 1), list()), color = "#161616"),
   tabsetPanel(
     id = "tabset",
     tabPanel(
@@ -39,10 +41,12 @@ fluidPage(
           '<a href = "https://github.com/nicoFhahn/covid_shiny"
         target="_blank">
         <button id="github"
-        title="GitHub repository">GitHub</button></a>'),
+        title="GitHub repository">GitHub</button></a>'
+        ),
         HTML(
           '<a href = "#top"><button id="myBtn"
-        title="jump to top">jump to top</button></a>'),
+        title="jump to top">jump to top</button></a>'
+        ),
         style = "z-index: 420;"
       ),
       fluidRow(
@@ -351,7 +355,7 @@ fluidPage(
         draggable = TRUE,
         top = 70,
         left = "auto",
-        right = 70,
+        right = 60,
         bottom = "auto",
         width = "18%",
         height = "auto",
@@ -379,14 +383,13 @@ fluidPage(
           "Cumulative numbers:",
           style = "font-size:1.25em;"
         ),
-        plotlyOutput("everything_plot", height = "15em"),
+        plotlyOutput("everything_plot", height = "12em"),
         h2(
           "Daily numbers:",
           style = "font-size:1.25em;"
         ),
-        plotlyOutput("daily_plot_confirmed", height = "10em"),
-        br(),
-        plotlyOutput("daily_plot_deaths", height = "10em"),
+        plotlyOutput("daily_plot_confirmed", height = "8em"),
+        plotlyOutput("daily_plot_deaths", height = "8em"),
         br(),
         h2(
           "Created by Nico Hahn with data from Johns Hopkins University",

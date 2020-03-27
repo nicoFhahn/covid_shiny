@@ -13,6 +13,7 @@ library(shiny)
 library(shinyanimate)
 library(shinyWidgets)
 library(stringr)
+library(waiter)
 # load the data
 source(file.path("server", "load_data.R"), local = TRUE)
 source(file.path("server", "create_story.R"), local = TRUE)
@@ -20,6 +21,8 @@ source(file.path("server", "create_story.R"), local = TRUE)
 try(load_dot_env("key.env"), silent = TRUE)
 key <- Sys.getenv("MAPBOX_KEY")
 css <- sass(sass_file("styles.scss"))
+spinners <- lsf.str("package:waiter")
+spinners <- paste(spinners[str_detect(spinners, "spin_")], sep = "")
 # load the interface
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # load the server
@@ -32,5 +35,6 @@ server <- function(input, output, session) {
   source(file.path("server", "plotly_outputs.R"), local = TRUE)$value
   source(file.path("server", "highcharter_outputs.R"), local = TRUE)$value
   source(file.path("server", "observer.R"), local = TRUE)$value
+  waiter_hide()
 }
 shinyApp(ui, server)
