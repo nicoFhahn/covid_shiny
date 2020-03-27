@@ -26,7 +26,7 @@ fluidPage(
   ),
   withAnim(),
   use_waiter(),
-  waiter_show_on_load(do.call(sample(spinners, 1), list()), color = "#161616"),
+  waiter_show_on_load(spin_flower(), color = "#161616"),
   tabsetPanel(
     id = "tabset",
     tabPanel(
