@@ -41,13 +41,11 @@ output$map_wuhan <- renderLeaflet({
   coords <- st_as_sf(wuhan, coords = c("lon", "lat"), crs = 4326)
   china <- countries[countries$ADMIN == "China", ]
   leaflet(options = leafletOptions(
-    zoomControl = FALSE, minZoom = 4, maxZoom = 4, scrollWheelZoom = FALSE,
-    dragging = FALSE, touchZoom = FALSE, doubleClickZoom = FALSE,
-    boxZoom = FALSE, attributionControl = FALSE
+    zoomControl = FALSE, minZoom = 4, maxZoom = 4, attributionControl = FALSE,
+    dragging = FALSE
   )) %>%
-    addPolygons(
-      data = china,
-      fillOpacity = 0,
+    addPolylines(
+      data = st_cast(china, "MULTILINESTRING"),
       color = "#00bb8b",
       weight = 1
     ) %>%
@@ -66,13 +64,11 @@ output$map_wuhan <- renderLeaflet({
 
 output$map_emergency <- renderLeaflet({
   leaflet(options = leafletOptions(
-    zoomControl = FALSE, minZoom = 2, maxZoom = 2, scrollWheelZoom = FALSE,
-    dragging = FALSE, touchZoom = FALSE, doubleClickZoom = FALSE,
-    boxZoom = FALSE, attributionControl = FALSE
+    zoomControl = FALSE, minZoom = 2, maxZoom = 2,
+    dragging = FALSE, attributionControl = FALSE
   )) %>%
-    addPolygons(
-      data = infected,
-      fillOpacity = 0,
+    addPolylines(
+      data = st_cast(infected, "MULTILINESTRING"),
       color = "#00bb8b",
       weight = 1
     ) %>%

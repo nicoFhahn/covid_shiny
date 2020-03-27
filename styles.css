@@ -278,10 +278,6 @@ a:hover {
   line-height:2.875vh;
 }
 
-#map_wuhan {
-  overflow:hidden !important;
-}
-
 .wrapper_2 {
   padding-left:14.2vh;
   padding-bottom: 40vh;
@@ -290,4 +286,15 @@ a:hover {
 
 .wrapper_1 {
   padding-left:9.7vh;
+}
+
+
+#lf1 {
+  z-index: -1;
+  position:relative;
+}
+
+#lf2 {
+  z-index: -1;
+  position:relative;
 }
