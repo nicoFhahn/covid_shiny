@@ -94,6 +94,13 @@ germany <- read_csv("data/germany.csv")
 file_1 <- readLines("html_files/today_1.html")
 file_2 <- readLines("html_files/today_2.html")
 file_3 <- readLines("html_files/today_3.html")
+file_4 <- readLines("html_files/leaders_4.html")
+file_5 <- readLines("html_files/leaders_5.html")
+file_6 <- readLines("html_files/leaders_6.html")
+file_7 <- readLines("html_files/leaders_7.html")
+file_8 <- readLines("html_files/leaders_8.html")
+file_9 <- readLines("html_files/text_12.html")
+file_10 <- readLines("html_files/today.html")
 data_pre <- corona_sf
 data_pre$geometry <- NULL
 daily_cases2 <- data_pre %>%
@@ -102,3 +109,93 @@ daily_cases2 <- data_pre %>%
     confirmed = sum(confirmed),
     deaths = sum(deaths)
   )
+today <- corona_sf[corona_sf$date == max(corona_sf$date), ]
+top15_confirmed <- today[today$confirmed %in% sort(today$confirmed, decreasing = TRUE)[1:15], ]
+top15_confirmed <- top15_confirmed[order(top15_confirmed$confirmed, decreasing = TRUE), ]
+top15_deaths <- today[today$confirmed %in% sort(today$confirmed, decreasing = TRUE)[1:15], ]
+top15_deaths <- top15_deaths[order(top15_deaths$deaths, decreasing = TRUE), ]
+today_inter <- st_intersection(countries, today)
+per_capita <- data.frame(
+  country = today_inter$Country.Region,
+  confirmed = today_inter$confirmed,
+  confirmed_per_capita = round(today_inter$confirmed / today_inter$POP_EST, 5) * 1000,
+  deaths = today_inter$deaths,
+  deaths_per_capita = round(today_inter$deaths / today_inter$POP_EST, 5) * 1000
+)
+top15_confirmed_per_capita <- per_capita[per_capita$confirmed_per_capita %in% sort(per_capita$confirmed_per_capita, decreasing = TRUE)[1:15], ]
+top15_deaths_per_capita <- per_capita[per_capita$deaths_per_capita %in% sort(per_capita$deaths_per_capita, decreasing = TRUE)[1:15], ]
+top15_confirmed_per_capita <- top15_confirmed_per_capita[order(top15_confirmed_per_capita$confirmed_per_capita, decreasing = TRUE), ]
+top15_deaths_per_capita <- top15_deaths_per_capita[order(top15_deaths_per_capita$deaths_per_capita, decreasing = TRUE), ]
+daily_cases3 <- daily_cases2[daily_cases2$date %in% c(max(daily_cases2$date), max(daily_cases2$date) - 14), ]
+daily_cases3 <- daily_cases3[daily_cases3$`Country/Region` != "Diamond Princess", ]
+splitted <- split(daily_cases3, daily_cases3$date)
+df <- data.frame(
+  country = unique(daily_cases3$`Country/Region`),
+  increase = (splitted[[2]]$confirmed / splitted[[1]]$confirmed) * 100 - 100,
+  old = splitted[[1]]$confirmed,
+  new = splitted[[2]]$confirmed
+)
+
+df <- df[!is.infinite(df$increase), ]
+df$increase <- round(df$increase)
+df_most <- df[df$increase %in% df[order(df$increase, decreasing = TRUE), ][1:15, ]$increase, ]
+df_most <- df_most[order(df_most$increase, decreasing = TRUE), ]
+if (any(df_most$old[1:3] < 25)) {
+  limit = 50
+} else if (any(df_most$old[1:3] < 50)) {
+  limit = 100
+} else {
+  limit = mean(df_most$old) * 5
+}
+df_limit <- df[df$old >= limit, ]
+df_limit_most <- df_limit[df_limit$increase %in% df_limit[order(df_limit$increase, decreasing = TRUE), ][1:15, ]$increase, ]
+df_limit_most <- df_limit_most[order(df_limit_most$increase, decreasing = TRUE), ]
+df_few <- df[df$increase %in% df[order(df$increase), ][1:15, ]$increase, ]
+df_few <- df_few[order(df_few$increase), ]
+
+daily_cases <- data_pre %>%
+  group_by(date) %>%
+  summarise(
+    confirmed = sum(confirmed),
+    deaths = sum(deaths)
+  )
+inds <- daily_cases$date
+
+## Create a time series object
+
+myts_conf <- ts(daily_cases$confirmed,     # random data
+                start = c(2020, as.numeric(format(inds[1], "%j"))),
+                frequency = 365)
+myts_death <- ts(daily_cases$deaths,     # random data
+                 start = c(2020, as.numeric(format(inds[1], "%j"))),
+                 frequency = 365)
+
+forecast_conf <- forecast(auto.arima(myts_conf), h = 30, level = 95)
+forecast_conf$lower <- round(forecast_conf$lower)
+forecast_conf$upper <- round(forecast_conf$upper)
+forecast_conf$mean <- round(forecast_conf$mean)
+forecast_death <- forecast(auto.arima(myts_death), h = 30, level = 95)
+forecast_death$lower <- round(forecast_death$lower)
+forecast_death$upper <- round(forecast_death$upper)
+forecast_death$mean <- round(forecast_death$mean)
+dates_ts <- seq(from = daily_cases$date[1], to = max(daily_cases$date) + 30, by = 1)
+forecast_df <- data.frame(
+  date = dates,
+  confirmed = c(daily_cases$confirmed, rep(NA, length(dates_ts) - length(daily_cases$confirmed))),
+  fitted_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$mean),
+  upper95_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$upper),
+  lower95_conf =  c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$lower),
+  deaths = c(daily_cases$deaths, rep(NA, length(dates_ts) - length(daily_cases$deaths))),
+  fitted_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$mean),
+  upper95_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$upper),
+  lower95_death =  c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$lower)
+)
+
+
+a <- try(getSymbols("^GSPC"), silent = TRUE)
+if (a != "^GSPC") {
+  gspc <- read_csv("data/gspc_backup.csv")
+} else {
+  gspc <- as.data.frame(GSPC)
+  gspc$date <- as.Date(rownames(gspc)) 
+}

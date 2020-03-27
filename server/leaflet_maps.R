@@ -62,7 +62,7 @@ output$map_emergency <- renderLeaflet({
     dragging = FALSE, attributionControl = FALSE
   )) %>%
     addPolylines(
-      data = st_cast(china, "MULTILINESTRING"),
+      data = st_cast(infected, "MULTILINESTRING"),
       color = "#00bb8b",
       weight = 1
     ) %>%
