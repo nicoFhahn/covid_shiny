@@ -1,7 +1,7 @@
 output$mymap <- renderLeaflet({
   # if no mapbox key exists use cartodb dark matter
   if (key == "") {
-    map <- leaflet() %>%
+    map <- leaflet(options = leafletOptions(zoomControl = FALSE)) %>%
       addProviderTiles(
         "CartoDB.DarkMatter"
       ) %>%
@@ -9,10 +9,7 @@ output$mymap <- renderLeaflet({
         lng = 40,
         lat = 30.45,
         zoom = 3
-      ) %>%
-      htmlwidgets::onRender("function(el, x) {
-        L.control.zoom({ position: 'bottomleft' }).addTo(this)
-    }")
+      )
   } else {
     map <- leaflet(options = leafletOptions(zoomControl = FALSE)) %>%
       addProviderTiles(
@@ -26,10 +23,7 @@ output$mymap <- renderLeaflet({
         lng = 40,
         lat = 30.45,
         zoom = 3
-      ) %>%
-      htmlwidgets::onRender("function(el, x) {
-        L.control.zoom({ position: 'topright' }).addTo(this)
-    }")
+      )
   }
 })
 
@@ -68,7 +62,7 @@ output$map_emergency <- renderLeaflet({
     dragging = FALSE, attributionControl = FALSE
   )) %>%
     addPolylines(
-      data = st_cast(infected, "MULTILINESTRING"),
+      data = st_cast(china, "MULTILINESTRING"),
       color = "#00bb8b",
       weight = 1
     ) %>%

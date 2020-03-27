@@ -30,7 +30,7 @@ observeEvent(list(
     }
     # get a frame between the two dates
     corona_frame <- corona_frame[corona_frame$date >= daterange[1] - 1 &
-                                   corona_frame$date <= daterange[2], ]
+      corona_frame$date <= daterange[2], ]
     # get data for the last day
     corona_frame1 <- corona_frame[corona_frame$date == max(corona_frame$date), ]
     # get data for the first day
@@ -92,28 +92,28 @@ observeEvent(list(
             )
           ) %>%
           # do the same again
-        addCircles(
-          data = st_centroid(corona_frame),
-          fillOpacity = 0.5,
-          radius = ~ sqrt(deaths) * 1250,
-          color = "#ff7373",
-          stroke = FALSE,
-          label = paste(
-            corona_frame$`Province/State`, ":<br>",
-            "Confirmed cases: ", corona_frame$confirmed, "<br>",
-            # "Recovered cases: ", corona_frame$recovered, "<br>",
-            "Deceased cases: ", corona_frame$deaths,
-            sep = ""
-          ) %>% lapply(htmltools::HTML),
-          labelOptions = labelOptions(
-            style = list(
-              "font-family" = "Oswald",
-              "font-style" = "sans-serif",
-              "font-size" = "14px",
-              "border-color" = "rgba(0,0,0,0.5)"
+          addCircles(
+            data = st_centroid(corona_frame),
+            fillOpacity = 0.5,
+            radius = ~ sqrt(deaths) * 1250,
+            color = "#ff7373",
+            stroke = FALSE,
+            label = paste(
+              corona_frame$`Province/State`, ":<br>",
+              "Confirmed cases: ", corona_frame$confirmed, "<br>",
+              # "Recovered cases: ", corona_frame$recovered, "<br>",
+              "Deceased cases: ", corona_frame$deaths,
+              sep = ""
+            ) %>% lapply(htmltools::HTML),
+            labelOptions = labelOptions(
+              style = list(
+                "font-family" = "Oswald",
+                "font-style" = "sans-serif",
+                "font-size" = "14px",
+                "border-color" = "rgba(0,0,0,0.5)"
+              )
             )
           )
-        )
       } else {
         leafletProxy("mymap") %>%
           # remove stuff from the old map
@@ -158,27 +158,27 @@ observeEvent(list(
             )
           ) %>%
           # do the same again
-        addCircles(
-          data = corona_frame,
-          fillOpacity = 0.5,
-          radius = ~ sqrt(deaths) * 1250,
-          color = "#ff7373",
-          stroke = FALSE,
-          label = paste(
-            corona_frame$`Province/State`, ":<br>",
-            "Confirmed cases: ", corona_frame$confirmed, "<br>",
-            "Deceased cases: ", corona_frame$deaths,
-            sep = ""
-          ) %>% lapply(htmltools::HTML),
-          labelOptions = labelOptions(
-            style = list(
-              "font-family" = "Oswald",
-              "font-style" = "sans-serif",
-              "font-size" = "14px",
-              "border-color" = "rgba(0,0,0,0.5)"
+          addCircles(
+            data = corona_frame,
+            fillOpacity = 0.5,
+            radius = ~ sqrt(deaths) * 1250,
+            color = "#ff7373",
+            stroke = FALSE,
+            label = paste(
+              corona_frame$`Province/State`, ":<br>",
+              "Confirmed cases: ", corona_frame$confirmed, "<br>",
+              "Deceased cases: ", corona_frame$deaths,
+              sep = ""
+            ) %>% lapply(htmltools::HTML),
+            labelOptions = labelOptions(
+              style = list(
+                "font-family" = "Oswald",
+                "font-style" = "sans-serif",
+                "font-size" = "14px",
+                "border-color" = "rgba(0,0,0,0.5)"
+              )
             )
           )
-        )
       }
     } else {
       leafletProxy("mymap") %>%
@@ -223,28 +223,28 @@ observeEvent(list(
             )
           )
         ) %>%
-      # do the same again
-      addCircles(
-        data = corona_frame,
-        fillOpacity = 0.5,
-        radius = ~ sqrt(deaths) * 1250,
-        color = "#ff7373",
-        stroke = FALSE,
-        label = paste(
-          corona_frame$`Province/State`, ":<br>",
-          "Confirmed cases: ", corona_frame$confirmed, "<br>",
-          "Deceased cases: ", corona_frame$deaths,
-          sep = ""
-        ) %>% lapply(htmltools::HTML),
-        labelOptions = labelOptions(
-          style = list(
-            "font-family" = "Oswald",
-            "font-style" = "sans-serif",
-            "font-size" = "14px",
-            "border-color" = "rgba(0,0,0,0.5)"
+        # do the same again
+        addCircles(
+          data = corona_frame,
+          fillOpacity = 0.5,
+          radius = ~ sqrt(deaths) * 1250,
+          color = "#ff7373",
+          stroke = FALSE,
+          label = paste(
+            corona_frame$`Province/State`, ":<br>",
+            "Confirmed cases: ", corona_frame$confirmed, "<br>",
+            "Deceased cases: ", corona_frame$deaths,
+            sep = ""
+          ) %>% lapply(htmltools::HTML),
+          labelOptions = labelOptions(
+            style = list(
+              "font-family" = "Oswald",
+              "font-style" = "sans-serif",
+              "font-size" = "14px",
+              "border-color" = "rgba(0,0,0,0.5)"
+            )
           )
         )
-      )
     }
   }
 })
@@ -290,7 +290,7 @@ observeEvent(list(
       )
     last_day <- corona_grouped[corona_grouped$date == daterange[1] - 1, ]
     corona_grouped <- corona_grouped[corona_grouped$date >= daterange[1] &
-                                     corona_grouped$date <= daterange[2], ]
+      corona_grouped$date <= daterange[2], ]
     colnames(corona_grouped) <- c("date", "confirmed", "deaths")
     corona_grouped$confirmed <- corona_grouped$confirmed - last_day$confirmed
     corona_grouped$deaths <- corona_grouped$deaths - last_day$deaths
@@ -315,34 +315,34 @@ observeEvent(list(
         ),
         line = list(color = "rgba(255, 115, 115, 1)")
       )) %>%
-    plotlyProxyInvoke("addTraces", list(
-      x = corona_grouped$date,
-      y = corona_grouped$confirmed - corona_grouped$deaths,
-      name = "Confirmed",
-      type = "scatter",
-      mode = "none",
-      stackgroup = "one",
-      fillcolor = "rgba(255, 183, 51, 0.5)",
-      hoverinfo = "text",
-      text = paste(
-        "Confirmed cases:", corona_grouped$confirmed, "<br>",
-        "Deceased cases:", corona_grouped$deaths
-      ),
-      line = list(color = "rgba(255, 183, 51, 1)")
-    )) %>%
+      plotlyProxyInvoke("addTraces", list(
+        x = corona_grouped$date,
+        y = corona_grouped$confirmed - corona_grouped$deaths,
+        name = "Confirmed",
+        type = "scatter",
+        mode = "none",
+        stackgroup = "one",
+        fillcolor = "rgba(255, 183, 51, 0.5)",
+        hoverinfo = "text",
+        text = paste(
+          "Confirmed cases:", corona_grouped$confirmed, "<br>",
+          "Deceased cases:", corona_grouped$deaths
+        ),
+        line = list(color = "rgba(255, 183, 51, 1)")
+      )) %>%
       # define the layout
       plotlyProxyInvoke("relayout",
-                        legend = list(
-                          orientation = "h",
-                          xanchor = "center",
-                          x = 0.5,
-                          y = 100000
-                        ),
-                        yaxis = list(
-                          title = "Total cases",
-                          fixedrange = TRUE
-                        ),
-                        xaxis = list(fixedrange = TRUE, showspikes = TRUE)
+        legend = list(
+          orientation = "h",
+          xanchor = "center",
+          x = 0.5,
+          y = 100000
+        ),
+        yaxis = list(
+          title = "Total cases",
+          fixedrange = TRUE
+        ),
+        xaxis = list(fixedrange = TRUE, showspikes = TRUE)
       )
   }
 })
@@ -386,7 +386,8 @@ observeEvent(list(
     last_day <- corona_grouped[corona_grouped$date == daterange[1] - 1, ]
     corona_grouped <- corona_grouped[
       corona_grouped$date >= daterange[1] &
-        corona_grouped$date <= daterange[2], ]
+        corona_grouped$date <= daterange[2],
+    ]
     corona_grouped2 <- corona_grouped
     # count the number of cases for each specific day
     for (i in nrow(corona_grouped2):2) {
@@ -460,7 +461,8 @@ observeEvent(list(
     last_day <- corona_grouped[corona_grouped$date == daterange[1] - 1, ]
     corona_grouped <- corona_grouped[
       corona_grouped$date >= daterange[1] &
-        corona_grouped$date <= daterange[2], ]
+        corona_grouped$date <= daterange[2],
+    ]
     corona_grouped2 <- corona_grouped
     # count the number of cases for each specific day
     for (i in nrow(corona_grouped2):2) {
