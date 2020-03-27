@@ -26,19 +26,22 @@ output$all_default <- renderText({
     paste(
       "<font size = 3em> confirmed:</font><br>",
       sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$confirmed,
-          na.rm = TRUE)
+        na.rm = TRUE
       )
+    )
   } else {
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(
-      corona_sf[corona_sf$date == daterange[1], ]$confirmed, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[1], ]$confirmed,
+      na.rm = TRUE
+    )
     cases_end <- sum(
-      corona_sf[corona_sf$date == daterange[2], ]$confirmed, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[2], ]$confirmed,
+      na.rm = TRUE
+    )
     paste(
       "<font size = 3em> confirmed:</font><br>", cases_end - cases_beginning
-      )
+    )
   }
 })
 
@@ -64,25 +67,29 @@ output$all_country <- renderText({
     }
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(
-      corona_frame[corona_frame$date == daterange[1], ]$confirmed, na.rm = TRUE
-      )
+      corona_frame[corona_frame$date == daterange[1], ]$confirmed,
+      na.rm = TRUE
+    )
     cases_end <- sum(
-      corona_frame[corona_frame$date == daterange[2], ]$confirmed, na.rm = TRUE
-      )
+      corona_frame[corona_frame$date == daterange[2], ]$confirmed,
+      na.rm = TRUE
+    )
     paste(
       "<font size = 3em> confirmed:</font><br>", cases_end - cases_beginning
-      )
+    )
   } else {
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(
-      corona_sf[corona_sf$date == daterange[1], ]$confirmed, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[1], ]$confirmed,
+      na.rm = TRUE
+    )
     cases_end <- sum(
-      corona_sf[corona_sf$date == daterange[2], ]$confirmed, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[2], ]$confirmed,
+      na.rm = TRUE
+    )
     paste(
       "<font size = 3em> confirmed:</font><br>", cases_end - cases_beginning
-      )
+    )
   }
 })
 
@@ -98,16 +105,19 @@ output$death_default <- renderText({
     paste(
       "<font size = 3em> deceased:</font><br>",
       sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$deaths,
-          na.rm = TRUE)
+        na.rm = TRUE
       )
+    )
   } else {
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(
-      corona_sf[corona_sf$date == daterange[1], ]$deaths, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[1], ]$deaths,
+      na.rm = TRUE
+    )
     cases_end <- sum(
-      corona_sf[corona_sf$date == daterange[2], ]$deaths, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[2], ]$deaths,
+      na.rm = TRUE
+    )
     paste("<font size = 3em> deceased:</font><br>", cases_end - cases_beginning)
   }
 })
@@ -133,20 +143,24 @@ output$death_country <- renderText({
     }
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(
-      corona_frame[corona_frame$date == daterange[1], ]$deaths, na.rm = TRUE
-      )
+      corona_frame[corona_frame$date == daterange[1], ]$deaths,
+      na.rm = TRUE
+    )
     cases_end <- sum(
-      corona_frame[corona_frame$date == daterange[2], ]$deaths, na.rm = TRUE
-      )
+      corona_frame[corona_frame$date == daterange[2], ]$deaths,
+      na.rm = TRUE
+    )
     paste("<font size = 3em> deceased:</font><br>", cases_end - cases_beginning)
   } else {
     daterange[1] <- daterange[1] - 1
     cases_beginning <- sum(
-      corona_sf[corona_sf$date == daterange[1], ]$deaths, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[1], ]$deaths,
+      na.rm = TRUE
+    )
     cases_end <- sum(
-      corona_sf[corona_sf$date == daterange[2], ]$deaths, na.rm = TRUE
-      )
+      corona_sf[corona_sf$date == daterange[2], ]$deaths,
+      na.rm = TRUE
+    )
     paste("<font size = 3em> deceased:</font><br>", cases_end - cases_beginning)
   }
 })

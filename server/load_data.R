@@ -34,16 +34,23 @@ deaths <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/ma
 if (any(!confirmed$`Country/Region` %in% deaths$`Country/Region`)) {
   frames <- deaths[1:sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`), ]
   frames$`Province/State` <- confirmed$`Province/State`[
-    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`
+  ]
   frames$`Country/Region` <- confirmed$`Country/Region`[
-    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`
+  ]
   frames$Lat <- confirmed$Lat[
-    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`
+  ]
   frames$Long <- confirmed$Long[
-    !confirmed$`Country/Region` %in% deaths$`Country/Region`]
-  frames[seq_len(
-    sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`)),
-    5:ncol(frames)] <- 0
+    !confirmed$`Country/Region` %in% deaths$`Country/Region`
+  ]
+  frames[
+    seq_len(
+      sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`)
+    ),
+    5:ncol(frames)
+  ] <- 0
   deaths <- rbind(deaths, frames)
 }
 
