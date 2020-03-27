@@ -20,8 +20,6 @@ source(file.path("server", "create_story.R"), local = TRUE)
 # load the api key for mapbox and the seed
 try(load_dot_env("key.env"), silent = TRUE)
 key <- Sys.getenv("MAPBOX_KEY")
-# save a new seed, so the next user sees a different loading page
-write_file(paste("seed=", as.numeric(seed) + 1), "seed.env")
 css <- sass(sass_file("styles.scss"))
 # load the interface
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
