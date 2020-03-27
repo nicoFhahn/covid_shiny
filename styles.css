@@ -130,6 +130,16 @@ section.content {
   line-height:4.875vh;
 }
 
+.story_4 {
+  padding-bottom:50vh;
+  background-color:#161616;
+  font-family: 'Open Sans', sans-serif;
+  color:#00bb8b;
+  font-size:3.8vh;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
 .date_1 {
   padding-top:20%;
   background-color:#161616;
@@ -143,6 +153,15 @@ section.content {
 .date_2 {
   background-color:#161616;
   padding-bottom: 3.4vh;
+  font-family: 'Open Sans', sans-serif;
+  font-size:2.2vh;
+  color:#fb5a19;
+  line-height:2.875vh;
+}
+
+.date_4 {
+  background-color:#161616;
+  padding-bottom: 3.2vh;
   font-family: 'Open Sans', sans-serif;
   font-size:2.2vh;
   color:#fb5a19;
@@ -172,8 +191,19 @@ section.content {
 }
 
 
-.title_medium {
-  padding-left:89.75vh;
+.title_medium_1 {
+  padding-left:99.15vh;
+  padding-bottom:8%;
+  background-color:#161616;
+  font-size:4.8vh;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  color:#00bb8b;
+  line-height:4.875vh;
+}
+
+.title_medium_2 {
+  padding-left:89.3vh;
   padding-bottom:8%;
   background-color:#161616;
   font-size:4.8vh;
@@ -256,7 +286,51 @@ a:hover {
   background-color: #00bb8b;
   color: #161616;/* Add a dark-grey background on hover */
 }
+  
+  
+#myBtn2 {
+  position: fixed; /* Fixed/sticky position */
+  bottom: 3vh; /* Place the button at the bottom of the page */
+  right: 3vh; /* Place the button 30vh from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #161616; /* Set a background color */
+  color: #00bb8b; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 1vh; /* Some padding */
+  border-radius: 1vh; /* Rounded corners */
+  font-size: 2vh; /* Increase font size */
+  /*border:1px solid #00bb8b;*/
+  width: 6%;
+}
 
+#myBtn2:hover {
+  background-color: #00bb8b;
+  color: #161616;/* Add a dark-grey background on hover */
+}
+
+#github2 {
+  position: fixed; /* Fixed/sticky position */
+  bottom: 10vh; /* Place the button at the bottom of the page */
+  right: 3vh; /* Place the button 30vh from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #161616; /* Set a background color */
+  color: #00bb8b; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 1vh; /* Some padding */
+  border-radius: 1vh; /* Rounded corners */
+  font-size: 2vh; /* Increase font size */
+  /*border:1px solid #00bb8b; */
+  width: 6%;
+}
+
+#github2:hover {
+  background-color: #00bb8b;
+  color: #161616;/* Add a dark-grey background on hover */
+}
 
 
 .final_1 {
