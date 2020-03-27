@@ -9,13 +9,13 @@ output$highcharter_1 <- renderHighchart({
     hc_add_series(
       name = "Confirmed cases in China  ",
       data = january$confirmed[january$`Country/Region` == "China"],
-      color = "#EF476F"
+      color = "#5BC0EB"
       ) %>%
     hc_add_series(
       name = "Confirmed cases outside China",
       data = january$confirmed[january$`Country/Region` != "China"],
       yAxis = 1,
-      color = "#FFD166"
+      color = "#FDE74C"
       ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(text = "Number of confirmed COVID-19 cases in January 2020") %>%
@@ -33,17 +33,17 @@ output$highcharter_2 <- renderHighchart({
     hc_add_series(
       name = "Italy",
       data = february$confirmed[february$`Country/Region` == "Italy"],
-      color = "#DD6E42"
+      color = "#F8333C"
       ) %>%
     hc_add_series(
       name = "Iran",
       data = february$confirmed[february$`Country/Region` == "Iran"],
-      color = "#E8DAB2"
+      color = "#44AF69"
       ) %>%
     hc_add_series(
       name = "South Korea",
       data = february$confirmed[february$`Country/Region` == "Korea, South"],
-      color = "#4F6D7A"
+      color = "#88CCF1"
       ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
@@ -335,4 +335,44 @@ output$highcharter_13 <- renderHighchart({
     hc_yAxis(title = list(text = "Deaths")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
+})
+
+output$highcharter_14 <- renderHighchart({
+  highchart() %>%
+    hc_xAxis(
+      categories = unique(daily_cases2$date),
+      title = list(text = "Date"),
+      plotLines = list(
+        list(
+          label = list(text = "U.S. leads in confirmed cases"),
+          color = "#00bb8b",
+          width = 2,
+          value = 65
+        )
+      )
+    ) %>%
+    hc_yAxis(title = list(text = "Confirmed cases")) %>%
+    hc_add_series(
+      name = "China",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "China"],
+      color = "#5BC0EB"
+    ) %>%
+    hc_add_series(
+      name = "Italy",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Italy"],
+      color = "#F8333C"
+    ) %>%
+    hc_add_series(
+      name = "United States",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "US"],
+      color = "#FAFAFA"
+    ) %>%
+    hc_add_theme(hc_theme_monokai()) %>%
+    hc_title(
+      text = "Number of confirmed COVID-19
+      cases"
+    ) %>%
+    hc_legend(align = "left") %>%
+    hc_chart(backgroundColor = "#161616")
+  
 })

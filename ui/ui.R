@@ -72,7 +72,6 @@ fluidPage(
         ),
         column(
           width = 4,
-          div(class = "story_4"),
           includeHTML("html_files/text_2.html")
         )
       ),
@@ -218,6 +217,15 @@ fluidPage(
         column(
           width = 4,
           includeHTML("html_files/text_10.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc14", highchartOutput("highcharter_14", height = "65vh"))
         )
       ),
       fluidRow(
