@@ -1,4 +1,5 @@
 library(dotenv)
+library(forecast)
 library(fresh)
 library(highcharter)
 library(htmltools)
@@ -11,12 +12,16 @@ library(sass)
 library(sf)
 library(shiny)
 library(shinyanimate)
+library(shinybusy)
 library(shinyWidgets)
 library(stringr)
 library(waiter)
 # load the data
+options(scipen = 15)
 source(file.path("server", "load_data.R"), local = TRUE)
 source(file.path("server", "create_story.R"), local = TRUE)
+# set time language to english
+Sys.setlocale("LC_TIME", "English")
 # load the api key for mapbox and the seed
 try(load_dot_env("key.env"), silent = TRUE)
 key <- Sys.getenv("MAPBOX_KEY")
