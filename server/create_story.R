@@ -61,7 +61,7 @@ if (!appears_1) {
     ordinal(pos),
     ".",
     sep = ""
-    )
+  )
 }
 
 file_4[9] <- paste(text_1, text_2, sep = "<br>")
@@ -74,16 +74,16 @@ if (country == "US") {
 new_in_2 <- sum(!top15_deaths_per_capita$country %in% top15_deaths$`Country/Region`)
 if (new_in_2 > 0) {
   if (new_in_1 == new_in_2) {
-    start = "Once again,"
+    start <- "Once again,"
   } else {
-    start = "This time,"
+    start <- "This time,"
   }
   text_1 <- paste(start, new_in_2, "countries that are not among the countries with the most deaths are among the countries with the highest death rate.")
 } else {
   if (new_in_1 == 0) {
     text_1 <- "Once again, the same countries remain."
   } else {
-    text_1 <- "It's still the same countries." 
+    text_1 <- "It's still the same countries."
   }
 }
 
@@ -102,7 +102,7 @@ if (!appears_2) {
       country,
       ", does not appear here.",
       sep = ""
-    ) 
+    )
   }
 } else {
   pos <- match(as.character(today[today$deaths == max(today$deaths), 2]), top15_deaths_per_capita$country)
@@ -113,19 +113,20 @@ if (!appears_2) {
     ordinal(pos),
     ".",
     sep = ""
-  ) 
+  )
 }
 
 file_5[9] <- paste(text_1, text_2, sep = "<br>")
 
-country_1 <- df_most[1, ]$country 
+country_1 <- df_most[1, ]$country
 if (country_1 == "US") {
   country_1 <- "the United States"
 }
 text_1 <- paste("In ", country_1, ", the number of new infections has increased from ",
-                df_most[1, ]$old, " to ", df_most[1, ]$new, ", an increase of ", format(df_most[1, ]$increase, big.mark = " "),
-                "%.", sep = ""
-                )
+  df_most[1, ]$old, " to ", df_most[1, ]$new, ", an increase of ", format(df_most[1, ]$increase, big.mark = " "),
+  "%.",
+  sep = ""
+)
 text_2 <- "However, these numbers can easily be influenced by outliers. Countries that didn't have a lot of cases a fortnight ago."
 text_3 <- paste("Let's see what the data looks like when a country must have had at least", limit, "infections two weeks ago.")
 
@@ -133,16 +134,17 @@ text_3 <- paste("Let's see what the data looks like when a country must have had
 file_6[9] <- paste(text_1, text_2, sep = "<br>")
 file_6[12] <- text_3
 
-country_2 <- df_limit_most[1, ]$country 
+country_2 <- df_limit_most[1, ]$country
 if (country_2 == "US") {
   country_2 <- "the United States"
 }
 
 if (country_1 != country_2) {
   text_1 <- paste(country_2, " now has the highest increase in new infections. The figures rose from ",
-                  df_limit_most[1, ]$old, " to ", df_limit_most[1, ]$new, " an increase of ", format(df_limit_most[1, ]$increase, big.mark = " "),
-                  "%.", sep = ""
-                  )
+    df_limit_most[1, ]$old, " to ", df_limit_most[1, ]$new, " an increase of ", format(df_limit_most[1, ]$increase, big.mark = " "),
+    "%.",
+    sep = ""
+  )
   if (country_1 %in% df_limit_most$country) {
     text_1 <- paste(text_1, paste(country_1, " is in ", ordinal(match(df_most[1, ]$country, df_limit_most$country)), "place.", sep = ""), sep = "<br>")
   } else {
@@ -152,7 +154,7 @@ if (country_1 != country_2) {
 
 file_7[9] <- text_1
 
-if(df_few$country[1] == "China") {
+if (df_few$country[1] == "China") {
   text_1 <- paste("China.<br>The country where it all began.<br>Only ", (df_few$new - df_few$old)[1], " new cases.<br>An increase of only ", df_few$increase[1], "%.", sep = "")
 } else {
   text_1 <- paste(df_few$country[1], " only reported ", (df_few$new - df_few$old)[1], " new cases.<br>An increase of only ", df_few$increase[1], "%.", sep = "")
@@ -166,7 +168,7 @@ text_1 <- paste(
   "and",
   format(max(forecast_df$upper95_conf, na.rm = TRUE), big.mark = " "),
   "confirmed cases."
-  )
+)
 
 text_2 <- paste(
   "And how many people might have died by",

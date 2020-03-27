@@ -141,11 +141,11 @@ df$increase <- round(df$increase)
 df_most <- df[df$increase %in% df[order(df$increase, decreasing = TRUE), ][1:15, ]$increase, ]
 df_most <- df_most[order(df_most$increase, decreasing = TRUE), ]
 if (any(df_most$old[1:3] < 25)) {
-  limit = 50
+  limit <- 50
 } else if (any(df_most$old[1:3] < 50)) {
-  limit = 100
+  limit <- 100
 } else {
-  limit = mean(df_most$old) * 5
+  limit <- mean(df_most$old) * 5
 }
 df_limit <- df[df$old >= limit, ]
 df_limit_most <- df_limit[df_limit$increase %in% df_limit[order(df_limit$increase, decreasing = TRUE), ][1:15, ]$increase, ]
@@ -163,12 +163,14 @@ inds <- daily_cases$date
 
 ## Create a time series object
 
-myts_conf <- ts(daily_cases$confirmed,     # random data
-                start = c(2020, as.numeric(format(inds[1], "%j"))),
-                frequency = 365)
-myts_death <- ts(daily_cases$deaths,     # random data
-                 start = c(2020, as.numeric(format(inds[1], "%j"))),
-                 frequency = 365)
+myts_conf <- ts(daily_cases$confirmed, # random data
+  start = c(2020, as.numeric(format(inds[1], "%j"))),
+  frequency = 365
+)
+myts_death <- ts(daily_cases$deaths, # random data
+  start = c(2020, as.numeric(format(inds[1], "%j"))),
+  frequency = 365
+)
 
 forecast_conf <- forecast(auto.arima(myts_conf), h = 30, level = 95)
 forecast_conf$lower <- round(forecast_conf$lower)
@@ -184,11 +186,11 @@ forecast_df <- data.frame(
   confirmed = c(daily_cases$confirmed, rep(NA, length(dates_ts) - length(daily_cases$confirmed))),
   fitted_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$mean),
   upper95_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$upper),
-  lower95_conf =  c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$lower),
+  lower95_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$lower),
   deaths = c(daily_cases$deaths, rep(NA, length(dates_ts) - length(daily_cases$deaths))),
   fitted_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$mean),
   upper95_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$upper),
-  lower95_death =  c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$lower)
+  lower95_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$lower)
 )
 
 
@@ -197,5 +199,5 @@ if (a != "^GSPC") {
   gspc <- read_csv("data/gspc_backup.csv")
 } else {
   gspc <- as.data.frame(GSPC)
-  gspc$date <- as.Date(rownames(gspc)) 
+  gspc$date <- as.Date(rownames(gspc))
 }

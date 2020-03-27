@@ -7,8 +7,10 @@ output$highcharter_1 <- renderHighchart({
         title = list(text = "Number of cases outside China")
       )
     ) %>%
-    hc_xAxis(categories = january$date, title = list(text = "Date"),
-             gridLineWidth = 0) %>%
+    hc_xAxis(
+      categories = january$date, title = list(text = "Date"),
+      gridLineWidth = 0
+    ) %>%
     hc_add_series(
       name = "Confirmed cases in China  ",
       data = january$confirmed[january$`Country/Region` == "China"],
@@ -82,7 +84,8 @@ output$highcharter_3 <- renderHighchart({
           width = 2,
           value = match(as.Date("2008-10-09"), gspc$date)
         )
-      )) %>%
+      )
+    ) %>%
     hc_yAxis(title = list(text = "Closing value")) %>%
     hc_add_series(
       name = "Closing value",
@@ -102,9 +105,11 @@ output$highcharter_3 <- renderHighchart({
 output$highcharter_4 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = feb_euro$Country.Region,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = feb_euro$Country.Region,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
       data = feb_euro$confirmed,
       name = "Confirmed cases",
@@ -123,9 +128,11 @@ output$highcharter_4 <- renderHighchart({
 output$highcharter_5 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = top10feb$`Country/Region`,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = top10feb$`Country/Region`,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
       data = top10feb$confirmed,
       name = "Confirmed cases",
@@ -217,8 +224,10 @@ output$highcharter_8 <- renderHighchart({
       daily_cases$confirmed
   )[seq_len(nrow(daily_cases))]
   highchart() %>%
-    hc_xAxis(categories = daily_cases$date, 
-             gridLineWidth = 0, title = list(text = "Date")) %>%
+    hc_xAxis(
+      categories = daily_cases$date,
+      gridLineWidth = 0, title = list(text = "Date")
+    ) %>%
     hc_yAxis(title = list(text = "Confirmed cases")) %>%
     hc_add_series(
       data = daily_cases$confirmed,
@@ -241,9 +250,11 @@ output$highcharter_9 <- renderHighchart({
   )[seq_len(nrow(daily_cases))]
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = daily_cases$date,
-             gridLineWidth = 0,
-             title = list(text = "Date")) %>%
+    hc_xAxis(
+      categories = daily_cases$date,
+      gridLineWidth = 0,
+      title = list(text = "Date")
+    ) %>%
     hc_add_series(
       data = daily_cases$increase,
       name = "New infections",
@@ -272,8 +283,10 @@ output$highcharter_10 <- renderHighchart({
     country <- "the United States"
   }
   highchart() %>%
-    hc_xAxis(categories = most_infected$date, title = list(text = "Date"),
-             gridLineWidth = 0) %>%
+    hc_xAxis(
+      categories = most_infected$date, title = list(text = "Date"),
+      gridLineWidth = 0
+    ) %>%
     hc_yAxis(title = list(text = "Confirmed cases")) %>%
     hc_add_series(
       data = most_infected$confirmed,
@@ -311,9 +324,11 @@ output$highcharter_11 <- renderHighchart({
   }
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = most_infected$date,
-             gridLineWidth = 0,
-             title = list(text = "Date")) %>%
+    hc_xAxis(
+      categories = most_infected$date,
+      gridLineWidth = 0,
+      title = list(text = "Date")
+    ) %>%
     hc_add_series(
       data = most_infected$increase,
       name = "Confirmed cases",
@@ -341,8 +356,10 @@ output$highcharter_12 <- renderHighchart({
     0, most_death$deaths[-1] - most_death$deaths
   )[seq_len(nrow(most_death))]
   highchart() %>%
-    hc_xAxis(categories = most_death$date, title = list(text = "Date"),
-             gridLineWidth = 0) %>%
+    hc_xAxis(
+      categories = most_death$date, title = list(text = "Date"),
+      gridLineWidth = 0
+    ) %>%
     hc_yAxis(title = list(text = "Deaths")) %>%
     hc_add_series(
       data = most_death$deaths,
@@ -374,9 +391,11 @@ output$highcharter_13 <- renderHighchart({
   )[seq_len(nrow(most_death))]
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = most_death$date,
-             gridLineWidth = 0,
-             title = list(text = "Date")) %>%
+    hc_xAxis(
+      categories = most_death$date,
+      gridLineWidth = 0,
+      title = list(text = "Date")
+    ) %>%
     hc_add_series(
       data = most_death$increase,
       name = "Deaths",
@@ -441,9 +460,11 @@ output$highcharter_14 <- renderHighchart({
 output$highcharter_15 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = top15_confirmed$`Country/Region`,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = top15_confirmed$`Country/Region`,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
       data = top15_confirmed$confirmed,
       name = "Confirmed infections",
@@ -453,22 +474,24 @@ output$highcharter_15 <- renderHighchart({
     hc_title(text = paste(
       "Countries with the most infections (as of ",
       format(Sys.Date(), "%B %d, %Y"),
-      ")", sep = ""
+      ")",
+      sep = ""
     )) %>%
     hc_yAxis(title = list(text = "Confirmed infections")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
-  
 })
 
 output$highcharter_16 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = top15_deaths$`Country/Region`,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = top15_deaths$`Country/Region`,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
-      data = top15_deaths$deaths ,
+      data = top15_deaths$deaths,
       name = "Deaths",
       color = "#fb5a19"
     ) %>%
@@ -476,7 +499,8 @@ output$highcharter_16 <- renderHighchart({
     hc_title(text = paste(
       "Countries with the most deaths (as of ",
       format(Sys.Date(), "%B %d, %Y"),
-      ")", sep = ""
+      ")",
+      sep = ""
     )) %>%
     hc_yAxis(title = list(text = "Deaths")) %>%
     hc_chart(backgroundColor = "#161616") %>%
@@ -486,9 +510,11 @@ output$highcharter_16 <- renderHighchart({
 output$highcharter_17 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = top15_confirmed_per_capita$country,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = top15_confirmed_per_capita$country,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
       data = top15_confirmed_per_capita$confirmed_per_capita,
       name = "Infection rate per 1000",
@@ -498,22 +524,24 @@ output$highcharter_17 <- renderHighchart({
     hc_title(text = paste(
       "Infection rate per 1000 (as of ",
       format(Sys.Date(), "%B %d, %Y"),
-      ")", sep = ""
+      ")",
+      sep = ""
     )) %>%
     hc_yAxis(title = list(text = "Infection rate per 1000")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
-  
 })
 
 output$highcharter_18 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = top15_deaths_per_capita$country,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = top15_deaths_per_capita$country,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
-      data = top15_deaths_per_capita$deaths_per_capita ,
+      data = top15_deaths_per_capita$deaths_per_capita,
       name = "Death rate per 1000",
       color = "#fb5a19"
     ) %>%
@@ -521,7 +549,8 @@ output$highcharter_18 <- renderHighchart({
     hc_title(text = paste(
       "Death rate per 1000 (as of ",
       format(Sys.Date(), "%B %d, %Y"),
-      ")", sep = ""
+      ")",
+      sep = ""
     )) %>%
     hc_yAxis(title = list(text = "Death rate per 1000")) %>%
     hc_chart(backgroundColor = "#161616") %>%
@@ -531,9 +560,11 @@ output$highcharter_18 <- renderHighchart({
 output$highcharter_19 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = df_most$country,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = df_most$country,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
       data = df_most$increase,
       name = "Increase in %",
@@ -549,9 +580,11 @@ output$highcharter_19 <- renderHighchart({
 output$highcharter_20 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = df_limit_most$country,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = df_limit_most$country,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
       data = df_limit_most$increase,
       name = "Increase in %",
@@ -567,9 +600,11 @@ output$highcharter_20 <- renderHighchart({
 output$highcharter_21 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
-    hc_xAxis(categories = df_few$country,
-             gridLineWidth = 0,
-             title = list(text = "Country")) %>%
+    hc_xAxis(
+      categories = df_few$country,
+      gridLineWidth = 0,
+      title = list(text = "Country")
+    ) %>%
     hc_add_series(
       data = df_few$increase,
       name = "Increase in %",
@@ -586,9 +621,11 @@ output$highcharter_22 <- renderHighchart({
   highchart() %>%
     hc_add_series(forecast_df$confirmed, name = "Original values", color = "#00bb8b") %>%
     hc_xAxis(title = list(text = "Date"), categories = forecast_df$date) %>%
-    hc_add_series(as.matrix(forecast_df[, 4:5]), type = "arearange", color = "#A2DFDE",
-                  fillOpacity = 0.3,
-                  name = "95% conf.") %>%
+    hc_add_series(as.matrix(forecast_df[, 4:5]),
+      type = "arearange", color = "#A2DFDE",
+      fillOpacity = 0.3,
+      name = "95% conf."
+    ) %>%
     hc_add_series(forecast_df$fitted_conf, name = "Mean prediction", color = "#00A9A5") %>%
     hc_xAxis(title = list(text = "Date"), categories = forecast_df$date) %>%
     hc_add_theme(hc_theme_monokai()) %>%
@@ -611,16 +648,18 @@ output$highcharter_22 <- renderHighchart({
     hc_plotOptions(
       line = list(marker = list(enabled = FALSE)),
       arearange = list(marker = list(enabled = FALSE))
-      )
+    )
 })
 
 output$highcharter_23 <- renderHighchart({
   highchart() %>%
     hc_add_series(forecast_df$deaths, name = "Original values", color = "#fb5a19") %>%
     hc_xAxis(title = list(text = "Date"), categories = forecast_df$date) %>%
-    hc_add_series(as.matrix(forecast_df[, 8:9]), type = "arearange", color = "#F3B1B5",
-                  fillOpacity = 0.3,
-                  name = "95% conf.") %>%
+    hc_add_series(as.matrix(forecast_df[, 8:9]),
+      type = "arearange", color = "#F3B1B5",
+      fillOpacity = 0.3,
+      name = "95% conf."
+    ) %>%
     hc_add_series(forecast_df$fitted_death, name = "Mean prediction", color = "#DF2935") %>%
     hc_xAxis(title = list(text = "Date"), categories = forecast_df$date) %>%
     hc_add_theme(hc_theme_monokai()) %>%
