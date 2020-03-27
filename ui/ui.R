@@ -18,6 +18,10 @@ fluidPage(
   background-color: #00bb8b;  color:#161616;
   border:none;
   }
+  .tabbable > .nav > li > a[data-value='Global leaders'] {
+  background-color: #00bb8b;  color:#161616;
+  border:none;
+  }
   .tabbable > .nav > li[class=active]    > a {
   background-color: #161616; color:#00bb8b;
   border:none;
@@ -27,6 +31,7 @@ fluidPage(
   withAnim(),
   use_waiter(),
   waiter_show_on_load(spin_flower(), color = "#161616"),
+  add_busy_bar(color = "#00bb8b"),
   tabsetPanel(
     id = "tabset",
     tabPanel(
@@ -238,6 +243,15 @@ fluidPage(
         ),
         column(
           width = 4,
+          includeHTML("html_files/text_13.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
           includeHTML("html_files/today_1.html")
         )
       ),
@@ -266,7 +280,7 @@ fluidPage(
         ),
         column(
           width = 4,
-          div(class = "story_2"),
+          div(class = "date_3"),
           includeHTML("html_files/today_2.html")
         )
       ),
@@ -276,7 +290,7 @@ fluidPage(
         ),
         column(
           width = 6,
-          div(id = "hc8", highchartOutput("highcharter_10", height = "65vh"))
+          div(id = "hc10", highchartOutput("highcharter_10", height = "65vh"))
         )
       ),
       fluidRow(
@@ -286,7 +300,7 @@ fluidPage(
         column(
           width = 6,
           div(class = "story_2"),
-          div(id = "hc9", highchartOutput("highcharter_11", height = "65vh"))
+          div(id = "hc11", highchartOutput("highcharter_11", height = "65vh"))
         )
       ),
       fluidRow(
@@ -295,7 +309,7 @@ fluidPage(
         ),
         column(
           width = 4,
-          div(class = "story_2"),
+          div(class = "date_3"),
           includeHTML("html_files/today_3.html")
         )
       ),
@@ -305,7 +319,7 @@ fluidPage(
         ),
         column(
           width = 6,
-          div(id = "hc8", highchartOutput("highcharter_12", height = "65vh"))
+          div(id = "hc12", highchartOutput("highcharter_12", height = "65vh"))
         )
       ),
       fluidRow(
@@ -315,7 +329,7 @@ fluidPage(
         column(
           width = 6,
           div(class = "story_2"),
-          div(id = "hc9", highchartOutput("highcharter_13", height = "65vh"))
+          div(id = "hc13", highchartOutput("highcharter_13", height = "65vh"))
         )
       ),
       fluidRow(
@@ -324,8 +338,202 @@ fluidPage(
         ),
         column(
           width = 4,
-          div(class = "story_2"),
+          includeHTML("html_files/text_11.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc22", highchartOutput("highcharter_22", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/text_12.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc23", highchartOutput("highcharter_23", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
           includeHTML("html_files/today.html")
+        )
+      )
+    ),
+    tabPanel(
+      "Global leaders",
+      HTML('<a name="top2">'),
+      absolutePanel(
+        draggable = FALSE,
+        fixed = TRUE,
+        top = 900,
+        left = 10,
+        HTML(
+          '<a href = "https://github.com/nicoFhahn/covid_shiny"
+        target="_blank">
+        <button id="github2"
+        title="GitHub repository">GitHub</button></a>'
+        ),
+        HTML(
+          '<a href = "#top2"><button id="myBtn2"
+        title="jump to top">jump to top</button></a>'
+        ),
+        style = "z-index: 420;"
+      ),
+      fluidRow(
+        includeHTML("html_files/landing2.html")
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_1.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc15", highchartOutput("highcharter_15", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_2.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc16", highchartOutput("highcharter_16", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_3.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc17", highchartOutput("highcharter_17", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_4.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc18", highchartOutput("highcharter_18", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_5.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc19", highchartOutput("highcharter_19", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_6.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc20", highchartOutput("highcharter_20", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_7.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc21", highchartOutput("highcharter_21", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/leaders_8.html")
         )
       )
     ),
