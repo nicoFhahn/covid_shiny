@@ -109,7 +109,7 @@ daily_cases2 <- data_pre %>%
     confirmed = sum(confirmed),
     deaths = sum(deaths)
   )
-today <- corona_sf[corona_sf$date == max(corona_sf$date), ]
+today <- daily_cases2[daily_cases2$date == max(daily_cases2$date), ]
 top15_confirmed <- today[today$confirmed %in% sort(today$confirmed, decreasing = TRUE)[1:15], ]
 top15_confirmed <- top15_confirmed[order(top15_confirmed$confirmed, decreasing = TRUE), ]
 top15_deaths <- today[today$confirmed %in% sort(today$confirmed, decreasing = TRUE)[1:15], ]

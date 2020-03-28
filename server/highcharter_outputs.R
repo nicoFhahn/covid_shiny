@@ -473,7 +473,7 @@ output$highcharter_15 <- renderHighchart({
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(text = paste(
       "Countries with the most infections (as of ",
-      format(Sys.Date(), "%B %d, %Y"),
+      format(today$date[1], "%B %d, %Y"),
       ")",
       sep = ""
     )) %>%
@@ -498,7 +498,7 @@ output$highcharter_16 <- renderHighchart({
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(text = paste(
       "Countries with the most deaths (as of ",
-      format(Sys.Date(), "%B %d, %Y"),
+      format(today$date[1], "%B %d, %Y"),
       ")",
       sep = ""
     )) %>%
@@ -523,7 +523,7 @@ output$highcharter_17 <- renderHighchart({
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(text = paste(
       "Infection rate per 1000 (as of ",
-      format(Sys.Date(), "%B %d, %Y"),
+      format(today$date[1], "%B %d, %Y"),
       ")",
       sep = ""
     )) %>%
@@ -548,7 +548,7 @@ output$highcharter_18 <- renderHighchart({
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(text = paste(
       "Death rate per 1000 (as of ",
-      format(Sys.Date(), "%B %d, %Y"),
+      format(today$date[1], "%B %d, %Y"),
       ")",
       sep = ""
     )) %>%
