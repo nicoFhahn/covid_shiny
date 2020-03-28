@@ -140,8 +140,14 @@ if (country_2 == "US") {
 }
 
 if (country_1 != country_2) {
+  if (country_2 == "the United States") {
+    country_2 <- "The United States"
+  }
+  
   text_1 <- paste(country_2, " now has the highest increase in new infections. The figures rose from ",
-    df_limit_most[1, ]$old, " to ", df_limit_most[1, ]$new, " an increase of ", format(df_limit_most[1, ]$increase, big.mark = " "),
+    format(df_limit_most[1, ]$old, big.mark = " "), " to ",
+    format(df_limit_most[1, ]$new, big.mark = " "),  " an increase of ",
+    format(df_limit_most[1, ]$increase, big.mark = " "),
     "%.",
     sep = ""
   )
@@ -181,7 +187,7 @@ file_9[12] <- text_2
 text_1 <- paste(
   "Anywhere between ",
   format(max(forecast_df$lower95_death, na.rm = TRUE), big.mark = " "),
-  " and ",
+  " and <br>",
   format(max(forecast_df$upper95_death, na.rm = TRUE), big.mark = " "),
   ".",
   sep = ""

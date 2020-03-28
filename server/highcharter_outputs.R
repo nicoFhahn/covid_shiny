@@ -591,7 +591,7 @@ output$highcharter_20 <- renderHighchart({
       color = "#00bb8b"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = "Most new infections in the last 14 days (at least 50 infections)") %>%
+    hc_title(text = paste("Most new infections in the last 14 days (at least", limit, "infections)")) %>%
     hc_yAxis(title = list(text = "Increase in %")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)

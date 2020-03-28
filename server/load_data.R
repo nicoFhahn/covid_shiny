@@ -141,15 +141,17 @@ df$increase <- round(df$increase)
 df_most <- df[df$increase %in% df[order(df$increase, decreasing = TRUE), ][1:15, ]$increase, ]
 df_most <- df_most[order(df_most$increase, decreasing = TRUE), ]
 if (any(df_most$old[1:3] < 25)) {
-  limit <- 50
+  limit <- 250
 } else if (any(df_most$old[1:3] < 50)) {
-  limit <- 100
+  limit <- 500
 } else {
-  limit <- mean(df_most$old) * 5
+  limit <- mean(df_most$old) * 100
 }
 df_limit <- df[df$old >= limit, ]
 df_limit_most <- df_limit[df_limit$increase %in% df_limit[order(df_limit$increase, decreasing = TRUE), ][1:15, ]$increase, ]
 df_limit_most <- df_limit_most[order(df_limit_most$increase, decreasing = TRUE), ]
+df_limit_few <- df_limit[df_limit$increase %in% df_limit[order(df_limit$increase), ][1:15, ]$increase, ]
+df_limit_few <- df_limit_few[order(df_limit_few$increase), ]
 df_few <- df[df$increase %in% df[order(df$increase), ][1:15, ]$increase, ]
 df_few <- df_few[order(df_few$increase), ]
 
