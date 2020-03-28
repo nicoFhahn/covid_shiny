@@ -31,6 +31,8 @@ css <- sass(sass_file("styles.scss"))
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # load the server
 server <- function(input, output, session) {
+  Sys.sleep(3) # do something that takes time
+  waiter_hide()
   source(file.path("server", "leaflet_maps.R"), local = TRUE)$value
   source(file.path("server", "event_observer.R"), local = TRUE)$value
   source(file.path("server", "reactive_events.R"), local = TRUE)$value

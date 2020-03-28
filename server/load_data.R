@@ -102,7 +102,6 @@ file_8 <- readLines("html_files/leaders_8.html")
 file_9 <- readLines("html_files/text_12.html")
 file_10 <- readLines("html_files/today.html")
 data_pre <- corona_sf
-data_pre$geometry <- NULL
 daily_cases2 <- data_pre %>%
   group_by(date, `Country/Region`) %>%
   summarise(
@@ -110,6 +109,7 @@ daily_cases2 <- data_pre %>%
     deaths = sum(deaths)
   )
 today <- daily_cases2[daily_cases2$date == max(daily_cases2$date), ]
+daily_cases2$geometry <- NULL
 top15_confirmed <- today[today$confirmed %in% sort(today$confirmed, decreasing = TRUE)[1:15], ]
 top15_confirmed <- top15_confirmed[order(top15_confirmed$confirmed, decreasing = TRUE), ]
 top15_deaths <- today[today$confirmed %in% sort(today$confirmed, decreasing = TRUE)[1:15], ]
