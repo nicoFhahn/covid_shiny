@@ -19,8 +19,6 @@ library(stringr)
 library(waiter)
 # load the data
 options(scipen = 15)
-source(file.path("server", "load_data.R"), local = TRUE)
-source(file.path("server", "create_story.R"), local = TRUE)
 # set time language to english
 Sys.setlocale("LC_TIME", "English")
 # load the api key for mapbox and the seed
@@ -31,7 +29,8 @@ css <- sass(sass_file("styles.scss"))
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # load the server
 server <- function(input, output, session) {
-  Sys.sleep(3) # do something that takes time
+  source(file.path("server", "load_data.R"), local = TRUE)
+  source(file.path("server", "create_story.R"), local = TRUE)
   waiter_hide()
   source(file.path("server", "leaflet_maps.R"), local = TRUE)$value
   source(file.path("server", "event_observer.R"), local = TRUE)$value
