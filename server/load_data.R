@@ -182,7 +182,7 @@ forecast_death$upper <- round(forecast_death$upper)
 forecast_death$mean <- round(forecast_death$mean)
 dates_ts <- seq(from = daily_cases$date[1], to = max(daily_cases$date) + 30, by = 1)
 forecast_df <- data.frame(
-  date = dates,
+  date = dates_ts,
   confirmed = c(daily_cases$confirmed, rep(NA, length(dates_ts) - length(daily_cases$confirmed))),
   fitted_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$mean),
   upper95_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$upper),
