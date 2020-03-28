@@ -1,7 +1,7 @@
 # Covid-19: The 2019-20 Coronavirus Pandemic visualized  with R and Shiny
 Covid-19 uses the data from Johns Hopkins University to visualize the outbreak of the novel coronavirus. The data is available from [this repository](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data).
 
-You can scroll through the history so far, look at the countries currently leading in various statistics and view the figures on a world map.
+You can scroll through the story so far, look at the countries currently leading in various statistics and view the figures on a world map.
 
 The app uses the [mapbox API](https://docs.mapbox.com/api/). If you have an API key, save it in a **key.env** file that looks like this:
 ```{bash}
