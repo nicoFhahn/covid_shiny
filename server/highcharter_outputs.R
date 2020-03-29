@@ -587,7 +587,7 @@ output$highcharter_21 <- renderHighchart({
       color = "#00bb8b"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = paste("Fewest infections in the last 14 days (at least", limit,  "infections)")) %>%
+    hc_title(text = paste("Fewest infections in the last 14 days (at least", limit, "infections)")) %>%
     hc_yAxis(title = list(text = "Increase in %")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
@@ -666,13 +666,15 @@ output$highcharter_24 <- renderHighchart({
   hchart(
     lock_df, "column",
     hcaes(x = lockdown, y = infection_rate, group = time),
-    color = c("#65DEF1", "#D7263D")) %>%
-    hc_xAxis(title = list(text = "Lockdown status"),
-             gridLineWidth = 0) %>%
+    color = c("#65DEF1", "#D7263D")
+  ) %>%
+    hc_xAxis(
+      title = list(text = "Lockdown status"),
+      gridLineWidth = 0
+    ) %>%
     hc_title(text = "Average daily growth rate before and after different types of lockdowns") %>%
     hc_yAxis(title = list(text = "Growth rate")) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(align = "left")
-  
 })

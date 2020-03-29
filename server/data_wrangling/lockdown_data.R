@@ -3,7 +3,7 @@ locked <- read_csv("data/locked.csv")
 # we want to calculate the growth rate for each of the 14 days prior to the lockdown
 locked_days <- daily_cases2[
   daily_cases2$date %in% seq(min(locked$date) - 15, max(daily_cases2$date), by = 1),
-  ]
+]
 # join the daily cases by the data
 locked_days <- right_join(locked_days, locked, by = "Country/Region")
 locked_days <- locked_days[locked_days$lockdown != "parts_special", ]

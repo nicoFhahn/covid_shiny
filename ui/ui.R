@@ -47,8 +47,7 @@ fluidPage(
         ),
         HTML('
         <button class="chapter" id = "chapter_sel"
-        title="Select chapter">Chapter</button></a>'
-        ),
+        title="Select chapter">Chapter</button></a>'),
         HTML(
           '<a href = "#top"><button class="myBtn"
         title="jump to top">jump to top</button></a>'

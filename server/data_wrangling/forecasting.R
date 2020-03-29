@@ -3,12 +3,12 @@ inds <- daily_cases$date
 ## Create a time series object
 
 myts_conf <- ts(daily_cases$confirmed, # random data
-                start = c(2020, as.numeric(format(inds[1], "%j"))),
-                frequency = 365
+  start = c(2020, as.numeric(format(inds[1], "%j"))),
+  frequency = 365
 )
 myts_death <- ts(daily_cases$deaths, # random data
-                 start = c(2020, as.numeric(format(inds[1], "%j"))),
-                 frequency = 365
+  start = c(2020, as.numeric(format(inds[1], "%j"))),
+  frequency = 365
 )
 
 # forecast the confirmed cases

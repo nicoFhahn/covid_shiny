@@ -85,7 +85,7 @@ output$map_lockdown <- renderLeaflet({
   )) %>%
     addPolygons(
       data = locked_countries,
-      fillColor = ~pal(lockdown),
+      fillColor = ~ pal(lockdown),
       opacity = 1,
       fillOpacity = 0.25,
       weight = 1,
@@ -104,5 +104,4 @@ output$map_lockdown <- renderLeaflet({
       lng = 0,
       zoom = 2
     )
-  
 })
