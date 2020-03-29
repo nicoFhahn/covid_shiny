@@ -7,19 +7,19 @@ fluidPage(
   tags$style(
     HTML("
   .tabbable > .nav > li > a {
-  background-color: #161616;  color:#00bb8b;
-  border:none;
-  }
-  .tabbable > .nav > li > a[data-value='Timeline of the outbreak'] {
-  background-color: #00bb8b;   color:#161616;
-  border:none;
-  }
-  .tabbable > .nav > li > a[data-value='Worldwide cases'] {
   background-color: #00bb8b;  color:#161616;
   border:none;
   }
+  .tabbable > .nav > li > a[data-value='Timeline of the outbreak'] {
+  background-color: #161616;   color:#00bb8b;
+  border:none;
+  }
+  .tabbable > .nav > li > a[data-value='Worldwide cases'] {
+  background-color: #161616;  color:#00bb8b;
+  border:none;
+  }
   .tabbable > .nav > li[class=active]    > a {
-  background-color: #161616; color:#00bb8b;
+  background-color: #00bb8b; color:#161616;
   border:none;
   }
   ")
