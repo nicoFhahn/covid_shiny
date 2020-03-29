@@ -3,6 +3,14 @@ source(file.path("server/data_wrangling", "jhu.R"), local = TRUE)
 
 # load the country shapes
 countries <- read_sf("data/ne_50m_admin_0_countries.shp")
+# group the countries by their sovereign state
+countries <- countries %>%
+  group_by(SOVEREIGNT) %>%
+  summarise(
+    POP_EST = sum(POP_EST),
+    ADMIN = unique(SOVEREIGNT),
+    geometry = st_union(geometry)
+  )
 
 # load data for highcharter plots
 source(file.path("server/data_wrangling", "highcharter_data.R"), local = TRUE)
@@ -14,6 +22,7 @@ source(file.path("server/data_wrangling", "html_files.R"), local = TRUE)
 source(file.path("server/data_wrangling", "group_data.R"), local = TRUE)
 
 today <- daily_cases2[daily_cases2$date == max(daily_cases2$date), ]
+today <- st_cast(today, "MULTIPOINT")
 daily_cases2$geometry <- NULL
 
 # load top_15 data

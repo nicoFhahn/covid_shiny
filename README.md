@@ -13,16 +13,16 @@ You can run Covid-19 on your own machine using the following code:
 ```R
 packages = c(
 	"dotenv", "english", "forecast", "fresh", "highcharter", "htmltools", "leaflet", "leaflet.extras",
-	"plotly", "quantmod", "readr", "sass", "sf", "shiny", "shinyanimate", "shinybusy", "shinyWidgets",
-	"stringr", "waiter"
+	"plotly", "quantmod", "readr", "sass", "sf", "shiny", "shinyanimate", "shinybusy", "shinyjs",
+	"shinyWidgets", "stringr", "waiter"
 	)
 install.packages(packages, repos = "https://cran.rstudio.com/")
 library(shiny)
 runGitHub("covid_shiny", "nicoFhahn")
 ```
 # Screenshots
-![alt text](https://i.imgur.com/JnCq99h.png "Logo Title Text 1")
-![alt text](https://i.imgur.com/mHQMc2H.png "Logo Title Text 1")
+![alt text](https://i.imgur.com/yP3b7eA.png "Logo Title Text 1")
+![alt text](https://i.imgur.com/PLz7s2e.png "Logo Title Text 1")
 
 ### Acknowledgments
 The folks over at RStudio with the [SuperZIP demo](https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example) which heavily inspired the layout of the leaflet map.

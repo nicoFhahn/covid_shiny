@@ -256,7 +256,7 @@ a:hover {
   font-weight: none }
   
   
-#myBtn {
+.myBtn {
   position: fixed; /* Fixed/sticky position */
   bottom: 3vh; /* Place the button at the bottom of the page */
   right: 3vh; /* Place the button 30vh from the right */
@@ -273,12 +273,34 @@ a:hover {
   width: 6%;
 }
 
-#myBtn:hover {
+.myBtn:hover {
   background-color: #00bb8b;
   color: #161616;/* Add a dark-grey background on hover */
 }
 
-#github {
+.github {
+  position: fixed; /* Fixed/sticky position */
+  bottom: 17vh; /* Place the button at the bottom of the page */
+  right: 3vh; /* Place the button 30vh from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #161616; /* Set a background color */
+  color: #00bb8b; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 1vh; /* Some padding */
+  border-radius: 1vh; /* Rounded corners */
+  font-size: 2vh; /* Increase font size */
+  /*border:1px solid #00bb8b; */
+  width: 6%;
+}
+
+.github:hover {
+  background-color: #00bb8b;
+  color: #161616;/* Add a dark-grey background on hover */
+}
+
+#chapter_sel {
   position: fixed; /* Fixed/sticky position */
   bottom: 10vh; /* Place the button at the bottom of the page */
   right: 3vh; /* Place the button 30vh from the right */
@@ -295,52 +317,7 @@ a:hover {
   width: 6%;
 }
 
-#github:hover {
-  background-color: #00bb8b;
-  color: #161616;/* Add a dark-grey background on hover */
-}
-  
-  
-#myBtn2 {
-  position: fixed; /* Fixed/sticky position */
-  bottom: 3vh; /* Place the button at the bottom of the page */
-  right: 3vh; /* Place the button 30vh from the right */
-  z-index: 99; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: #161616; /* Set a background color */
-  color: #00bb8b; /* Text color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 1vh; /* Some padding */
-  border-radius: 1vh; /* Rounded corners */
-  font-size: 2vh; /* Increase font size */
-  /*border:1px solid #00bb8b;*/
-  width: 6%;
-}
-
-#myBtn2:hover {
-  background-color: #00bb8b;
-  color: #161616;/* Add a dark-grey background on hover */
-}
-
-#github2 {
-  position: fixed; /* Fixed/sticky position */
-  bottom: 10vh; /* Place the button at the bottom of the page */
-  right: 3vh; /* Place the button 30vh from the right */
-  z-index: 99; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: #161616; /* Set a background color */
-  color: #00bb8b; /* Text color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 1vh; /* Some padding */
-  border-radius: 1vh; /* Rounded corners */
-  font-size: 2vh; /* Increase font size */
-  /*border:1px solid #00bb8b; */
-  width: 6%;
-}
-
-#github2:hover {
+#chapter_sel:hover {
   background-color: #00bb8b;
   color: #161616;/* Add a dark-grey background on hover */
 }
@@ -386,4 +363,138 @@ a:hover {
 #lf2 {
   z-index: -1;
   position:relative;
+}
+
+#lf3 {
+  z-index: -1;
+  position:relative;
+}
+
+
+
+.chapter_big {
+  /* padding-left:11vh;*/
+  text-align:left;
+  padding-bottom:1%;
+  background-color:#161616;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  font-size:6.8vh;
+  color:#00bb8b;
+  line-height:6.875vh;
+}
+
+
+.chapter_medium {
+/*  padding-left:99.15vh;*/ 
+  text-align:left;
+  padding-bottom:8%;
+  background-color:#161616;
+  font-size:4.8vh;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  color:#00bb8b;
+  line-height:4.875vh;
+}
+
+.chapter_wrapper_1 {
+  width: 55.5815vw;
+  margin-top:23vh;
+  margin-bottom:18vh;
+  margin-left: 5.8vw;
+}
+
+.chapter_wrapper_2 {
+  width: 55.5815vw;
+  margin-left: 5.8vw;
+  margin-bottom:64vh;
+}
+
+.chapter_small {
+  background-color:#161616;
+  padding-bottom:4vh;
+  font-size:3vh;
+  color:#00bb8b;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
+
+.link_small {
+  background-color:#161616;
+  text-align: left;
+  padding-bottom:4vh;
+  font-size:1.4vh;
+  color:#00bb8b !important;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
+.date_chapter {
+  background-color:#161616;
+  text-align:right;
+  padding-bottom:4vh;
+  font-size:1.4vh;
+  color:#00bb8b;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  line-height:4.875vh;
+}
+
+#modal .modal-dialog{
+  margin-left:62vw;
+  width:32vw;
+  color:#00bb8b;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+}
+
+a:visited {
+  color: #00bb8b;
+}
+a:active {
+  color: #00bb8b;
+}
+a:link {
+  color: #00bb8b;
+}
+
+
+div.modal-content {
+  background-color: #161616;
+}
+
+#shiny-modal > div > div > div.modal-header > h4 {
+  color:#00bb8b;
+  font-weight:bold;
+  font-size: 2.2vh;
+}
+
+#shiny-modal > div > div > div.modal-footer > button {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #161616; /* Set a background color */
+  color: #00bb8b; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 1vh; /* Some padding */
+  border-radius: 1vh; /* Rounded corners */
+  font-size: 1.6vh; /* Increase font size */
+  font-family: 'Quicksand', sans-serif;
+  /*border:1px solid #00bb8b; */
+}
+
+
+#shiny-modal > div > div > div.modal-footer > button:hover {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #00bb8b; /* Set a background color */
+  color: #161616; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 1vh; /* Some padding */
+  border-radius: 1vh; /* Rounded corners */
+  font-size: 2vh; /* Increase font size */
+  font-family: 'Quicksand', sans-serif;
+  /*border:1px solid #00bb8b; */
 }

@@ -6,6 +6,7 @@ locked_days <- daily_cases2[
   ]
 # join the daily cases by the data
 locked_days <- right_join(locked_days, locked, by = "Country/Region")
+locked_days <- locked_days[locked_days$lockdown != "parts_special", ]
 # throw away to old data
 locked_days <- locked_days[locked_days$date.x + 15 >= locked_days$date.y, ]
 # split by the type of lockdown
@@ -82,9 +83,9 @@ lock_df <- data.frame(
 lock_df$lockdown <- as.character(lock_df$lockdown)
 lock_df$lockdown[lock_df$lockdown == "Yes"] <- "Full lockdown"
 lock_df$lockdown[lock_df$lockdown == "Partial"] <- "Partial lockdown"
-lock_df$lockdown[lock_df$lockdown == "Some cities"] <- "Lockdown in some cities"
+lock_df$lockdown[lock_df$lockdown == "parts"] <- "Lockdown in parts of country"
 lock_df$lockdown <- ordered(lock_df$lockdown, levels = c(
-  "No lockdown", "Lockdown in some cities", "Partial lockdown", "Full lockdown"
+  "No lockdown", "Lockdown in parts of country", "Partial lockdown", "Full lockdown"
 ))
 lock_df$time <- ordered(lock_df$time, levels = c("Pre or no lockdown", "Post lockdown"))
 lock_df <- lock_df[order(lock_df$lockdown), ]
@@ -93,7 +94,7 @@ lock_df <- lock_df[order(lock_df$lockdown), ]
 locked_2 <- locked
 colnames(locked_2)[1] <- "ADMIN"
 missing_frame <- data.frame(
-  ADMIN = countries$ADMIN[!countries$ADMIN %in% locked$ADMIN],
+  ADMIN = countries$ADMIN[!countries$ADMIN %in% locked_2$ADMIN],
   lockdown = "No lockdown",
   date = NA
 )
@@ -102,8 +103,9 @@ locked_countries <- right_join(countries, locked_2, by = "ADMIN")
 locked_countries <- locked_countries[locked_countries$ADMIN != "Antarctica", ]
 locked_countries$lockdown[locked_countries$lockdown == "Yes"] <- "Full lockdown"
 locked_countries$lockdown[locked_countries$lockdown == "Partial"] <- "Partial lockdown"
-locked_countries$lockdown[locked_countries$lockdown == "Some cities"] <- "Lockdown in some cities"
+locked_countries$lockdown[locked_countries$lockdown == "parts"] <- "Lockdown in parts of country"
+locked_countries$lockdown[locked_countries$lockdown == "parts_special"] <- "Lockdown in parts of country"
 locked_countries$lockdown <- ordered(locked_countries$lockdown, levels = c(
-  "No lockdown", "Lockdown in some cities", "Partial lockdown", "Full lockdown"
+  "No lockdown", "Lockdown in parts of country", "Partial lockdown", "Full lockdown"
 ))
-pal <- colorFactor(c("#F6F7F8", "#EACD4F", "#F38A32", "#FF3366"), domain = locked_countries$lockdown)
+pal <- colorFactor(c("#161616", "#EABF00", "#F26D00", "#FF003F"), domain = locked_countries$lockdown)

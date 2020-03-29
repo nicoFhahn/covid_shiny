@@ -23,7 +23,7 @@ output$highcharter_1 <- renderHighchart({
       color = "#FDE74C"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = "Number of confirmed COVID-19 cases in January 2020") %>%
+    hc_title(text = "Number of confirmed cases in January 2020") %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(align = "left") %>%
     hc_plotOptions(
@@ -56,8 +56,7 @@ output$highcharter_2 <- renderHighchart({
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
-      text = "Number of confirmed COVID-19
-      cases at the end of February 2020"
+      text = "Number of confirmed cases at the end of February 2020"
     ) %>%
     hc_legend(align = "left") %>%
     hc_chart(backgroundColor = "#161616") %>%
@@ -117,8 +116,7 @@ output$highcharter_4 <- renderHighchart({
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
-      text = "Number of confirmed COVID-19
-      cases at the end of February 2020"
+      text = "Number of confirmed cases at the end of February 2020"
     ) %>%
     hc_yAxis(title = list(text = "Confirmed cases")) %>%
     hc_chart(backgroundColor = "#161616") %>%
@@ -140,8 +138,7 @@ output$highcharter_5 <- renderHighchart({
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
-      text = "Number of confirmed COVID-19 cases
-      at the end of February 2020"
+      text = "Number of confirmed cases at the end of February 2020"
     ) %>%
     hc_yAxis(title = list(text = "Confirmed cases")) %>%
     hc_chart(backgroundColor = "#161616") %>%
@@ -178,8 +175,7 @@ output$highcharter_6 <- renderHighchart({
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
-      text = "Number of confirmed COVID-19 cases
-      outside China over the last 28 days"
+      text = "Number of confirmed cases outside China over the last 28 days"
     ) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE) %>%
@@ -198,7 +194,7 @@ output$highcharter_7 <- renderHighchart({
       color = "#D2F898"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = "Number of confirmed COVID-19 cases in Germany") %>%
+    hc_title(text = "Number of confirmed cases in Germany") %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE) %>%
     hc_xAxis(
@@ -235,7 +231,7 @@ output$highcharter_8 <- renderHighchart({
       color = "#00bb8b"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = "Number of confirmed COVID-19 cases") %>%
+    hc_title(text = "Number of confirmed cases") %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE) %>%
     hc_plotOptions(
@@ -296,7 +292,7 @@ output$highcharter_10 <- renderHighchart({
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
       text = paste(
-        "Number of confirmed COVID-19 cases in",
+        "Number of confirmed cases in",
         country
       )
     ) %>%
@@ -446,7 +442,7 @@ output$highcharter_14 <- renderHighchart({
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
-      text = "Number of confirmed COVID-19
+      text = "Number of confirmed
       cases"
     ) %>%
     hc_legend(align = "left") %>%
@@ -471,12 +467,7 @@ output$highcharter_15 <- renderHighchart({
       color = "#00bb8b"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = paste(
-      "Countries with the most infections (as of ",
-      format(today$date[1], "%B %d, %Y"),
-      ")",
-      sep = ""
-    )) %>%
+    hc_title(text = "Countries with the most infections (as of today)") %>%
     hc_yAxis(title = list(text = "Confirmed infections")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
@@ -496,12 +487,7 @@ output$highcharter_16 <- renderHighchart({
       color = "#fb5a19"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = paste(
-      "Countries with the most deaths (as of ",
-      format(today$date[1], "%B %d, %Y"),
-      ")",
-      sep = ""
-    )) %>%
+    hc_title(text = "Countries with the most deaths (as of today)") %>%
     hc_yAxis(title = list(text = "Deaths")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
@@ -517,17 +503,12 @@ output$highcharter_17 <- renderHighchart({
     ) %>%
     hc_add_series(
       data = top15_confirmed_per_capita$confirmed_per_capita,
-      name = "Infection rate per 1000",
+      name = "Infection rate per 1 000",
       color = "#00bb8b"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = paste(
-      "Infection rate per 1000 (as of ",
-      format(today$date[1], "%B %d, %Y"),
-      ")",
-      sep = ""
-    )) %>%
-    hc_yAxis(title = list(text = "Infection rate per 1000")) %>%
+    hc_title(text = "Infection rate per 1 000 (as of today)") %>%
+    hc_yAxis(title = list(text = "Infection rate per 1 000")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
 })
@@ -542,17 +523,12 @@ output$highcharter_18 <- renderHighchart({
     ) %>%
     hc_add_series(
       data = top15_deaths_per_capita$deaths_per_capita,
-      name = "Death rate per 1000",
+      name = "Death rate per 1 000",
       color = "#fb5a19"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = paste(
-      "Death rate per 1000 (as of ",
-      format(today$date[1], "%B %d, %Y"),
-      ")",
-      sep = ""
-    )) %>%
-    hc_yAxis(title = list(text = "Death rate per 1000")) %>%
+    hc_title(text = "Death rate per 1 000 (as of today)") %>%
+    hc_yAxis(title = list(text = "Death rate per 1 000")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
 })
@@ -601,17 +577,17 @@ output$highcharter_21 <- renderHighchart({
   highchart() %>%
     hc_chart(type = "column") %>%
     hc_xAxis(
-      categories = df_few$country,
+      categories = df_limit_few$country,
       gridLineWidth = 0,
       title = list(text = "Country")
     ) %>%
     hc_add_series(
-      data = df_few$increase,
+      data = df_limit_few$increase,
       name = "Increase in %",
       color = "#00bb8b"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
-    hc_title(text = "Fewest infections in the last 14 days (at least 1 infection)") %>%
+    hc_title(text = paste("Fewest infections in the last 14 days (at least", limit,  "infections)")) %>%
     hc_yAxis(title = list(text = "Increase in %")) %>%
     hc_chart(backgroundColor = "#161616") %>%
     hc_legend(enabled = FALSE)
@@ -683,4 +659,20 @@ output$highcharter_23 <- renderHighchart({
       line = list(marker = list(enabled = FALSE)),
       arearange = list(marker = list(enabled = FALSE))
     )
+})
+
+
+output$highcharter_24 <- renderHighchart({
+  hchart(
+    lock_df, "column",
+    hcaes(x = lockdown, y = infection_rate, group = time),
+    color = c("#65DEF1", "#D7263D")) %>%
+    hc_xAxis(title = list(text = "Lockdown status"),
+             gridLineWidth = 0) %>%
+    hc_title(text = "Average daily growth rate before and after different types of lockdowns") %>%
+    hc_yAxis(title = list(text = "Growth rate")) %>%
+    hc_add_theme(hc_theme_monokai()) %>%
+    hc_chart(backgroundColor = "#161616") %>%
+    hc_legend(align = "left")
+  
 })

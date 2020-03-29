@@ -18,10 +18,6 @@ fluidPage(
   background-color: #00bb8b;  color:#161616;
   border:none;
   }
-  .tabbable > .nav > li > a[data-value='Global leaders'] {
-  background-color: #00bb8b;  color:#161616;
-  border:none;
-  }
   .tabbable > .nav > li[class=active]    > a {
   background-color: #161616; color:#00bb8b;
   border:none;
@@ -30,6 +26,7 @@ fluidPage(
   ),
   withAnim(),
   use_waiter(),
+  useShinyjs(),
   waiter_show_on_load(spin_flower(), color = "#161616"),
   add_busy_bar(color = "#00bb8b"),
   tabsetPanel(
@@ -40,19 +37,23 @@ fluidPage(
       absolutePanel(
         draggable = FALSE,
         fixed = TRUE,
-        top = 900,
+        top = 1200,
         left = 10,
         HTML(
           '<a href = "https://github.com/nicoFhahn/covid_shiny"
         target="_blank">
-        <button id="github"
+        <button class="github" id = "test1"
         title="GitHub repository">GitHub</button></a>'
         ),
+        HTML('
+        <button class="chapter" id = "chapter_sel"
+        title="Select chapter">Chapter</button></a>'
+        ),
         HTML(
-          '<a href = "#top"><button id="myBtn"
+          '<a href = "#top"><button class="myBtn"
         title="jump to top">jump to top</button></a>'
         ),
-        style = "z-index: 420;"
+        style = "z-index: 420; border:1px solid red;"
       ),
       fluidRow(
         includeHTML("html_files/landing.html")
@@ -64,6 +65,19 @@ fluidPage(
         column(
           width = 4,
           includeHTML("html_files/text_1.html")
+        )
+      ),
+      HTML('<a name="chapter1"></a>'),
+      fluidRow(
+        includeHTML("html_files/chapter1.html")
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/text_1_1.html")
         )
       ),
       fluidRow(
@@ -82,6 +96,19 @@ fluidPage(
         column(
           width = 4,
           includeHTML("html_files/text_2.html")
+        )
+      ),
+      HTML('<a name="chapter2"></a>'),
+      fluidRow(
+        includeHTML("html_files/chapter2.html")
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/text2_1.html")
         )
       ),
       fluidRow(
@@ -190,6 +217,19 @@ fluidPage(
         column(
           width = 4,
           includeHTML("html_files/text_8.html")
+        )
+      ),
+      HTML('<a name="chapter3"></a>'),
+      fluidRow(
+        includeHTML("html_files/chapter3.html")
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/text_8_1.html")
         )
       ),
       fluidRow(
@@ -376,30 +416,10 @@ fluidPage(
           width = 4,
           includeHTML("html_files/today.html")
         )
-      )
-    ),
-    tabPanel(
-      "Global leaders",
-      HTML('<a name="top2">'),
-      absolutePanel(
-        draggable = FALSE,
-        fixed = TRUE,
-        top = 900,
-        left = 10,
-        HTML(
-          '<a href = "https://github.com/nicoFhahn/covid_shiny"
-        target="_blank">
-        <button id="github2"
-        title="GitHub repository">GitHub</button></a>'
-        ),
-        HTML(
-          '<a href = "#top2"><button id="myBtn2"
-        title="jump to top">jump to top</button></a>'
-        ),
-        style = "z-index: 420;"
       ),
+      HTML('<a name="chapter4"></a>'),
       fluidRow(
-        includeHTML("html_files/landing2.html")
+        includeHTML("html_files/chapter4.html")
       ),
       fluidRow(
         column(
@@ -534,6 +554,55 @@ fluidPage(
         column(
           width = 4,
           includeHTML("html_files/leaders_8.html")
+        )
+      ),
+      HTML('<a name="chapter5"></a>'),
+      fluidRow(
+        includeHTML("html_files/chapter5.html")
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/lockdown1.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "lf3", leafletOutput("map_lockdown", height = "65vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/lockdown2.html")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 3
+        ),
+        column(
+          width = 6,
+          div(id = "hc24", highchartOutput("highcharter_24", height = "80vh"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 4
+        ),
+        column(
+          width = 4,
+          includeHTML("html_files/lockdown3.html")
         )
       )
     ),

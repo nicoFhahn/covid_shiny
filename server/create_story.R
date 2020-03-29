@@ -123,7 +123,9 @@ if (country_1 == "US") {
   country_1 <- "the United States"
 }
 text_1 <- paste("In ", country_1, ", the number of new infections has increased from ",
-  df_most[1, ]$old, " to ", df_most[1, ]$new, ", an increase of ", format(df_most[1, ]$increase, big.mark = " "),
+  format(df_most[1, ]$old, big.mark =  " "), " to ",
+  format(df_most[1, ]$new, big.mark = " "),  ", an increase of ",
+  format(df_most[1, ]$increase, big.mark = " "),
   "%.",
   sep = ""
 )
@@ -144,9 +146,9 @@ if (country_1 != country_2) {
     country_2 <- "The United States"
   }
   
-  text_1 <- paste(country_2, " now has the highest increase in new infections. The figures rose from ",
+  text_1 <- paste(country_2, " now has the highest increase in new infections. The figures rose from <br>",
     format(df_limit_most[1, ]$old, big.mark = " "), " to ",
-    format(df_limit_most[1, ]$new, big.mark = " "),  " an increase of ",
+    format(df_limit_most[1, ]$new, big.mark = " "),  ", an increase of <br>",
     format(df_limit_most[1, ]$increase, big.mark = " "),
     "%.",
     sep = ""
@@ -160,10 +162,16 @@ if (country_1 != country_2) {
 
 file_7[9] <- text_1
 
-if (df_few$country[1] == "China") {
-  text_1 <- paste("China.<br>The country where it all began.<br>Only ", (df_few$new - df_few$old)[1], " new cases.<br>An increase of only ", df_few$increase[1], "%.", sep = "")
+if (df_limit_few$country[1] == "China") {
+  text_1 <- paste(
+    "China.<br>The country where it all began.<br>Only ",
+    format((df_limit_few$new - df_limit_few$old)[1], big.mark = " "),
+    " new cases.<br>An increase of only ", df_limit_few$increase[1], "%.", sep = "")
 } else {
-  text_1 <- paste(df_few$country[1], " only reported ", (df_few$new - df_few$old)[1], " new cases.<br>An increase of only ", df_few$increase[1], "%.", sep = "")
+  text_1 <- paste(
+    as.character(df_limit_few$country[1]), " only reported ", 
+    format((df_limit_few$new - df_limit_few$old)[1], big.mark = " "),
+    "new cases.<br>An increase of only ", df_limit_few$increase[1], "%.", sep = "")
 }
 
 file_8[9] <- text_1

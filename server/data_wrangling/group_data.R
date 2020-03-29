@@ -11,4 +11,3 @@ daily_cases2 <- corona_sf %>%
     confirmed = sum(confirmed),
     deaths = sum(deaths)
   )
-

@@ -76,3 +76,33 @@ output$map_emergency <- renderLeaflet({
       zoom = 2
     )
 })
+
+
+output$map_lockdown <- renderLeaflet({
+  leaflet(options = leafletOptions(
+    zoomControl = FALSE, minZoom = 2, maxZoom = 2,
+    dragging = FALSE, attributionControl = FALSE
+  )) %>%
+    addPolygons(
+      data = locked_countries,
+      fillColor = ~pal(lockdown),
+      opacity = 1,
+      fillOpacity = 0.25,
+      weight = 1,
+      color = "#FCFCFC",
+      label = locked_countries$ADMIN
+    ) %>%
+    leaflet::addLegend(
+      data = locked_countries,
+      pal = pal,
+      values = ~lockdown,
+      title = "Lockdown status",
+      position = "bottomleft"
+    ) %>%
+    setView(
+      lat = 40,
+      lng = 0,
+      zoom = 2
+    )
+  
+})

@@ -1,4 +1,5 @@
 library(dotenv)
+library(dplyr)
 library(english)
 library(forecast)
 library(fresh)
@@ -14,6 +15,7 @@ library(sf)
 library(shiny)
 library(shinyanimate)
 library(shinybusy)
+library(shinyjs)
 library(shinyWidgets)
 library(stringr)
 library(waiter)
@@ -31,7 +33,6 @@ ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 server <- function(input, output, session) {
   source(file.path("server", "load_data.R"), local = TRUE)
   source(file.path("server", "create_story.R"), local = TRUE)
-  waiter_hide()
   source(file.path("server", "leaflet_maps.R"), local = TRUE)$value
   source(file.path("server", "event_observer.R"), local = TRUE)$value
   source(file.path("server", "reactive_events.R"), local = TRUE)$value
@@ -40,6 +41,7 @@ server <- function(input, output, session) {
   source(file.path("server", "plotly_outputs.R"), local = TRUE)$value
   source(file.path("server", "highcharter_outputs.R"), local = TRUE)$value
   source(file.path("server", "observer.R"), local = TRUE)$value
+  source(file.path("server", "modal.R"), local = TRUE)$value
   waiter_hide()
 }
 shinyApp(ui, server)
