@@ -1,3 +1,4 @@
+a <- Sys.time()
 # load johns hopkins data
 source(file.path("server/data_wrangling", "jhu.R"), local = TRUE)
 
@@ -22,7 +23,6 @@ source(file.path("server/data_wrangling", "html_files.R"), local = TRUE)
 source(file.path("server/data_wrangling", "group_data.R"), local = TRUE)
 
 today <- daily_cases2[daily_cases2$date == max(daily_cases2$date), ]
-today <- st_cast(today, "MULTIPOINT")
 daily_cases2$geometry <- NULL
 
 # load top_15 data

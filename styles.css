@@ -470,7 +470,7 @@ div.modal-content {
   cursor: pointer; /* Add a mouse pointer on hover */
   padding: 1vh; /* Some padding */
   border-radius: 1vh; /* Rounded corners */
-  font-size: 2vh; /* Increase font size */
+  font-size: 1.6vh; /* Increase font size */
   font-family: 'Quicksand', sans-serif;
   /*border:1px solid #00bb8b; */
 }

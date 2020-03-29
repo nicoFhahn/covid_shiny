@@ -21,8 +21,6 @@ library(stringr)
 library(waiter)
 # load the data
 options(scipen = 15)
-# set time language to english
-Sys.setlocale("LC_TIME", "English")
 # load the api key for mapbox and the seed
 try(load_dot_env("key.env"), silent = TRUE)
 key <- Sys.getenv("MAPBOX_KEY")
