@@ -79,20 +79,6 @@ section.content {
   padding:0;
 }
 
-
-#test {
-  display:inline-block;
-  height: 15em;
-  background-color:#323233;
-}
-
-
-#shiny-tab-rawdata {
-  max-height: 100vh;
-  overflow-y:auto !important;
-  background-color:#323233;
-}
-
 .container-fluid {
   padding-right:0px !important;
   padding-left:0px !important;
