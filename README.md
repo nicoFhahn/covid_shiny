@@ -27,5 +27,5 @@ runGitHub("covid_shiny", "nicoFhahn")
 ### Acknowledgments
 The folks over at RStudio with the [SuperZIP demo](https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example) which heavily inspired the layout of the leaflet map.
 
-### Questions/issuses/contacts
+### Questions/issues/contact
 nico@f-hahn.de, or open a GitHub issue
