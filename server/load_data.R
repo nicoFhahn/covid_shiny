@@ -3,9 +3,9 @@ a <- Sys.time()
 source(file.path("server/data_wrangling", "jhu.R"), local = TRUE)
 
 # load the country shapes
-countries <- read_sf("data/ne_50m_admin_0_countries.shp")
+countries_old <- read_sf("data/ne_50m_admin_0_countries.shp")
 # group the countries by their sovereign state
-countries <- countries %>%
+countries <- countries_old %>%
   group_by(SOVEREIGNT) %>%
   summarise(
     POP_EST = sum(POP_EST),

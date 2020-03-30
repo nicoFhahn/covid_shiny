@@ -5,7 +5,7 @@ get_country <- eventReactive(input$mymap_click, {
   # turn into points
   coords <- st_as_sf(coords, coords = c("lng", "lat"), crs = 4326)
   # match with the country shapes
-  country <- countries[unlist(st_intersects(coords, countries)), ]
+  country <- countries_old[unlist(st_intersects(coords, countries_old)), ]
   # either return the country or world
   if (nrow(country) == 0) {
     country <- "world"
