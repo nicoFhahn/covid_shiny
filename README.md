@@ -1,5 +1,5 @@
-# Covid-19: The 2019-20 Coronavirus Pandemic visualized  with R and Shiny
-Covid-19 uses the data from Johns Hopkins University to visualize the outbreak of the novel coronavirus. The data is available from [this repository](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data).
+# Covid Shiny: The 2019-20 Coronavirus Pandemic visualized  with R and Shiny
+Covid Shiny uses the data from Johns Hopkins University to visualize the outbreak of the novel coronavirus. The data is available from [this repository](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data).
 
 You can scroll through the story so far, look at the countries currently leading in various statistics and view the figures on a world map.
 
@@ -9,7 +9,7 @@ MAPBOX_KEY=YOUR_SECRET_API_KEY
 ```
 If you do not have such a key, the app will display a dark basemap from carto.
 # Run it on your machine
-You can run Covid-19 on your own machine using the following code:
+You can run Covid Shiny on your own machine using the following code:
 ```R
 packages = c(
 	"dotenv", "english", "forecast", "fresh", "highcharter", "htmltools", "leaflet", "leaflet.extras",
