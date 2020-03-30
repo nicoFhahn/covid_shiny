@@ -1,5 +1,6 @@
 library(data.table)
 library(dotenv)
+library(dplyr)
 library(english)
 library(forecast)
 library(fresh)

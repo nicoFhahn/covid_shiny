@@ -12,7 +12,7 @@ If you do not have such a key, the app will display a dark basemap from carto.
 You can run Covid Shiny on your own machine using the following code:
 ```R
 packages = c(
-	"data.table", "dotenv", "english", "forecast", "fresh", "highcharter", "htmltools", "leaflet",
+	"data.table", "dotenv", "dplyr", "english", "forecast", "fresh", "highcharter", "htmltools", "leaflet",
 	"plotly", "quantmod", "readr", "sass", "sf", "shiny", "shinyanimate", "shinybusy",
 	"shinyjs", "shinyWidgets", "stringr", "waiter"
 	)
