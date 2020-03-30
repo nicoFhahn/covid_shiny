@@ -13,7 +13,7 @@ You can run Covid Shiny on your own machine using the following code:
 ```R
 packages = c(
 	"data.table", "dotenv", "dplyr", "english", "forecast", "fresh", "highcharter", "htmltools", "leaflet",
-	"plotly", "quantmod", "readr", "sass", "sf", "shiny", "shinyanimate", "shinybusy",
+	"leaflet.extras", "plotly", "quantmod", "readr", "sass", "sf", "shiny", "shinyanimate", "shinybusy",
 	"shinyjs", "shinyWidgets", "stringr", "waiter"
 	)
 install.packages(packages, repos = "https://cran.rstudio.com/")
