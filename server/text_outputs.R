@@ -51,7 +51,8 @@ output$all_country <- renderText({
   daterange <- input$date
   # calculate cases based on whether a country was clicked
   if (country != "world") {
-    country_df <- countries[countries$ADMIN == country, ]
+    country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
+    corona_sf <- st_as_sf(corona_sf, crs = 4326)
     corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
     if (nrow(corona_frame) == 0) {
       corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
@@ -127,7 +128,8 @@ output$death_country <- renderText({
   daterange <- input$date
   # calculate the number of cases based on whether a country was clicked
   if (country != "world") {
-    country_df <- countries[countries$ADMIN == country, ]
+    country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
+    corona_sf <- st_as_sf(corona_sf, crs = 4326)
     corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
     if (nrow(corona_frame) == 0) {
       corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]

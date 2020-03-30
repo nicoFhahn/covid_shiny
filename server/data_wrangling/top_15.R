@@ -6,9 +6,12 @@ top15_deaths <- today[today$confirmed %in% sort(today$confirmed, decreasing = TR
 top15_deaths <- top15_deaths[order(top15_deaths$deaths, decreasing = TRUE), ]
 # spatial intersection to calculate per capita stats
 # we don't want countries
-today_inter <- st_intersection(countries[seq_len(nrow(countries)), ], today)
+# today_inter <- st_intersection(countries[seq_len(nrow(countries)), ], today)
+countries_sf <- st_as_sf(countries)
+today_sf <- st_as_sf(today, crs = 4326)
+today_inter <- st_intersection(countries_sf[seq_len(nrow(countries)), ], today_sf)
 # calculate per capita stats
-per_capita <- data.frame(
+per_capita <- data.table(
   country = today_inter$Country.Region,
   confirmed = today_inter$confirmed,
   confirmed_per_capita = round(today_inter$confirmed / today_inter$POP_EST, 5) * 1000,

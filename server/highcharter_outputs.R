@@ -215,10 +215,6 @@ output$highcharter_7 <- renderHighchart({
 })
 
 output$highcharter_8 <- renderHighchart({
-  daily_cases$increase <- c(
-    0, daily_cases$confirmed[-1] -
-      daily_cases$confirmed
-  )[seq_len(nrow(daily_cases))]
   highchart() %>%
     hc_xAxis(
       categories = daily_cases$date,
@@ -270,10 +266,6 @@ output$highcharter_10 <- renderHighchart({
       today[today$confirmed == max(today$confirmed), 2]
     ),
   ]
-  most_infected$increase <- c(
-    0, most_infected$confirmed[-1] -
-      most_infected$confirmed
-  )[seq_len(nrow(most_infected))]
   country <- unique(most_infected$`Country/Region`)
   if (country == "US") {
     country <- "the United States"
@@ -348,9 +340,6 @@ output$highcharter_12 <- renderHighchart({
       today[today$deaths == max(today$deaths), 2]
     ),
   ]
-  most_death$increase <- c(
-    0, most_death$deaths[-1] - most_death$deaths
-  )[seq_len(nrow(most_death))]
   highchart() %>%
     hc_xAxis(
       categories = most_death$date, title = list(text = "Date"),

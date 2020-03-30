@@ -39,7 +39,7 @@ output$map_wuhan <- renderLeaflet({
     dragging = FALSE
   )) %>%
     addPolylines(
-      data = st_cast(china, "MULTILINESTRING"),
+      data = st_cast(st_as_sf(china), "MULTILINESTRING"),
       color = "#00bb8b",
       weight = 1
     ) %>%
@@ -84,7 +84,7 @@ output$map_lockdown <- renderLeaflet({
     dragging = FALSE, attributionControl = FALSE
   )) %>%
     addPolygons(
-      data = locked_countries,
+      data = st_as_sf(locked_countries),
       fillColor = ~ pal(lockdown),
       opacity = 1,
       fillOpacity = 0.25,

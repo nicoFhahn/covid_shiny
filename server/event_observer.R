@@ -8,12 +8,12 @@ observeEvent(list(
     daterange <- get_date()
     # try and get the country
     country <- try(get_country(), silent = TRUE)
-    corona_frame <- corona_sf
+    corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
       # if a country was clicked, select the subset of corona data
       if (country != "world") {
-        country_df <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
+        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }
@@ -52,7 +52,7 @@ observeEvent(list(
           clearPopups() %>%
           # add the country shapes
           addPolygons(
-            data = country_df2,
+            data = st_as_sf(country_df2),
             weight = 0,
             color = "#000000",
             fillOpacity = 0,
@@ -123,7 +123,7 @@ observeEvent(list(
           clearPopups() %>%
           # add the country shapes
           addPolygons(
-            data = countries,
+            data = st_as_sf(countries),
             weight = 0,
             color = "#000000",
             fillOpacity = 0,
@@ -189,7 +189,7 @@ observeEvent(list(
         clearPopups() %>%
         # add the country shapes
         addPolygons(
-          data = countries,
+          data = st_as_sf(countries),
           weight = 0,
           color = "#000000",
           fillOpacity = 0,
@@ -259,12 +259,12 @@ observeEvent(list(
     daterange <- get_date()
     # get the country
     country <- try(get_country(), silent = TRUE)
-    corona_frame <- corona_sf
+    corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
-      # select subset
+      # if a country was clicked, select the subset of corona data
       if (country != "world") {
-        country_df <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
+        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }
@@ -355,11 +355,12 @@ observeEvent(list(
     # first get the specifiy dataset again
     daterange <- get_date()
     country <- try(get_country(), silent = TRUE)
-    corona_frame <- corona_sf
+    corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
+      # if a country was clicked, select the subset of corona data
       if (country != "world") {
-        country_df <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
+        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }
@@ -430,11 +431,12 @@ observeEvent(list(
     # first get the specifiy dataset again
     daterange <- get_date()
     country <- try(get_country(), silent = TRUE)
-    corona_frame <- corona_sf
+    corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
+      # if a country was clicked, select the subset of corona data
       if (country != "world") {
-        country_df <- countries[countries$ADMIN == country, ]
-        corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+        country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
+        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }
