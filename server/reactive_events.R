@@ -2,6 +2,8 @@
 get_country <- eventReactive(input$mymap_click, {
   # get the coordinates of the click
   coords <- data.frame(lng = input$mymap_click$lng, lat = input$mymap_click$lat)
+  # coords <- data.frame(lng = 126.21, lat = 39.70)
+  print(coords)
   # turn into points
   coords <- st_as_sf(coords, coords = c("lng", "lat"), crs = 4326)
   # match with the country shapes

@@ -61,9 +61,12 @@ output$all_country <- renderText({
       corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
     }
     if (nrow(corona_frame) == 0) {
-      corona_frame[seq_len(length(unique(corona_sf$date))), 1:2] <- country
-      corona_frame[seq_len(length(unique(corona_sf$date))), c(3, 5)] <- 0
-      corona_frame[, ]$date <- unique(corona_sf$date)
+      corona_frame <- corona_frame[seq_len(length(unique(corona_sf$date))), ]
+      corona_frame$`Province/State` <- country
+      corona_frame$`Country/Region` <- country
+      corona_frame$confirmed <- 0
+      corona_frame$deaths <- 0
+      corona_frame$date <- unique(corona_sf$date)
       corona_frame$geometry <- country_df$geometry
     }
     daterange[1] <- daterange[1] - 1
@@ -138,9 +141,12 @@ output$death_country <- renderText({
       corona_frame <- corona_sf[corona_sf$`Country/Region` == country, ]
     }
     if (nrow(corona_frame) == 0) {
-      corona_frame[seq_len(length(unique(corona_sf$date))), 1:2] <- country
-      corona_frame[seq_len(length(unique(corona_sf$date))), c(3, 5)] <- 0
-      corona_frame[, ]$date <- unique(corona_sf$date)
+      corona_frame <- corona_frame[seq_len(length(unique(corona_sf$date))), ]
+      corona_frame$`Province/State` <- country
+      corona_frame$`Country/Region` <- country
+      corona_frame$confirmed <- 0
+      corona_frame$deaths <- 0
+      corona_frame$date <- unique(corona_sf$date)
       corona_frame$geometry <- country_df$geometry
     }
     daterange[1] <- daterange[1] - 1
