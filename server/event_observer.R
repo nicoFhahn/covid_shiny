@@ -44,6 +44,9 @@ observeEvent(list(
       corona_frame2$confirmed
     corona_frame1$deaths <- corona_frame1$deaths - corona_frame2$deaths
     corona_frame <- corona_frame1
+    if (corona_frame$`Province/State` == "") {
+      corona_frame$`Province/State` <- corona_frame$`Country/Region`
+    }
     if (country == "Philippines") {
       linecol = "#BAFF80"
     } else {
@@ -54,7 +57,7 @@ observeEvent(list(
       if (country != "world") {
         if (country != "Philippines") {
           country_df2 <- countries[countries$ADMIN != country, ]
-          leaflet("mymap") %>%
+          leafletProxy("mymap") %>%
             # remove stuff from the old map
             clearControls() %>%
             clearMarkers() %>%
