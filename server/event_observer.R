@@ -84,7 +84,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(confirmed) * 1250,
+              radius = ~ sqrt(confirmed) * 500,
               color = "#ffb733",
               stroke = FALSE,
               # add labels
@@ -108,7 +108,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(deaths) * 1250,
+              radius = ~ sqrt(deaths) * 500,
               color = "#ff7373",
               stroke = FALSE,
               label = paste(
@@ -156,7 +156,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame)),
               fillOpacity = 0.5,
-              radius = ~ sqrt(confirmed) * 1250,
+              radius = ~ sqrt(confirmed) * 500,
               color = "#ffb733",
               stroke = FALSE,
               # add labels
@@ -180,7 +180,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame)),
               fillOpacity = 0.5,
-              radius = ~ sqrt(deaths) * 1250,
+              radius = ~ sqrt(deaths) * 500,
               color = "#ff7373",
               stroke = FALSE,
               label = paste(
@@ -228,7 +228,7 @@ observeEvent(list(
           addCircles(
             data = corona_frame,
             fillOpacity = 0.5,
-            radius = ~ sqrt(confirmed) * 1250,
+            radius = ~ sqrt(confirmed) * 500,
             color = "#ffb733",
             stroke = FALSE,
             # add labels
@@ -252,7 +252,7 @@ observeEvent(list(
           addCircles(
             data = corona_frame,
             fillOpacity = 0.5,
-            radius = ~ sqrt(deaths) * 1250,
+            radius = ~ sqrt(deaths) * 500,
             color = "#ff7373",
             stroke = FALSE,
             label = paste(
@@ -294,7 +294,7 @@ observeEvent(list(
         addCircles(
           data = corona_frame,
           fillOpacity = 0.5,
-          radius = ~ sqrt(confirmed) * 1250,
+          radius = ~ sqrt(confirmed) * 500,
           color = "#ffb733",
           stroke = FALSE,
           # add labels
@@ -318,7 +318,7 @@ observeEvent(list(
         addCircles(
           data = corona_frame,
           fillOpacity = 0.5,
-          radius = ~ sqrt(deaths) * 1250,
+          radius = ~ sqrt(deaths) * 500,
           color = "#ff7373",
           stroke = FALSE,
           label = paste(

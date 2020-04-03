@@ -191,7 +191,7 @@ output$highcharter_7 <- renderHighchart({
     hc_add_series(
       data = germany$confirmed,
       name = "Confirmed cases",
-      color = "#D2F898"
+      color = "#EE6352"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(text = "Number of confirmed cases in Germany") %>%
@@ -428,6 +428,21 @@ output$highcharter_14 <- renderHighchart({
       name = "United States",
       data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "US"],
       color = "#97C667"
+    ) %>%
+    hc_add_series(
+      name = "Germany",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Germany"],
+      color = "#EE6352"
+    ) %>%
+    hc_add_series(
+      name = "Spain",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Spain"],
+      color = "#F2CCC3"
+    ) %>%
+    hc_add_series(
+      name = "France",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "France"],
+      color = "#F6D8AE"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
