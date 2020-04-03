@@ -637,49 +637,50 @@ fluidPage(
         height = "auto",
         br(),
         HTML('<button data-toggle="collapse" class = "clp_btn" data-target="#panel_wrapper">Collapse</button>'),
-        tags$div(id = 'demo',  class="collapse"),
+        tags$div(id = "demo", class = "collapse"),
         br(),
         h2(
           "SARS-CoV-2 Outbreak 2020",
           style = "font-size:1.8em;"
         ),
-        div(id = "panel_wrapper",
-        uiOutput("total_cases_ui"),
-        br(),
-        fluidRow(
-          column(
-            width = 6,
-            uiOutput("cases_all_ui")
+        div(
+          id = "panel_wrapper",
+          uiOutput("total_cases_ui"),
+          br(),
+          fluidRow(
+            column(
+              width = 6,
+              uiOutput("cases_all_ui")
+            ),
+            column(
+              width = 6,
+              htmlOutput("cases_death_ui")
+            )
           ),
-          column(
-            width = 6,
-            htmlOutput("cases_death_ui")
+          br(),
+          htmlOutput("show_everything"),
+          br(),
+          uiOutput("date_ui"),
+          h2(
+            "Cumulative numbers:",
+            style = "font-size:1.25em;"
+          ),
+          plotlyOutput("everything_plot", height = "12em"),
+          h2(
+            "Daily numbers:",
+            style = "font-size:1.25em;"
+          ),
+          plotlyOutput("daily_plot_confirmed", height = "8em"),
+          plotlyOutput("daily_plot_deaths", height = "8em"),
+          br(),
+          h2(
+            "Created by Nico Hahn with data from Johns Hopkins University",
+            style = "font-size:0.75em;"
+          ),
+          h2(
+            "Works best in Firefox",
+            style = "font-size:0.75em;"
           )
-        ),
-        br(),
-        htmlOutput("show_everything"),
-        br(),
-        uiOutput("date_ui"),
-        h2(
-          "Cumulative numbers:",
-          style = "font-size:1.25em;"
-        ),
-        plotlyOutput("everything_plot", height = "12em"),
-        h2(
-          "Daily numbers:",
-          style = "font-size:1.25em;"
-        ),
-        plotlyOutput("daily_plot_confirmed", height = "8em"),
-        plotlyOutput("daily_plot_deaths", height = "8em"),
-        br(),
-        h2(
-          "Created by Nico Hahn with data from Johns Hopkins University",
-          style = "font-size:0.75em;"
-        ),
-        h2(
-          "Works best in Firefox",
-          style = "font-size:0.75em;"
-        )
         ),
         style = "z-index: 420;"
       )

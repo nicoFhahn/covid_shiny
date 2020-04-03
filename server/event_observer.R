@@ -48,9 +48,9 @@ observeEvent(list(
       corona_frame$`Province/State` <- corona_frame$`Country/Region`
     }
     if (country == "Philippines") {
-      linecol = "#BAFF80"
+      linecol <- "#BAFF80"
     } else {
-      linecol = "#FF80ED"
+      linecol <- "#FF80ED"
     }
     # create the map
     if (class(country) != "try-error") {

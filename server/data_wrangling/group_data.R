@@ -1,8 +1,12 @@
-daily_cases <- corona_sf[, .(confirmed = sum(confirmed),
-                             deaths = sum(deaths)), by = date]
+daily_cases <- corona_sf[, .(
+  confirmed = sum(confirmed),
+  deaths = sum(deaths)
+), by = date]
 
-daily_cases2 <- corona_sf[, .(confirmed = sum(confirmed),
-                             deaths = sum(deaths)), keyby = .(date, `Country/Region`)]
+daily_cases2 <- corona_sf[, .(
+  confirmed = sum(confirmed),
+  deaths = sum(deaths)
+), keyby = .(date, `Country/Region`)]
 daily_cases2 <- daily_cases2[order(daily_cases2$date, daily_cases2$`Country/Region`), ]
 a <- corona_sf[!duplicated(corona_sf$`Country/Region`), ]
 a <- a[order(a$`Country/Region`), ]

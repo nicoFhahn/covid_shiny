@@ -4,9 +4,11 @@ closeAllConnections()
 source(file.path("server/data_wrangling", "jhu.R"), local = TRUE)
 # load the country shapes
 countries_old <- data.table(read_sf("data/ne_50m_admin_0_countries.shp"))
-countries <- countries_old[, .(POP_EST = sum(POP_EST),
-                  ADMIN = unique(SOVEREIGNT),
-                  geometry = st_union(geometry)), by = SOVEREIGNT]
+countries <- countries_old[, .(
+  POP_EST = sum(POP_EST),
+  ADMIN = unique(SOVEREIGNT),
+  geometry = st_union(geometry)
+), by = SOVEREIGNT]
 countries_old <- st_as_sf(countries_old, crs = 4326)
 # load data for highcharter plots
 source(file.path("server/data_wrangling", "highcharter_data.R"), local = TRUE)

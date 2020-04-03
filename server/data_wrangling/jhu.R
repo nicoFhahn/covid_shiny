@@ -6,9 +6,9 @@ confirmed_long <- confirmed[, 1:5]
 # i hate dates and found no easier way to do this even though i know there is
 date <- str_split(colnames(confirmed)[5], "/")[[1]]
 date_new <- paste(ifelse(nchar(date[1]) == 2, date[1], paste(0, date[1], sep = "")),
-                  ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
-                  paste("20", date[3], sep = ""),
-                  sep = "/"
+  ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
+  paste("20", date[3], sep = ""),
+  sep = "/"
 )
 confirmed_long$date <- as.Date(date_new, format = "%m/%d/%Y")
 colnames(confirmed_long)[5] <- "confirmed"
@@ -18,9 +18,9 @@ confirmed_long2 <- lapply(6:ncol(confirmed), function(i, ...) {
   colnames(confirmed_new)[5] <- "confirmed"
   date <- str_split(colnames(confirmed)[i], "/")[[1]]
   date_new <- paste(ifelse(nchar(date[1]) == 2, date[1], paste(0, date[1], sep = "")),
-                    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
-                    paste("20", date[3], sep = ""),
-                    sep = "/"
+    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
+    paste("20", date[3], sep = ""),
+    sep = "/"
   )
   confirmed_new$date <- as.Date(date_new, format = "%m/%d/%Y")
   confirmed_new
@@ -32,22 +32,22 @@ if (any(!confirmed$`Country/Region` %in% deaths$`Country/Region`)) {
   frames <- deaths[1:sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`), ]
   frames$`Province/State` <- confirmed$`Province/State`[
     !confirmed$`Country/Region` %in% deaths$`Country/Region`
-    ]
+  ]
   frames$`Country/Region` <- confirmed$`Country/Region`[
     !confirmed$`Country/Region` %in% deaths$`Country/Region`
-    ]
+  ]
   frames$Lat <- confirmed$Lat[
     !confirmed$`Country/Region` %in% deaths$`Country/Region`
-    ]
+  ]
   frames$Long <- confirmed$Long[
     !confirmed$`Country/Region` %in% deaths$`Country/Region`
-    ]
+  ]
   frames[
     seq_len(
       sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`)
     ),
     5:ncol(frames)
-    ] <- 0
+  ] <- 0
   deaths <- rbind(deaths, frames)
 }
 

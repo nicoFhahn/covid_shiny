@@ -2,8 +2,10 @@
 daily_cases3 <- daily_cases2[daily_cases2$date %in% c(max(daily_cases2$date), max(daily_cases2$date) - 14), ]
 # remove cruise ships
 daily_cases3 <- daily_cases3[daily_cases3$`Country/Region` != "Diamond Princess", ]
-daily_cases3 <- daily_cases3[, .(confirmed = sum(confirmed),
-                             deaths = sum(deaths)), keyby = .(date, `Country/Region`)]
+daily_cases3 <- daily_cases3[, .(
+  confirmed = sum(confirmed),
+  deaths = sum(deaths)
+), keyby = .(date, `Country/Region`)]
 # split the data by day
 splitted <- split(daily_cases3, daily_cases3$date)
 # calculate the increases
