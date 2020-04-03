@@ -474,3 +474,19 @@ div.modal-content {
   font-family: 'Quicksand', sans-serif;
   /*border:1px solid #00bb8b; */
 }
+
+.clp_btn {
+  float:right;
+  color:#161616;
+  border:none;
+  outline: none; /* Remove outline */
+  background-color: white; /* Set a background color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  border-radius: 1vh; /* Rounded corners */
+  font-size: 1.8vh; /* Increase font size */
+}
+
+.clp_btn:hover {
+  background-color: #161616;
+  color: white;/* Add a dark-grey background on hover */
+}
