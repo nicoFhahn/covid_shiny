@@ -52,10 +52,35 @@ observeEvent(list(
     } else {
       linecol <- "#FF80ED"
     }
+    ee <- FALSE
+    if (country %in% c("India", "Philippines", "Vietnam", "Germany")) {
+      if (country == "Philippines") {
+        lng_easter <- 123.365708
+        lat_egg <- 9.950766
+        ee <- TRUE
+      } else if (country == "India") {
+        lng_easter <- 11.589492
+        lat_egg <- 48.139782
+        ee <- TRUE
+      } else if (country == "Vietnam") {
+        lng_easter <- 11.584852
+        lat_egg <- 48.156953
+        ee <- TRUE
+      } else if (country == "Germany") {
+        coords <- data.frame(lng = input$mymap_click$lng, lat = input$mymap_click$lat)
+        # turn into points
+        coords <- st_as_sf(coords, coords = c("lng", "lat"), crs = 4326)
+        if (length(st_contains(aic, coords)) > 0) {
+          lng_easter <- -73.792036
+          lat_egg <- 40.680398
+          ee <- TRUE
+          }
+      }
+    }
     # create the map
     if (class(country) != "try-error") {
       if (country != "world") {
-        if (country != "Philippines") {
+        if (!ee) {
           country_df2 <- countries[countries$ADMIN != country, ]
           leafletProxy("mymap") %>%
             # remove stuff from the old map
@@ -200,9 +225,9 @@ observeEvent(list(
               )
             ) %>%
             addPulseMarkers(
-              lng = 123.365708,
-              lat = 9.950766,
-              icon = makePulseIcon(heartbeat = 0.5, color = "#2E1184", iconSize = 2)
+              lng = lng_easter,
+              lat = lat_egg,
+              icon = makePulseIcon(heartbeat = 0.5, color = "#2E1184", iconSize = 3)
             )
         }
       } else {

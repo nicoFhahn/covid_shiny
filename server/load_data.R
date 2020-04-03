@@ -36,5 +36,5 @@ source(file.path("server/data_wrangling", "s_n_p.R"), local = TRUE)
 
 # load lockdown data
 source(file.path("server/data_wrangling", "lockdown_data.R"), local = TRUE)
-Sys.time() - b
+aic <- read_sf("data/aichach.kml")
 # old: 2.24
