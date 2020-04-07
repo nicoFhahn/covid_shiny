@@ -28,11 +28,11 @@ try(load_dot_env("key.env"), silent = TRUE)
 key <- Sys.getenv("MAPBOX_KEY")
 css <- sass(sass_file("styles.scss"))
 # load the interface
+source(file.path("server", "load_data.R"), local = TRUE)
+source(file.path("server", "create_story.R"), local = TRUE)
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # load the server
 server <- function(input, output, session) {
-  source(file.path("server", "load_data.R"), local = TRUE)
-  source(file.path("server", "create_story.R"), local = TRUE)
   source(file.path("server", "leaflet_maps.R"), local = TRUE)$value
   source(file.path("server", "event_observer.R"), local = TRUE)$value
   source(file.path("server", "reactive_events.R"), local = TRUE)$value

@@ -1,5 +1,5 @@
 # load lockdown data
-locked <- read_csv("data/locked.csv")
+locked <- read_csv("https://raw.githubusercontent.com/nicoFhahn/covid_shiny/master/data/locked.csv")
 # we want to calculate the growth rate for each of the 14 days prior to the lockdown
 locked_days <- daily_cases2[
   daily_cases2$date %in% seq(min(locked$date) - 15, max(daily_cases2$date), by = 1),
