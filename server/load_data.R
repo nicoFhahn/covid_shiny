@@ -1,5 +1,4 @@
 # load johns hopkins data
-b <- Sys.time()
 closeAllConnections()
 source(file.path("server/data_wrangling", "jhu.R"), local = TRUE)
 # load the country shapes
