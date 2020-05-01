@@ -28,6 +28,7 @@ observeEvent(list(
           corona_frame$confirmed <- 0
           corona_frame$deaths <- 0
           corona_frame$date <- unique(corona_sf$date)
+          corona_frame <- st_as_sf(corona_frame)
           corona_frame$geometry <- country_df$geometry
         }
       }
@@ -70,7 +71,7 @@ observeEvent(list(
         coords <- data.frame(lng = input$mymap_click$lng, lat = input$mymap_click$lat)
         # turn into points
         coords <- st_as_sf(coords, coords = c("lng", "lat"), crs = 4326)
-        if (length(st_contains(aic, coords)) > 0) {
+        if (length(st_contains(aic, coords)[1][[1]]) > 0) {
           lng_easter <- -73.792036
           lat_egg <- 40.680398
           ee <- TRUE

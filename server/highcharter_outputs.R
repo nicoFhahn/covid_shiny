@@ -185,6 +185,7 @@ output$highcharter_6 <- renderHighchart({
 })
 
 output$highcharter_7 <- renderHighchart({
+  germany <- daily_cases2[daily_cases2$`Country/Region` == "Germany", c(1, 3, 4)]
   highchart() %>%
     hc_xAxis(categories = germany$date) %>%
     hc_yAxis(title = list(text = "Confirmed cases")) %>%
@@ -443,6 +444,11 @@ output$highcharter_14 <- renderHighchart({
       name = "France",
       data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "France"],
       color = "#F6D8AE"
+    ) %>%
+    hc_add_series(
+      name = "Russia",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Russia"],
+      color = "#00a896"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
