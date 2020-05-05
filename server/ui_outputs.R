@@ -19,6 +19,16 @@ output$cases_all_ui <- renderUI({
 })
 
 # either show default text or click based
+output$cases_recovered_ui <- renderUI({
+  if (is.null(input$mymap_click)) {
+    htmlOutput("recovered_default")
+  } else {
+    htmlOutput("recovered_country")
+  }
+})
+
+
+# either show default text or click based
 output$cases_death_ui <- renderUI({
   b <- get_date()
   if (is.null(input$mymap_click)) {

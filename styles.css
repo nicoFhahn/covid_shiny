@@ -56,19 +56,24 @@ h1, h2, h3, h4 { font-weight: 400; }
 }
 
 #all_default, #all_country {
-  font-size: 1.8em;
-  background-color: rgba(255,165,0,0.5);
+  font-size: 1.3em;
+  background-color: rgba(52,84,209,0.5);
   text-align: center;
-  border-radius: 25% 10% 25% 10%;
+  border-radius: 20% 10% 20% 10%;
 }
 
-
+#recovered_default, #recovered_country {
+  font-size: 1.3em;
+  background-color: rgba(35,240,199,0.5);
+  text-align: center;
+  border-radius: 20% 10% 20% 10%;
+}
 
 #death_default, #death_country {
-  font-size: 1.8em;
-  background-color: rgba(153,0,0,0.5);
+  font-size: 1.3em;
+  background-color: rgba(237,37,78,0.5);
   text-align: center;
-  border-radius: 25% 10% 25% 10%;
+  border-radius: 20% 10% 20% 10%;
 }
 
 #date {

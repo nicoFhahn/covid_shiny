@@ -629,7 +629,7 @@ fluidPage(
         class = "panel panel-default",
         fixed = TRUE,
         draggable = TRUE,
-        top = 70,
+        top = 40,
         left = "auto",
         right = 60,
         bottom = "auto",
@@ -649,11 +649,15 @@ fluidPage(
           br(),
           fluidRow(
             column(
-              width = 6,
+              width = 4,
               uiOutput("cases_all_ui")
             ),
             column(
-              width = 6,
+              width = 4,
+              uiOutput("cases_recovered_ui")
+            ),
+            column(
+              width = 4,
               htmlOutput("cases_death_ui")
             )
           ),

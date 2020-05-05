@@ -1,4 +1,3 @@
-# CLICK ON NORTH KOREA
 library(data.table)
 library(dotenv)
 library(dplyr)

@@ -27,6 +27,7 @@ observeEvent(list(
           corona_frame$`Country/Region` <- country
           corona_frame$confirmed <- 0
           corona_frame$deaths <- 0
+          corona_frame$recovered <- 0
           corona_frame$date <- unique(corona_sf$date)
           corona_frame <- st_as_sf(corona_frame)
           corona_frame$geometry <- country_df$geometry
@@ -111,12 +112,13 @@ observeEvent(list(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
               radius = ~ sqrt(confirmed) * 500,
-              color = "#ffb733",
+              color = "#3454D1",
               stroke = FALSE,
               # add labels
               label = paste(
                 corona_frame$`Province/State`, ":<br>",
                 "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                "Recovered cases: ", corona_frame$recovered, "<br>",
                 "Deceased cases: ", corona_frame$deaths,
                 sep = ""
               ) %>% lapply(htmltools::HTML),
@@ -134,13 +136,36 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(deaths) * 500,
-              color = "#ff7373",
+              radius = ~ sqrt(recovered) * 500,
+              color = "#23F0C7",
               stroke = FALSE,
               label = paste(
                 corona_frame$`Province/State`, ":<br>",
                 "Confirmed cases: ", corona_frame$confirmed, "<br>",
-                # "Recovered cases: ", corona_frame$recovered, "<br>",
+                "Recovered cases: ", corona_frame$recovered, "<br>",
+                "Deceased cases: ", corona_frame$deaths,
+                sep = ""
+              ) %>% lapply(htmltools::HTML),
+              labelOptions = labelOptions(
+                style = list(
+                  "font-family" = "Oswald",
+                  "font-style" = "sans-serif",
+                  "font-size" = "14px",
+                  "border-color" = "rgba(0,0,0,0.5)"
+                )
+              )
+            ) %>%
+            # do the same again
+            addCircles(
+              data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+              fillOpacity = 0.5,
+              radius = ~ sqrt(deaths) * 500,
+              color = "#ED254E",
+              stroke = FALSE,
+              label = paste(
+                corona_frame$`Province/State`, ":<br>",
+                "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                "Recovered cases: ", corona_frame$recovered, "<br>",
                 "Deceased cases: ", corona_frame$deaths,
                 sep = ""
               ) %>% lapply(htmltools::HTML),
@@ -179,16 +204,19 @@ observeEvent(list(
               weight = 2
             ) %>%
             # add the corona data
+            
+            # add the corona data
             addCircles(
-              data = st_centroid(st_as_sf(corona_frame)),
+              data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
               radius = ~ sqrt(confirmed) * 500,
-              color = "#ffb733",
+              color = "#3454D1",
               stroke = FALSE,
               # add labels
               label = paste(
                 corona_frame$`Province/State`, ":<br>",
                 "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                "Recovered cases: ", corona_frame$recovered, "<br>",
                 "Deceased cases: ", corona_frame$deaths,
                 sep = ""
               ) %>% lapply(htmltools::HTML),
@@ -204,15 +232,38 @@ observeEvent(list(
             ) %>%
             # do the same again
             addCircles(
-              data = st_centroid(st_as_sf(corona_frame)),
+              data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(deaths) * 500,
-              color = "#ff7373",
+              radius = ~ sqrt(recovered) * 500,
+              color = "#23F0C7",
               stroke = FALSE,
               label = paste(
                 corona_frame$`Province/State`, ":<br>",
                 "Confirmed cases: ", corona_frame$confirmed, "<br>",
-                # "Recovered cases: ", corona_frame$recovered, "<br>",
+                "Recovered cases: ", corona_frame$recovered, "<br>",
+                "Deceased cases: ", corona_frame$deaths,
+                sep = ""
+              ) %>% lapply(htmltools::HTML),
+              labelOptions = labelOptions(
+                style = list(
+                  "font-family" = "Oswald",
+                  "font-style" = "sans-serif",
+                  "font-size" = "14px",
+                  "border-color" = "rgba(0,0,0,0.5)"
+                )
+              )
+            ) %>%
+            # do the same again
+            addCircles(
+              data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+              fillOpacity = 0.5,
+              radius = ~ sqrt(deaths) * 500,
+              color = "#ED254E",
+              stroke = FALSE,
+              label = paste(
+                corona_frame$`Province/State`, ":<br>",
+                "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                "Recovered cases: ", corona_frame$recovered, "<br>",
                 "Deceased cases: ", corona_frame$deaths,
                 sep = ""
               ) %>% lapply(htmltools::HTML),
@@ -251,16 +302,19 @@ observeEvent(list(
             )
           ) %>%
           # add the corona data
+          
+          # add the corona data
           addCircles(
-            data = corona_frame,
+            data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
             fillOpacity = 0.5,
             radius = ~ sqrt(confirmed) * 500,
-            color = "#ffb733",
+            color = "#3454D1",
             stroke = FALSE,
             # add labels
             label = paste(
               corona_frame$`Province/State`, ":<br>",
               "Confirmed cases: ", corona_frame$confirmed, "<br>",
+              "Recovered cases: ", corona_frame$recovered, "<br>",
               "Deceased cases: ", corona_frame$deaths,
               sep = ""
             ) %>% lapply(htmltools::HTML),
@@ -276,14 +330,38 @@ observeEvent(list(
           ) %>%
           # do the same again
           addCircles(
-            data = corona_frame,
+            data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
             fillOpacity = 0.5,
-            radius = ~ sqrt(deaths) * 500,
-            color = "#ff7373",
+            radius = ~ sqrt(recovered) * 500,
+            color = "#23F0C7",
             stroke = FALSE,
             label = paste(
               corona_frame$`Province/State`, ":<br>",
               "Confirmed cases: ", corona_frame$confirmed, "<br>",
+              "Recovered cases: ", corona_frame$recovered, "<br>",
+              "Deceased cases: ", corona_frame$deaths,
+              sep = ""
+            ) %>% lapply(htmltools::HTML),
+            labelOptions = labelOptions(
+              style = list(
+                "font-family" = "Oswald",
+                "font-style" = "sans-serif",
+                "font-size" = "14px",
+                "border-color" = "rgba(0,0,0,0.5)"
+              )
+            )
+          ) %>%
+          # do the same again
+          addCircles(
+            data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+            fillOpacity = 0.5,
+            radius = ~ sqrt(deaths) * 500,
+            color = "#ED254E",
+            stroke = FALSE,
+            label = paste(
+              corona_frame$`Province/State`, ":<br>",
+              "Confirmed cases: ", corona_frame$confirmed, "<br>",
+              "Recovered cases: ", corona_frame$recovered, "<br>",
               "Deceased cases: ", corona_frame$deaths,
               sep = ""
             ) %>% lapply(htmltools::HTML),
@@ -321,12 +399,38 @@ observeEvent(list(
           data = corona_frame,
           fillOpacity = 0.5,
           radius = ~ sqrt(confirmed) * 500,
-          color = "#ffb733",
+          color = "#3454D1",
           stroke = FALSE,
           # add labels
           label = paste(
             corona_frame$`Province/State`, ":<br>",
             "Confirmed cases: ", corona_frame$confirmed, "<br>",
+            "Recovered cases: ", corona_frame$recovered, "<br>",
+            "Deceased cases: ", corona_frame$deaths,
+            sep = ""
+          ) %>% lapply(htmltools::HTML),
+          # style the labels
+          labelOptions = labelOptions(
+            style = list(
+              "font-family" = "Oswald",
+              "font-style" = "sans-serif",
+              "font-size" = "14px",
+              "border-color" = "rgba(0,0,0,0.5)"
+            )
+          )
+        ) %>%
+        # add the corona data
+        addCircles(
+          data = corona_frame,
+          fillOpacity = 0.5,
+          radius = ~ sqrt(recovered) * 500,
+          color = "#23F0C7",
+          stroke = FALSE,
+          # add labels
+          label = paste(
+            corona_frame$`Province/State`, ":<br>",
+            "Confirmed cases: ", corona_frame$confirmed, "<br>",
+            "Recovered cases: ", corona_frame$recovered, "<br>",
             "Deceased cases: ", corona_frame$deaths,
             sep = ""
           ) %>% lapply(htmltools::HTML),
@@ -345,11 +449,12 @@ observeEvent(list(
           data = corona_frame,
           fillOpacity = 0.5,
           radius = ~ sqrt(deaths) * 500,
-          color = "#ff7373",
+          color = "#ED254E",
           stroke = FALSE,
           label = paste(
             corona_frame$`Province/State`, ":<br>",
             "Confirmed cases: ", corona_frame$confirmed, "<br>",
+            "Recovered cases: ", corona_frame$recovered, "<br>",
             "Deceased cases: ", corona_frame$deaths,
             sep = ""
           ) %>% lapply(htmltools::HTML),
@@ -394,6 +499,7 @@ observeEvent(list(
           corona_frame$`Country/Region` <- country
           corona_frame$confirmed <- 0
           corona_frame$deaths <- 0
+          corona_frame$recovered <- 0
           corona_frame$date <- unique(corona_sf$date)
           corona_frame$geometry <- country_df$geometry
         }
@@ -406,17 +512,20 @@ observeEvent(list(
       group_by(date) %>%
       summarise(
         confirmed = sum(confirmed),
-        deaths = sum(deaths)
+        deaths = sum(deaths),
+        recovered = sum(recovered)
       )
     last_day <- corona_grouped[corona_grouped$date == daterange[1] - 1, ]
     corona_grouped <- corona_grouped[corona_grouped$date >= daterange[1] &
       corona_grouped$date <= daterange[2], ]
-    colnames(corona_grouped) <- c("date", "confirmed", "deaths")
+    colnames(corona_grouped) <- c("date", "confirmed", "deaths", "recovered")
     corona_grouped$confirmed <- corona_grouped$confirmed - last_day$confirmed
     corona_grouped$deaths <- corona_grouped$deaths - last_day$deaths
+    corona_grouped$recovered <- corona_grouped$recovered - last_day$recovered
     # update the plot
     plotlyProxy("everything_plot", session) %>%
       # delete the old traces
+      plotlyProxyInvoke("deleteTraces", list(0)) %>%
       plotlyProxyInvoke("deleteTraces", list(0)) %>%
       plotlyProxyInvoke("deleteTraces", list(0)) %>%
       # add new traces
@@ -427,25 +536,43 @@ observeEvent(list(
         type = "scatter",
         mode = "none",
         stackgroup = "one",
-        fillcolor = "rgba(255, 115, 115, 0.5)",
+        fillcolor = "rgba(237,37,78,0.5)",
         hoverinfo = "text",
         text = paste(
           "Confirmed cases:", corona_grouped$confirmed, "<br>",
+          "Recovered cases:", corona_grouped$recovered, "<br>",
           "Deceased cases:", corona_grouped$deaths
         ),
         line = list(color = "rgba(255, 115, 115, 1)")
       )) %>%
       plotlyProxyInvoke("addTraces", list(
         x = corona_grouped$date,
-        y = corona_grouped$confirmed - corona_grouped$deaths,
+        y = corona_grouped$recovered - corona_grouped$deaths,
+        name = "Recovered",
+        type = "scatter",
+        mode = "none",
+        stackgroup = "one",
+        fillcolor = "rgba(35,240,199,0.5)",
+        hoverinfo = "text",
+        text = paste(
+          "Confirmed cases:", corona_grouped$confirmed, "<br>",
+          "Recovered cases:", corona_grouped$recovered, "<br>",
+          "Deceased cases:", corona_grouped$deaths
+        ),
+        line = list(color = "rgba(255, 115, 115, 1)")
+      )) %>%
+      plotlyProxyInvoke("addTraces", list(
+        x = corona_grouped$date,
+        y = corona_grouped$confirmed - corona_grouped$deaths - corona_grouped$recovered,
         name = "Confirmed",
         type = "scatter",
         mode = "none",
         stackgroup = "one",
-        fillcolor = "rgba(255, 183, 51, 0.5)",
+        fillcolor = "rgba(52,84,209,0.5)",
         hoverinfo = "text",
         text = paste(
           "Confirmed cases:", corona_grouped$confirmed, "<br>",
+          "Recovered cases:", corona_grouped$recovered, "<br>",
           "Deceased cases:", corona_grouped$deaths
         ),
         line = list(color = "rgba(255, 183, 51, 1)")
@@ -493,6 +620,7 @@ observeEvent(list(
           corona_frame$`Country/Region` <- country
           corona_frame$confirmed <- 0
           corona_frame$deaths <- 0
+          corona_frame$recovered <- 0
           corona_frame$date <- unique(corona_sf$date)
           corona_frame$geometry <- country_df$geometry
         }
@@ -530,7 +658,7 @@ observeEvent(list(
         y = corona_grouped2$confirmed,
         name = "Deceased",
         type = "bar",
-        marker = list(color = "rgba(255, 183, 51, 0.7)")
+        marker = list(color = "rgba(52,84,209,0.5)")
       )) %>%
       # set the layout
       plotlyProxyInvoke(
@@ -572,6 +700,7 @@ observeEvent(list(
           corona_frame$`Country/Region` <- country
           corona_frame$confirmed <- 0
           corona_frame$deaths <- 0
+          corona_frame$recovered <- 0
           corona_frame$date <- unique(corona_sf$date)
           corona_frame$geometry <- country_df$geometry
         }
@@ -609,7 +738,7 @@ observeEvent(list(
         y = corona_grouped2$deaths,
         name = "Deceased",
         type = "bar",
-        marker = list(color = "rgba(255, 115, 115, 0.7)")
+        marker = list(color = "rgba(237,37,78,0.5")
       )) %>%
       # set the layout
       plotlyProxyInvoke(
