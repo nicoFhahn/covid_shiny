@@ -15,6 +15,9 @@ observeEvent(list(
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
         corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        if (country == "Italy") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+        }
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }
@@ -487,6 +490,9 @@ observeEvent(list(
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
         corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        if (country == "Italy") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+        }
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }
@@ -608,6 +614,9 @@ observeEvent(list(
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
         corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        if (country == "Italy") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+        }
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }
