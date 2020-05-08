@@ -644,7 +644,7 @@ fluidPage(
           style = "font-size:1.8em;"
         ),
         div(
-          id = "panel_wrapper",
+          id = "panel_wrapper", class = "panel_wrapper collapse in",
           uiOutput("total_cases_ui"),
           br(),
           fluidRow(
