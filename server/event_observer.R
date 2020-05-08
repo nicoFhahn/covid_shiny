@@ -76,7 +76,7 @@ observeEvent(list(
           lng_easter <- -73.792036
           lat_egg <- 40.680398
           ee <- TRUE
-          }
+        }
       }
     }
     # create the map
@@ -204,7 +204,7 @@ observeEvent(list(
               weight = 2
             ) %>%
             # add the corona data
-            
+
             # add the corona data
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
@@ -302,7 +302,7 @@ observeEvent(list(
             )
           ) %>%
           # add the corona data
-          
+
           # add the corona data
           addCircles(
             data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
@@ -589,7 +589,7 @@ observeEvent(list(
           title = "Total cases",
           fixedrange = TRUE
         ),
-        xaxis = list(fixedrange = TRUE, showspikes = TRUE)
+        xaxis = list(fixedrange = TRUE, showspikes = TRUE, showgrid = FALSE)
       )
   }
 })
@@ -668,7 +668,7 @@ observeEvent(list(
           title = "New cases",
           fixedrange = TRUE
         ),
-        xaxis = list(fixedrange = TRUE)
+        xaxis = list(fixedrange = TRUE, showgrid = FALSE)
       )
   }
 })
@@ -748,7 +748,7 @@ observeEvent(list(
           title = "Deaths",
           fixedrange = TRUE
         ),
-        xaxis = list(fixedrange = TRUE)
+        xaxis = list(fixedrange = TRUE, showgrid = FALSE)
       )
   }
 })

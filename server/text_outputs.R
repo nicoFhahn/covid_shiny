@@ -110,7 +110,7 @@ output$recovered_default <- renderText({
     paste(
       "<font size = 3em> recovered:</font><br>",
       sum(corona_sf[corona_sf$date == max(corona_sf$date), ]$recovered,
-          na.rm = TRUE
+        na.rm = TRUE
       )
     )
   } else {

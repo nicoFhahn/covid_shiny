@@ -59,9 +59,9 @@ deaths_long2 <- lapply(6:ncol(deaths), function(i, ...) {
   colnames(deaths_new)[5] <- "deaths"
   date <- str_split(colnames(deaths)[i], "/")[[1]]
   date_new <- paste(ifelse(nchar(date[1]) == 2, date[1], paste(0, date[1], sep = "")),
-                    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
-                    paste("20", date[3], sep = ""),
-                    sep = "/"
+    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
+    paste("20", date[3], sep = ""),
+    sep = "/"
   )
   deaths_new$date <- as.Date(date_new, format = "%m/%d/%Y")
   deaths_new
@@ -74,22 +74,22 @@ if (any(!confirmed$`Country/Region` %in% recovered$`Country/Region`)) {
   frames <- recovered[1:sum(!confirmed$`Country/Region` %in% recovered$`Country/Region`), ]
   frames$`Province/State` <- confirmed$`Province/State`[
     !confirmed$`Country/Region` %in% recovered$`Country/Region`
-    ]
+  ]
   frames$`Country/Region` <- confirmed$`Country/Region`[
     !confirmed$`Country/Region` %in% recovered$`Country/Region`
-    ]
+  ]
   frames$Lat <- confirmed$Lat[
     !confirmed$`Country/Region` %in% recovered$`Country/Region`
-    ]
+  ]
   frames$Long <- confirmed$Long[
     !confirmed$`Country/Region` %in% recovered$`Country/Region`
-    ]
+  ]
   frames[
     seq_len(
       sum(!confirmed$`Country/Region` %in% recovered$`Country/Region`)
     ),
     5:ncol(frames)
-    ] <- 0
+  ] <- 0
   recovered <- rbind(recovered, frames)
 }
 
@@ -101,17 +101,17 @@ recovered_long2 <- lapply(6:ncol(recovered), function(i, ...) {
   colnames(recovered_new)[5] <- "recovered"
   date <- str_split(colnames(recovered)[i], "/")[[1]]
   date_new <- paste(ifelse(nchar(date[1]) == 2, date[1], paste(0, date[1], sep = "")),
-                    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
-                    paste("20", date[3], sep = ""),
-                    sep = "/"
+    ifelse(nchar(date[2]) == 2, date[2], paste(0, date[2], sep = "")),
+    paste("20", date[3], sep = ""),
+    sep = "/"
   )
   recovered_new$date <- as.Date(date_new, format = "%m/%d/%Y")
   recovered_new
 })
 recovered_long <- rbind(recovered_long, rbindlist(recovered_long2))
 
-canada_confirmed <- confirmed_long[confirmed_long$`Country/Region` == "Canada",][, .(
-  `Province/State`= unique(`Country/Region`),
+canada_confirmed <- confirmed_long[confirmed_long$`Country/Region` == "Canada", ][, .(
+  `Province/State` = unique(`Country/Region`),
   `Country/Region` = unique(`Country/Region`),
   confirmed = sum(confirmed),
   Lat = mean(Lat),
@@ -119,8 +119,8 @@ canada_confirmed <- confirmed_long[confirmed_long$`Country/Region` == "Canada",]
   date = unique(date)
 ), keyby = .(date, `Country/Region`)][, 3:8]
 
-canada_deaths <- deaths_long[deaths_long$`Country/Region` == "Canada",][, .(
-  `Province/State`= unique(`Country/Region`),
+canada_deaths <- deaths_long[deaths_long$`Country/Region` == "Canada", ][, .(
+  `Province/State` = unique(`Country/Region`),
   `Country/Region` = unique(`Country/Region`),
   Lat = mean(Lat),
   Long = mean(Long),
