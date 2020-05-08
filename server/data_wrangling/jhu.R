@@ -139,6 +139,7 @@ confirmed_long[, deaths := deaths_long[, "deaths"]]
 confirmed_long[, recovered := recovered_long[, "recovered"]]
 confirmed_long[confirmed_long$`Country/Region` == "Canada", ]$Lat <- 53.91469
 confirmed_long[confirmed_long$`Country/Region` == "Canada", ]$Long <- -106.48272
+confirmed_long[confirmed_long$`Country/Region` == "Holy See", ]$`Country/Region` <- "Vatican"
 corona <- confirmed_long
 # add a day 0 frame
 rows <- seq_len(length(unique(paste(corona$`Country/Region`, corona$`Province/State`))))
