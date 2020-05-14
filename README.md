@@ -22,7 +22,7 @@ runGitHub("covid_shiny", "nicoFhahn")
 ```
 # Screenshots
 ![alt text](https://i.imgur.com/yP3b7eA.png "Logo Title Text 1")
-![alt text](https://i.imgur.com/PLz7s2e.png "Logo Title Text 1")
+![alt text](https://i.imgur.com/BLrMttV.png "Logo Title Text 1")
 
 ### Acknowledgments
 The folks over at RStudio with the [SuperZIP demo](https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example) which heavily inspired the layout of the leaflet map.
