@@ -9,6 +9,8 @@ observeEvent(list(
     daterange <- get_date()
     # try and get the country
     country <- try(get_country(), silent = TRUE)
+    print(daterange)
+    print(country)
     corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
       # if a country was clicked, select the subset of corona data
@@ -49,7 +51,7 @@ observeEvent(list(
       corona_frame2$confirmed
     corona_frame1$deaths <- corona_frame1$deaths - corona_frame2$deaths
     corona_frame <- corona_frame1
-    if (corona_frame$`Province/State` == "") {
+    if (any(corona_frame$`Province/State` == "")) {
       corona_frame$`Province/State` <- corona_frame$`Country/Region`
     }
     if (country == "Philippines") {
@@ -304,11 +306,8 @@ observeEvent(list(
               sendToBack = TRUE
             )
           ) %>%
-          # add the corona data
-
-          # add the corona data
           addCircles(
-            data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+            data = st_centroid(st_as_sf(corona_frame, crs = 4326)),
             fillOpacity = 0.5,
             radius = ~ sqrt(confirmed) * 500,
             color = "#3454D1",
@@ -333,7 +332,7 @@ observeEvent(list(
           ) %>%
           # do the same again
           addCircles(
-            data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+            data = st_centroid(st_as_sf(corona_frame, crs = 4326)),
             fillOpacity = 0.5,
             radius = ~ sqrt(recovered) * 500,
             color = "#23F0C7",
@@ -356,7 +355,7 @@ observeEvent(list(
           ) %>%
           # do the same again
           addCircles(
-            data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+            data = st_centroid(st_as_sf(corona_frame, crs = 4326)),
             fillOpacity = 0.5,
             radius = ~ sqrt(deaths) * 500,
             color = "#ED254E",
