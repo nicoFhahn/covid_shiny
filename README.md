@@ -1,3 +1,5 @@
+[![eRum2020::CovidR](https://badgen.net/https/runkit.io/erum2020-covidr/badge/branches/master/hahn-covid-shinyline?cache=300)](https://milano-r.github.io/erum2020-covidr-contest/hahn-covid-shinyline.html)
+
 # Covid Shinyline: The 2019-20 Coronavirus Pandemic visualized  with R and Shiny
 Covid Shinyline uses the data from Johns Hopkins University to visualize the outbreak of the novel coronavirus. The data is available from [this repository](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data).
 
