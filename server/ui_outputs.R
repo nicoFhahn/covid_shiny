@@ -41,11 +41,6 @@ output$cases_death_ui <- renderUI({
 
 # dateinput based on dates available
 output$date_ui <- renderUI({
-  # dateRangeInput("date", "Choose a date range:",
-  #   start = min(corona_sf$date) + 1, end = max(corona_sf$date),
-  #   min = min(corona_sf$date) + 1, max = max(corona_sf$date),
-  #   width = "100%"
-  # )
   airDatepickerInput(
     "date", "Date range:",
     range = TRUE,
