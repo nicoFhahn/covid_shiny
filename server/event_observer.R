@@ -9,6 +9,7 @@ observeEvent(list(
     daterange <- get_date()
     # try and get the country
     country <- try(get_country(), silent = TRUE)
+    print(country)
     corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
       # if a country was clicked, select the subset of corona data
