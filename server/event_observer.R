@@ -17,7 +17,7 @@ observeEvent(list(
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
         corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
         if (country == "Italy") {
-          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
         }
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
@@ -489,7 +489,7 @@ observeEvent(list(
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
         corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
         if (country == "Italy") {
-          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
         }
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
@@ -613,7 +613,7 @@ observeEvent(list(
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
         corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
         if (country == "Italy") {
-          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
         }
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
@@ -653,7 +653,7 @@ observeEvent(list(
       for (i in nrow(corona_grouped2):2) {
         corona_grouped2[i, ]$confirmed <- corona_grouped2[i, ]$confirmed -
           corona_grouped2[i - 1, ]$confirmed
-      } 
+      }
     }
     corona_grouped2$confirmed[1] <- corona_grouped2$confirmed[1] -
       last_day$confirmed

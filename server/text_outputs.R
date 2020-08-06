@@ -55,7 +55,7 @@ output$all_country <- renderText({
     corona_sf <- st_as_sf(corona_sf, crs = 4326)
     corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
     if (country == "Italy") {
-      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
     }
     if (nrow(corona_frame) == 0) {
       corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
@@ -142,7 +142,7 @@ output$recovered_country <- renderText({
     corona_sf <- st_as_sf(corona_sf, crs = 4326)
     corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
     if (country == "Italy") {
-      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
     }
     if (nrow(corona_frame) == 0) {
       corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
@@ -228,7 +228,7 @@ output$death_country <- renderText({
     corona_sf <- st_as_sf(corona_sf, crs = 4326)
     corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
     if (country == "Italy") {
-      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy",]
+      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
     }
     if (nrow(corona_frame) == 0) {
       corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
