@@ -7,9 +7,9 @@ observeEvent(list(
   if (!is.null(input$date)) {
     # get the selected dates
     daterange <- get_date()
+    print(daterange)
     # try and get the country
     country <- try(get_country(), silent = TRUE)
-    print(country)
     corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
       # if a country was clicked, select the subset of corona data
@@ -649,9 +649,11 @@ observeEvent(list(
     ]
     corona_grouped2 <- corona_grouped
     # count the number of cases for each specific day
-    for (i in nrow(corona_grouped2):2) {
-      corona_grouped2[i, ]$confirmed <- corona_grouped2[i, ]$confirmed -
-        corona_grouped2[i - 1, ]$confirmed
+    if (daterange[1] != daterange[2]) {
+      for (i in nrow(corona_grouped2):2) {
+        corona_grouped2[i, ]$confirmed <- corona_grouped2[i, ]$confirmed -
+          corona_grouped2[i - 1, ]$confirmed
+      } 
     }
     corona_grouped2$confirmed[1] <- corona_grouped2$confirmed[1] -
       last_day$confirmed
@@ -729,9 +731,11 @@ observeEvent(list(
     ]
     corona_grouped2 <- corona_grouped
     # count the number of cases for each specific day
-    for (i in nrow(corona_grouped2):2) {
-      corona_grouped2[i, ]$deaths <- corona_grouped2[i, ]$deaths -
-        corona_grouped2[i - 1, ]$deaths
+    if (daterange[1] != daterange[2]) {
+      for (i in nrow(corona_grouped2):2) {
+        corona_grouped2[i, ]$deaths <- corona_grouped2[i, ]$deaths -
+          corona_grouped2[i - 1, ]$deaths
+      }
     }
     corona_grouped2$deaths[1] <- corona_grouped2$deaths[1] -
       last_day$deaths
