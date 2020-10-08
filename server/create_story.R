@@ -2,7 +2,7 @@
 # i won't go into detail
 infected_world <- daily_cases[daily_cases$date == max(daily_cases$date), ]$confirmed
 died <- daily_cases[daily_cases$date == max(daily_cases$date), ]$deaths
-file_1[14] <- paste("To date", format(infected_world, big.mark = " "), "people have been infected with the virus and", format(died, big.mark = " "), "have died.")
+file_1[14] <- paste("To date", format(infected_world, big.mark = "."), "people have been infected with the virus and", format(died, big.mark = "."), "have died.")
 today <- daily_cases2[daily_cases2$date == max(daily_cases2$date), ]
 country <- as.character(today[today$confirmed == max(today$confirmed), 2])
 if (country == "US") {
@@ -12,7 +12,7 @@ file_2[8] <- paste(
   "In ",
   country,
   ", ",
-  format(as.numeric(today[today$confirmed == max(today$confirmed), 3]), big.mark = " "),
+  format(as.numeric(today[today$confirmed == max(today$confirmed), 3]), big.mark = "."),
   " people are infected with the virus, making it the country with the most infections worldwide.",
   sep = ""
 )
@@ -21,7 +21,7 @@ if (country == "US") {
   country <- "the United States"
 }
 file_3[8] <- paste(
-  format(as.numeric(today[today$deaths == max(today$deaths), 4]), big.mark = " "),
+  format(as.numeric(today[today$deaths == max(today$deaths), 4]), big.mark = "."),
   "people have died in",
   country,
   "as a result of the coronavirus. <br>"
@@ -123,14 +123,14 @@ if (country_1 == "US") {
   country_1 <- "the United States"
 }
 text_1 <- paste("In ", country_1, ", the number of new infections has increased from ",
-  format(df_most[1, ]$old, big.mark = " "), " to ",
-  format(df_most[1, ]$new, big.mark = " "), ", an increase of ",
-  format(df_most[1, ]$increase, big.mark = " "),
+  format(df_most[1, ]$old, big.mark = "."), " to ",
+  format(df_most[1, ]$new, big.mark = "."), ", an increase of ",
+  format(df_most[1, ]$increase, big.mark = "."),
   "%.",
   sep = ""
 )
 text_2 <- "However, these numbers can easily be influenced by outliers. Countries that didn't have a lot of cases a fortnight ago."
-text_3 <- paste("Let's see what the data looks like when a country must have had at least", limit, "infections two weeks ago.")
+text_3 <- paste("Let's see what the data looks like when a country must have had at least", format(limit, big.mark = "."), "infections two weeks ago.")
 
 
 file_6[9] <- paste(text_1, text_2, sep = "<br>")
@@ -147,9 +147,9 @@ if (country_1 != country_2) {
   }
 
   text_1 <- paste(country_2, " now has the highest increase in new infections. The figures rose from <br>",
-    format(df_limit_most[1, ]$old, big.mark = " "), " to ",
-    format(df_limit_most[1, ]$new, big.mark = " "), ", an increase of <br>",
-    format(df_limit_most[1, ]$increase, big.mark = " "),
+    format(df_limit_most[1, ]$old, big.mark = "."), " to ",
+    format(df_limit_most[1, ]$new, big.mark = "."), ", an increase of <br>",
+    format(df_limit_most[1, ]$increase, big.mark = "."),
     "%.",
     sep = ""
   )
@@ -165,14 +165,14 @@ file_7[9] <- text_1
 if (df_limit_few$country[1] == "China") {
   text_1 <- paste(
     "China.<br>The country where it all began.<br>Only ",
-    format((df_limit_few$new - df_limit_few$old)[1], big.mark = " "),
+    format((df_limit_few$new - df_limit_few$old)[1], big.mark = "."),
     " new cases.<br>An increase of only ", df_limit_few$increase[1], "%.",
     sep = ""
   )
 } else {
   text_1 <- paste(
     as.character(df_limit_few$country[1]), " only reported ",
-    format((df_limit_few$new - df_limit_few$old)[1], big.mark = " "),
+    format((df_limit_few$new - df_limit_few$old)[1], big.mark = "."),
     "new cases.<br>An increase of only ", df_limit_few$increase[1], "%.",
     sep = ""
   )
@@ -182,9 +182,9 @@ file_8[9] <- text_1
 
 text_1 <- paste(
   "In 30 days we could have anywhere between",
-  format(max(forecast_df$lower95_conf, na.rm = TRUE), big.mark = " "),
+  format(max(forecast_df$lower95_conf, na.rm = TRUE), big.mark = "."),
   "and",
-  format(max(forecast_df$upper95_conf, na.rm = TRUE), big.mark = " "),
+  format(max(forecast_df$upper95_conf, na.rm = TRUE), big.mark = "."),
   "confirmed cases."
 )
 
@@ -198,9 +198,9 @@ file_9[12] <- text_2
 
 text_1 <- paste(
   "Anywhere between ",
-  format(max(forecast_df$lower95_death, na.rm = TRUE), big.mark = " "),
+  format(max(forecast_df$lower95_death, na.rm = TRUE), big.mark = "."),
   " and <br>",
-  format(max(forecast_df$upper95_death, na.rm = TRUE), big.mark = " "),
+  format(max(forecast_df$upper95_death, na.rm = TRUE), big.mark = "."),
   ".",
   sep = ""
 )

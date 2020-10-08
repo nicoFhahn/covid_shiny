@@ -495,3 +495,7 @@ div.modal-content {
   background-color: #161616;
   color: white;/* Add a dark-grey background on hover */
 }
+
+.mapboxgl-ctrl-logo {
+ opacity: 0;
+}

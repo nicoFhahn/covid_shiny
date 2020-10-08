@@ -27,7 +27,7 @@ if (any(df_most$old[1:3] < 25)) {
 } else if (any(df_most$old[1:3] < 50)) {
   limit <- 500
 } else {
-  limit <- mean(df_most$old) * 100
+  limit <- round_any(mean(df_most$old), 10000)
 }
 df_limit <- df[df$old >= limit, ]
 # get countries with the highest increase
