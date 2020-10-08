@@ -12,13 +12,7 @@ output$mymap <- renderLeaflet({
       )
   } else {
     map <- leaflet(options = leafletOptions(zoomControl = FALSE)) %>%
-      addProviderTiles(
-        "MapBox",
-        options = providerTileOptions(
-          id = "mapbox.dark", noWrap = FALSE,
-          accessToken = key
-        )
-      ) %>%
+      addMapboxGL(style = "mapbox://styles/nicohahn/ckg0iz22c28xx19pqdi54tw53") %>%
       setView(
         lng = 40,
         lat = 30.45,

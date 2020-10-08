@@ -115,7 +115,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(confirmed) * 500,
+              radius = ~ sqrt(confirmed) * 250,
               color = "#3454D1",
               stroke = FALSE,
               # add labels
@@ -140,7 +140,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(recovered) * 500,
+              radius = ~ sqrt(recovered) * 250,
               color = "#23F0C7",
               stroke = FALSE,
               label = paste(
@@ -163,7 +163,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(deaths) * 500,
+              radius = ~ sqrt(deaths) * 250,
               color = "#ED254E",
               stroke = FALSE,
               label = paste(
@@ -213,7 +213,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(confirmed) * 500,
+              radius = ~ sqrt(confirmed) * 250,
               color = "#3454D1",
               stroke = FALSE,
               # add labels
@@ -238,7 +238,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(recovered) * 500,
+              radius = ~ sqrt(recovered) * 250,
               color = "#23F0C7",
               stroke = FALSE,
               label = paste(
@@ -261,7 +261,7 @@ observeEvent(list(
             addCircles(
               data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
               fillOpacity = 0.5,
-              radius = ~ sqrt(deaths) * 500,
+              radius = ~ sqrt(deaths) * 250,
               color = "#ED254E",
               stroke = FALSE,
               label = paste(
@@ -308,7 +308,7 @@ observeEvent(list(
           addCircles(
             data = st_centroid(st_as_sf(corona_frame, crs = 4326)),
             fillOpacity = 0.5,
-            radius = ~ sqrt(confirmed) * 500,
+            radius = ~ sqrt(confirmed) * 250,
             color = "#3454D1",
             stroke = FALSE,
             # add labels
@@ -333,7 +333,7 @@ observeEvent(list(
           addCircles(
             data = st_centroid(st_as_sf(corona_frame, crs = 4326)),
             fillOpacity = 0.5,
-            radius = ~ sqrt(recovered) * 500,
+            radius = ~ sqrt(recovered) * 250,
             color = "#23F0C7",
             stroke = FALSE,
             label = paste(
@@ -356,7 +356,7 @@ observeEvent(list(
           addCircles(
             data = st_centroid(st_as_sf(corona_frame, crs = 4326)),
             fillOpacity = 0.5,
-            radius = ~ sqrt(deaths) * 500,
+            radius = ~ sqrt(deaths) * 250,
             color = "#ED254E",
             stroke = FALSE,
             label = paste(
@@ -399,7 +399,7 @@ observeEvent(list(
         addCircles(
           data = corona_frame,
           fillOpacity = 0.5,
-          radius = ~ sqrt(confirmed) * 500,
+          radius = ~ sqrt(confirmed) * 250,
           color = "#3454D1",
           stroke = FALSE,
           # add labels
@@ -424,7 +424,7 @@ observeEvent(list(
         addCircles(
           data = corona_frame,
           fillOpacity = 0.5,
-          radius = ~ sqrt(recovered) * 500,
+          radius = ~ sqrt(recovered) * 250,
           color = "#23F0C7",
           stroke = FALSE,
           # add labels
@@ -449,7 +449,7 @@ observeEvent(list(
         addCircles(
           data = corona_frame,
           fillOpacity = 0.5,
-          radius = ~ sqrt(deaths) * 500,
+          radius = ~ sqrt(deaths) * 250,
           color = "#ED254E",
           stroke = FALSE,
           label = paste(
