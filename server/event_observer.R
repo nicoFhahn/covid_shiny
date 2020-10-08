@@ -7,15 +7,21 @@ observeEvent(list(
   if (!is.null(input$date)) {
     # get the selected dates
     daterange <- get_date()
+    # daterange <- as.Date(c("2020-01-22", "2020-10-07"))
     print(daterange)
     # try and get the country
     country <- try(get_country(), silent = TRUE)
+    print(country)
     corona_frame <- st_as_sf(corona_sf, crs = 4326)
     if (class(country) != "try-error") {
       # if a country was clicked, select the subset of corona data
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
-        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        if (country == "Israel") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
+        } else {
+          corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        }
         if (country == "Italy") {
           corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
         }
@@ -88,100 +94,198 @@ observeEvent(list(
       if (country != "world") {
         if (!ee) {
           country_df2 <- countries[countries$ADMIN != country, ]
-          leafletProxy("mymap") %>%
-            # remove stuff from the old map
-            clearControls() %>%
-            clearMarkers() %>%
-            clearShapes() %>%
-            clearPopups() %>%
-            # add the country shapes
-            addPolygons(
-              data = st_as_sf(country_df2),
-              weight = 0,
-              color = "#000000",
-              fillOpacity = 0,
-              # highlight the outer lines
-              highlightOptions = highlightOptions(
-                color = "#ffffff", opacity = 1, weight = 2, fillOpacity = 0,
-                sendToBack = TRUE
-              )
-            ) %>%
-            addPolylines(
-              data = st_cast(country_df, "MULTILINESTRING"),
-              color = linecol,
-              weight = 2
-            ) %>%
-            # add the corona data
-            addCircles(
-              data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
-              fillOpacity = 0.5,
-              radius = ~ sqrt(confirmed) * 250,
-              color = "#3454D1",
-              stroke = FALSE,
-              # add labels
-              label = paste(
-                corona_frame$`Province/State`, ":<br>",
-                "Confirmed cases: ", corona_frame$confirmed, "<br>",
-                "Recovered cases: ", corona_frame$recovered, "<br>",
-                "Deceased cases: ", corona_frame$deaths,
-                sep = ""
-              ) %>% lapply(htmltools::HTML),
-              # style the labels
-              labelOptions = labelOptions(
-                style = list(
-                  "font-family" = "Oswald",
-                  "font-style" = "sans-serif",
-                  "font-size" = "14px",
-                  "border-color" = "rgba(0,0,0,0.5)"
+          if (country != "Israel") {
+            leafletProxy("mymap") %>%
+              # remove stuff from the old map
+              clearControls() %>%
+              clearMarkers() %>%
+              clearShapes() %>%
+              clearPopups() %>%
+              # add the country shapes
+              addPolygons(
+                data = st_as_sf(country_df2),
+                weight = 0,
+                color = "#000000",
+                fillOpacity = 0,
+                # highlight the outer lines
+                highlightOptions = highlightOptions(
+                  color = "#ffffff", opacity = 1, weight = 2, fillOpacity = 0,
+                  sendToBack = TRUE
+                )
+              ) %>%
+              addPolylines(
+                data = st_cast(country_df, "MULTILINESTRING"),
+                color = linecol,
+                weight = 2
+              ) %>%
+              # add the corona data
+              addCircles(
+                data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+                fillOpacity = 0.5,
+                radius = ~ sqrt(confirmed) * 250,
+                color = "#3454D1",
+                stroke = FALSE,
+                # add labels
+                label = paste(
+                  corona_frame$`Province/State`, ":<br>",
+                  "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                  "Recovered cases: ", corona_frame$recovered, "<br>",
+                  "Deceased cases: ", corona_frame$deaths,
+                  sep = ""
+                ) %>% lapply(htmltools::HTML),
+                # style the labels
+                labelOptions = labelOptions(
+                  style = list(
+                    "font-family" = "Oswald",
+                    "font-style" = "sans-serif",
+                    "font-size" = "14px",
+                    "border-color" = "rgba(0,0,0,0.5)"
+                  )
+                )
+              ) %>%
+              # do the same again
+              addCircles(
+                data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+                fillOpacity = 0.5,
+                radius = ~ sqrt(recovered) * 250,
+                color = "#23F0C7",
+                stroke = FALSE,
+                label = paste(
+                  corona_frame$`Province/State`, ":<br>",
+                  "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                  "Recovered cases: ", corona_frame$recovered, "<br>",
+                  "Deceased cases: ", corona_frame$deaths,
+                  sep = ""
+                ) %>% lapply(htmltools::HTML),
+                labelOptions = labelOptions(
+                  style = list(
+                    "font-family" = "Oswald",
+                    "font-style" = "sans-serif",
+                    "font-size" = "14px",
+                    "border-color" = "rgba(0,0,0,0.5)"
+                  )
+                )
+              ) %>%
+              # do the same again
+              addCircles(
+                data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+                fillOpacity = 0.5,
+                radius = ~ sqrt(deaths) * 250,
+                color = "#ED254E",
+                stroke = FALSE,
+                label = paste(
+                  corona_frame$`Province/State`, ":<br>",
+                  "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                  "Recovered cases: ", corona_frame$recovered, "<br>",
+                  "Deceased cases: ", corona_frame$deaths,
+                  sep = ""
+                ) %>% lapply(htmltools::HTML),
+                labelOptions = labelOptions(
+                  style = list(
+                    "font-family" = "Oswald",
+                    "font-style" = "sans-serif",
+                    "font-size" = "14px",
+                    "border-color" = "rgba(0,0,0,0.5)"
+                  )
                 )
               )
-            ) %>%
-            # do the same again
-            addCircles(
-              data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
-              fillOpacity = 0.5,
-              radius = ~ sqrt(recovered) * 250,
-              color = "#23F0C7",
-              stroke = FALSE,
-              label = paste(
-                corona_frame$`Province/State`, ":<br>",
-                "Confirmed cases: ", corona_frame$confirmed, "<br>",
-                "Recovered cases: ", corona_frame$recovered, "<br>",
-                "Deceased cases: ", corona_frame$deaths,
-                sep = ""
-              ) %>% lapply(htmltools::HTML),
-              labelOptions = labelOptions(
-                style = list(
-                  "font-family" = "Oswald",
-                  "font-style" = "sans-serif",
-                  "font-size" = "14px",
-                  "border-color" = "rgba(0,0,0,0.5)"
+          } else {
+            leafletProxy("mymap") %>%
+              # remove stuff from the old map
+              clearControls() %>%
+              clearMarkers() %>%
+              clearShapes() %>%
+              clearPopups() %>%
+              # add the country shapes
+              addPolygons(
+                data = st_as_sf(country_df2),
+                weight = 0,
+                color = "#000000",
+                fillOpacity = 0,
+                # highlight the outer lines
+                highlightOptions = highlightOptions(
+                  color = "#ffffff", opacity = 1, weight = 2, fillOpacity = 0,
+                  sendToBack = TRUE
+                )
+              ) %>%
+              addPolygons(
+                data = country_df,
+                color = linecol,
+                fillOpacity = 0,
+                weight = 2
+              ) %>%
+              # add the corona data
+              addCircles(
+                data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+                fillOpacity = 0.5,
+                radius = ~ sqrt(confirmed) * 250,
+                color = "#3454D1",
+                stroke = FALSE,
+                # add labels
+                label = paste(
+                  corona_frame$`Province/State`, ":<br>",
+                  "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                  "Recovered cases: ", corona_frame$recovered, "<br>",
+                  "Deceased cases: ", corona_frame$deaths,
+                  sep = ""
+                ) %>% lapply(htmltools::HTML),
+                # style the labels
+                labelOptions = labelOptions(
+                  style = list(
+                    "font-family" = "Oswald",
+                    "font-style" = "sans-serif",
+                    "font-size" = "14px",
+                    "border-color" = "rgba(0,0,0,0.5)"
+                  )
+                )
+              ) %>%
+              # do the same again
+              addCircles(
+                data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+                fillOpacity = 0.5,
+                radius = ~ sqrt(recovered) * 250,
+                color = "#23F0C7",
+                stroke = FALSE,
+                label = paste(
+                  corona_frame$`Province/State`, ":<br>",
+                  "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                  "Recovered cases: ", corona_frame$recovered, "<br>",
+                  "Deceased cases: ", corona_frame$deaths,
+                  sep = ""
+                ) %>% lapply(htmltools::HTML),
+                labelOptions = labelOptions(
+                  style = list(
+                    "font-family" = "Oswald",
+                    "font-style" = "sans-serif",
+                    "font-size" = "14px",
+                    "border-color" = "rgba(0,0,0,0.5)"
+                  )
+                )
+              ) %>%
+              # do the same again
+              addCircles(
+                data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
+                fillOpacity = 0.5,
+                radius = ~ sqrt(deaths) * 250,
+                color = "#ED254E",
+                stroke = FALSE,
+                label = paste(
+                  corona_frame$`Province/State`, ":<br>",
+                  "Confirmed cases: ", corona_frame$confirmed, "<br>",
+                  "Recovered cases: ", corona_frame$recovered, "<br>",
+                  "Deceased cases: ", corona_frame$deaths,
+                  sep = ""
+                ) %>% lapply(htmltools::HTML),
+                labelOptions = labelOptions(
+                  style = list(
+                    "font-family" = "Oswald",
+                    "font-style" = "sans-serif",
+                    "font-size" = "14px",
+                    "border-color" = "rgba(0,0,0,0.5)"
+                  )
                 )
               )
-            ) %>%
-            # do the same again
-            addCircles(
-              data = st_centroid(st_as_sf(corona_frame, crs = 4326)[1, ]),
-              fillOpacity = 0.5,
-              radius = ~ sqrt(deaths) * 250,
-              color = "#ED254E",
-              stroke = FALSE,
-              label = paste(
-                corona_frame$`Province/State`, ":<br>",
-                "Confirmed cases: ", corona_frame$confirmed, "<br>",
-                "Recovered cases: ", corona_frame$recovered, "<br>",
-                "Deceased cases: ", corona_frame$deaths,
-                sep = ""
-              ) %>% lapply(htmltools::HTML),
-              labelOptions = labelOptions(
-                style = list(
-                  "font-family" = "Oswald",
-                  "font-style" = "sans-serif",
-                  "font-size" = "14px",
-                  "border-color" = "rgba(0,0,0,0.5)"
-                )
-              )
-            )
+          }
         } else {
           country_df2 <- countries[countries$ADMIN != country, ]
           leafletProxy("mymap") %>%
@@ -487,7 +591,11 @@ observeEvent(list(
       # if a country was clicked, select the subset of corona data
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
-        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        if (country == "Israel") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
+        } else {
+          corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        }
         if (country == "Italy") {
           corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
         }
@@ -611,7 +719,11 @@ observeEvent(list(
       # if a country was clicked, select the subset of corona data
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
-        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        if (country == "Israel") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
+        } else {
+          corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        }
         if (country == "Italy") {
           corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
         }
@@ -696,7 +808,11 @@ observeEvent(list(
       # if a country was clicked, select the subset of corona data
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
-        corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        if (country == "Israel") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
+        } else {
+          corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+        }
         if (nrow(corona_frame) == 0) {
           corona_frame <- corona_sf[corona_sf$`Province/State` == country, ]
         }

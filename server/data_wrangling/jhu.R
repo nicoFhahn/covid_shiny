@@ -1,5 +1,7 @@
 # download the data
 confirmed <- fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+confirmed[confirmed$`Country/Region` == "Israel", 5:ncol(confirmed)] <- confirmed[confirmed$`Country/Region` == "Israel", 5:ncol(confirmed)] + confirmed[confirmed$`Country/Region` == "West Bank and Gaza", 5:ncol(confirmed)]
+confirmed <- confirmed[confirmed$`Country/Region` != "West Bank and Gaza", ]
 # now a whole bunch of preprocessing
 # get the cases for the first day
 confirmed_long <- confirmed[, 1:5]
@@ -28,6 +30,8 @@ confirmed_long2 <- lapply(6:ncol(confirmed), function(i, ...) {
 confirmed_long <- rbind(confirmed_long, rbindlist(confirmed_long2))
 # old death
 deaths <- fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")
+deaths[deaths$`Country/Region` == "Israel", 5:ncol(deaths)] <- deaths[deaths$`Country/Region` == "Israel", 5:ncol(deaths)] + deaths[deaths$`Country/Region` == "West Bank and Gaza", 5:ncol(deaths)]
+deaths <- deaths[deaths$`Country/Region` != "West Bank and Gaza", ]
 if (any(!confirmed$`Country/Region` %in% deaths$`Country/Region`)) {
   frames <- deaths[1:sum(!confirmed$`Country/Region` %in% deaths$`Country/Region`), ]
   frames$`Province/State` <- confirmed$`Province/State`[
@@ -70,6 +74,8 @@ deaths_long2 <- lapply(6:ncol(deaths), function(i, ...) {
 deaths_long <- rbind(deaths_long, rbindlist(deaths_long2))
 
 recovered <- fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv")
+recovered[recovered$`Country/Region` == "Israel", 5:ncol(recovered)] <- recovered[recovered$`Country/Region` == "Israel", 5:ncol(recovered)] + recovered[recovered$`Country/Region` == "West Bank and Gaza", 5:ncol(recovered)]
+recovered <- recovered[recovered$`Country/Region` != "West Bank and Gaza", ]
 if (any(!confirmed$`Country/Region` %in% recovered$`Country/Region`)) {
   frames <- recovered[1:sum(!confirmed$`Country/Region` %in% recovered$`Country/Region`), ]
   frames$`Province/State` <- confirmed$`Province/State`[

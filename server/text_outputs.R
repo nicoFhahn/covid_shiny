@@ -53,7 +53,11 @@ output$all_country <- renderText({
   if (country != "world") {
     country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
     corona_sf <- st_as_sf(corona_sf, crs = 4326)
-    corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+    if (country == "Israel") {
+      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
+    } else {
+      corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+    }
     if (country == "Italy") {
       corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
     }
@@ -140,7 +144,11 @@ output$recovered_country <- renderText({
   if (country != "world") {
     country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
     corona_sf <- st_as_sf(corona_sf, crs = 4326)
-    corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+    if (country == "Israel") {
+      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
+    } else {
+      corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+    }
     if (country == "Italy") {
       corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
     }
@@ -226,7 +234,11 @@ output$death_country <- renderText({
   if (country != "world") {
     country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
     corona_sf <- st_as_sf(corona_sf, crs = 4326)
-    corona_frame <- corona_sf[unlist(st_contains(country_df, corona_sf)), ]
+    if (country == "Israel") {
+      corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
+    } else {
+      corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+    }
     if (country == "Italy") {
       corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
     }
