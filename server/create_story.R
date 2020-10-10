@@ -1,8 +1,15 @@
 # this part pretty generates some basic sentences for some parts of the timeline or global leaders
 # i won't go into detail
-infected_world <- daily_cases[daily_cases$date == max(daily_cases$date), ]$confirmed
+infected_world <- daily_cases[
+  daily_cases$date == max(daily_cases$date), ]$confirmed
 died <- daily_cases[daily_cases$date == max(daily_cases$date), ]$deaths
-file_1[14] <- paste("To date", format(infected_world, big.mark = "."), "people have been infected with the virus and", format(died, big.mark = "."), "have died.")
+file_1[14] <- paste(
+  "To date",
+  format(infected_world, big.mark = "."),
+  "people have been infected with the virus and",
+  format(died, big.mark = "."),
+  "have died."
+)
 today <- daily_cases2[daily_cases2$date == max(daily_cases2$date), ]
 country <- as.character(today[today$confirmed == max(today$confirmed), 2])
 if (country == "US") {
@@ -12,8 +19,12 @@ file_2[8] <- paste(
   "In ",
   country,
   ", ",
-  format(as.numeric(today[today$confirmed == max(today$confirmed), 3]), big.mark = "."),
-  " people are infected with the virus, making it the country with the most infections worldwide.",
+  format(
+    as.numeric(today[today$confirmed == max(today$confirmed), 3]),
+    big.mark = "."
+  ),
+  " people are infected with the virus, making it the country with the most
+  infections worldwide.",
   sep = ""
 )
 country <- as.character(today[today$deaths == max(today$deaths), 2])
@@ -21,7 +32,10 @@ if (country == "US") {
   country <- "the United States"
 }
 file_3[8] <- paste(
-  format(as.numeric(today[today$deaths == max(today$deaths), 4]), big.mark = "."),
+  format(
+    as.numeric(today[today$deaths == max(today$deaths), 4]),
+    big.mark = "."
+  ),
   "people have died in",
   country,
   "as a result of the coronavirus. <br>"
@@ -37,14 +51,22 @@ if (country == "US") {
   country <- "the United States"
 }
 
-new_in_1 <- sum(!top15_confirmed_per_capita$country %in% top15_confirmed$`Country/Region`)
+new_in_1 <- sum(
+  !top15_confirmed_per_capita$country %in% top15_confirmed$`Country/Region`
+  )
 if (new_in_1 > 0) {
-  text_1 <- paste(new_in_1, "countries that are not among the countries with the most infections are among the countries with the highest infection rate.")
+  text_1 <- paste(
+    new_in_1,
+    "countries that are not among the countries with the most infections are
+    among the countries with the highest infection rate."
+  )
 } else {
   text_1 <- "It's still the same countries."
 }
 
-appears_1 <- today[today$confirmed == max(today$confirmed), ]$`Country/Region` %in% top15_confirmed_per_capita$country
+appears_1 <- today[
+  today$confirmed == max(today$confirmed),
+  ]$`Country/Region` %in% top15_confirmed_per_capita$country
 if (!appears_1) {
   text_2 <- paste(
     "Interestingly, the country with the most infections, ",
@@ -53,7 +75,10 @@ if (!appears_1) {
     sep = ""
   )
 } else {
-  pos <- match(as.character(today[today$confirmed == max(today$confirmed), 2]), top15_confirmed_per_capita$country)
+  pos <- match(
+    as.character(today[today$confirmed == max(today$confirmed), 2]),
+    top15_confirmed_per_capita$country
+  )
   text_2 <- paste(
     "The country with the most infections, ",
     country,
@@ -71,14 +96,21 @@ if (country == "US") {
   country <- "the United States"
 }
 
-new_in_2 <- sum(!top15_deaths_per_capita$country %in% top15_deaths$`Country/Region`)
+new_in_2 <- sum(
+  !top15_deaths_per_capita$country %in% top15_deaths$`Country/Region`
+)
 if (new_in_2 > 0) {
   if (new_in_1 == new_in_2) {
     start <- "Once again,"
   } else {
     start <- "This time,"
   }
-  text_1 <- paste(start, new_in_2, "countries that are not among the countries with the most deaths are among the countries with the highest death rate.")
+  text_1 <- paste(
+    start,
+    new_in_2,
+    "countries that are not among the countries with the most deaths are among
+    the countries with the highest death rate."
+  )
 } else {
   if (new_in_1 == 0) {
     text_1 <- "Once again, the same countries remain."
@@ -87,7 +119,9 @@ if (new_in_2 > 0) {
   }
 }
 
-appears_2 <- today[today$deaths == max(today$deaths), ]$`Country/Region` %in% top15_confirmed_per_capita$country
+appears_2 <- today[
+  today$deaths == max(today$deaths),
+]$`Country/Region` %in% top15_confirmed_per_capita$country
 if (!appears_2) {
   if (!appears_1) {
     text_2 <- paste(
@@ -105,7 +139,10 @@ if (!appears_2) {
     )
   }
 } else {
-  pos <- match(as.character(today[today$deaths == max(today$deaths), 2]), top15_deaths_per_capita$country)
+  pos <- match(
+    as.character(today[today$deaths == max(today$deaths), 2]),
+    top15_deaths_per_capita$country
+  )
   text_2 <- paste(
     "The country with the most deaths, ",
     country,
@@ -122,15 +159,23 @@ country_1 <- df_most[1, ]$country
 if (country_1 == "US") {
   country_1 <- "the United States"
 }
-text_1 <- paste("In ", country_1, ", the number of new infections has increased from ",
+text_1 <- paste(
+  "In ",
+  country_1,
+  ", the number of new infections has increased from ",
   format(df_most[1, ]$old, big.mark = "."), " to ",
   format(df_most[1, ]$new, big.mark = "."), ", an increase of ",
   format(df_most[1, ]$increase, big.mark = "."),
   "%.",
   sep = ""
 )
-text_2 <- "However, these numbers can easily be influenced by outliers. Countries that didn't have a lot of cases a fortnight ago."
-text_3 <- paste("Let's see what the data looks like when a country must have had at least", format(limit, big.mark = "."), "infections two weeks ago.")
+text_2 <- "However, these numbers can easily be influenced by outliers.
+Countries that didn't have a lot of cases a fortnight ago."
+text_3 <- paste(
+  "Let's see what the data looks like when a country must have had at least",
+  format(limit, big.mark = "."),
+  "infections two weeks ago."
+)
 
 
 file_6[9] <- paste(text_1, text_2, sep = "<br>")
@@ -146,7 +191,10 @@ if (country_1 != country_2) {
     country_2 <- "The United States"
   }
 
-  text_1 <- paste(country_2, " now has the highest increase in new infections. The figures rose from <br>",
+  text_1 <- paste(
+    country_2,
+    " now has the highest increase in new infections.
+    The figures rose from <br>",
     format(df_limit_most[1, ]$old, big.mark = "."), " to ",
     format(df_limit_most[1, ]$new, big.mark = "."), ", an increase of <br>",
     format(df_limit_most[1, ]$increase, big.mark = "."),
@@ -154,9 +202,35 @@ if (country_1 != country_2) {
     sep = ""
   )
   if (country_1 %in% df_limit_most$country) {
-    text_1 <- paste(text_1, paste(country_1, " is in ", ordinal(match(df_most[1, ]$country, df_limit_most$country)), "place.", sep = ""), sep = "<br>")
+    text_1 <- paste(
+      text_1,
+      paste(
+        country_1,
+        " is in ", 
+        ordinal(
+          match(
+            df_most[1, ]$country,
+            df_limit_most$country
+          )
+        ),
+        "place.",
+        sep = ""
+      ),
+      sep = "<br>"
+    )
   } else {
-    text_1 <- paste(text_1, paste("The previous leader, ", country_1, ", is not even in the top ", nrow(df_limit_most), ".", sep = ""), sep = "<br>")
+    text_1 <- paste(
+      text_1,
+      paste(
+        "The previous leader, ",
+        country_1,
+        ", is not even in the top ",
+        nrow(df_limit_most),
+        ".",
+        sep = ""
+      ),
+      sep = "<br>"
+    )
   }
 }
 

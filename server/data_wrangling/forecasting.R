@@ -24,16 +24,44 @@ forecast_death$lower <- round(forecast_death$lower)
 forecast_death$upper <- round(forecast_death$upper)
 forecast_death$mean <- round(forecast_death$mean)
 # create dates for the forecast
-dates_ts <- seq(from = daily_cases$date[1], to = max(daily_cases$date) + 30, by = 1)
+dates_ts <- seq(
+  from = daily_cases$date[1],
+  to = max(daily_cases$date) + 30,
+  by = 1
+)
 # create forecast data.frame
 forecast_df <- data.frame(
   date = dates_ts,
-  confirmed = c(daily_cases$confirmed, rep(NA, length(dates_ts) - length(daily_cases$confirmed))),
-  fitted_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$mean),
-  upper95_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$upper),
-  lower95_conf = c(rep(NA, length(dates_ts) - length(forecast_conf$mean)), forecast_conf$lower),
-  deaths = c(daily_cases$deaths, rep(NA, length(dates_ts) - length(daily_cases$deaths))),
-  fitted_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$mean),
-  upper95_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$upper),
-  lower95_death = c(rep(NA, length(dates_ts) - length(forecast_death$mean)), forecast_death$lower)
+  confirmed = c(
+    daily_cases$confirmed,
+    rep(NA, length(dates_ts) - length(daily_cases$confirmed))
+  ),
+  fitted_conf = c(
+    rep(NA, length(dates_ts) - length(forecast_conf$mean)),
+    forecast_conf$mean
+  ),
+  upper95_conf = c(
+    rep(NA, length(dates_ts) - length(forecast_conf$mean)),
+    forecast_conf$upper
+  ),
+  lower95_conf = c(
+    rep(NA, length(dates_ts) - length(forecast_conf$mean)),
+    forecast_conf$lower
+  ),
+  deaths = c(
+    daily_cases$deaths,
+    rep(NA, length(dates_ts) - length(daily_cases$deaths))
+  ),
+  fitted_death = c(
+    rep(NA, length(dates_ts) - length(forecast_death$mean)),
+    forecast_death$mean
+  ),
+  upper95_death = c(
+    rep(NA, length(dates_ts) - length(forecast_death$mean)),
+    forecast_death$upper
+  ),
+  lower95_death = c(
+    rep(NA, length(dates_ts) - length(forecast_death$mean)),
+    forecast_death$lower
+  )
 )

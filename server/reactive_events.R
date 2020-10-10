@@ -12,7 +12,11 @@ get_country <- eventReactive(input$mymap_click, {
     country <- "world"
   } else {
     country <- country$ADMIN
+    if (country == "Palestine") {
+      country <- "Israel"
+    }
   }
+  country
 })
 
 # get the date
