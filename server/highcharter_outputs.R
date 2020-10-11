@@ -416,29 +416,14 @@ output$highcharter_14 <- renderHighchart({
     ) %>%
     hc_yAxis(title = list(text = "Confirmed cases")) %>%
     hc_add_series(
+      name = "Brazil",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Brazil"],
+      color = "#FFBD00"
+    ) %>%
+    hc_add_series(
       name = "China",
       data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "China"],
       color = "#5BC0EB"
-    ) %>%
-    hc_add_series(
-      name = "Italy",
-      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Italy"],
-      color = "#F8333C"
-    ) %>%
-    hc_add_series(
-      name = "USA",
-      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "US"],
-      color = "#97C667"
-    ) %>%
-    hc_add_series(
-      name = "Germany",
-      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Germany"],
-      color = "#EE6352"
-    ) %>%
-    hc_add_series(
-      name = "Spain",
-      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Spain"],
-      color = "#F2CCC3"
     ) %>%
     hc_add_series(
       name = "France",
@@ -446,19 +431,39 @@ output$highcharter_14 <- renderHighchart({
       color = "#F6D8AE"
     ) %>%
     hc_add_series(
+      name = "Germany",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Germany"],
+      color = "#EE6352"
+    ) %>%
+    hc_add_series(
+      name = "India",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "India"],
+      color = "pink"
+    ) %>%
+    hc_add_series(
+      name = "Italy",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Italy"],
+      color = "#F8333C"
+    ) %>%
+    hc_add_series(
       name = "Russia",
       data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Russia"],
       color = "#00a896"
     ) %>%
     hc_add_series(
-      name = "Brazil",
-      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Brazil"],
-      color = "#FFBD00"
+      name = "Spain",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "Spain"],
+      color = "#F2CCC3"
     ) %>%
     hc_add_series(
       name = "UK",
       data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "United Kingdom"],
       color = "#D4A0A7"
+    ) %>%
+    hc_add_series(
+      name = "USA",
+      data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "US"],
+      color = "#97C667"
     ) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_title(
