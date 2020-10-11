@@ -428,7 +428,7 @@ output$highcharter_14 <- renderHighchart({
     hc_add_series(
       name = "France",
       data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "France"],
-      color = "#F6D8AE"
+      color = "#AF3E4D"
     ) %>%
     hc_add_series(
       name = "Germany",
@@ -438,7 +438,7 @@ output$highcharter_14 <- renderHighchart({
     hc_add_series(
       name = "India",
       data = daily_cases2$confirmed[daily_cases2$`Country/Region` == "India"],
-      color = "pink"
+      color = "#F4F4F8"
     ) %>%
     hc_add_series(
       name = "Italy",
