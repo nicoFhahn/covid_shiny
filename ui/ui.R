@@ -69,6 +69,7 @@ spins <- list(
 set.seed(Sys.time())
 spinner <- spins[[sample(1:66, 1)]]
 fluidPage(
+  title = "Covid-19 Timeline",
   tags$head(
     tags$style(
       css
