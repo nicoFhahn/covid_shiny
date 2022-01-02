@@ -714,7 +714,7 @@ fluidPage(
         tags$div(id = "demo", class = "collapse"),
         br(),
         h2(
-          "SARS-CoV-2 Outbreak 2020",
+          "SARS-CoV-2 Outbreak",
           style = "font-size:1.8em;"
         ),
         div(

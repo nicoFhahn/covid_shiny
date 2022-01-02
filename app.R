@@ -30,7 +30,7 @@ key <- Sys.getenv("MAPBOX_KEY")
 options(mapbox.accessToken = key)
 css <- sass(sass_file("styles.scss"))
 # load the interface
-source(file.path("server", "load_data.R"), local = TRUE)
+# source(file.path("server", "load_data.R"), local = TRUE)
 source(file.path("server", "create_story.R"), local = TRUE)
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # load the server

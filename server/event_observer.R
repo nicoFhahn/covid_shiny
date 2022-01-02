@@ -17,11 +17,13 @@ observeEvent(list(
       # if a country was clicked, select the subset of corona data
       if (country != "world") {
         country_df <- st_as_sf(countries[countries$ADMIN == country, ], crs = 4326)
-        if (country == "Israel") {
+        if (country == "China") {
+          corona_frame <- corona_frame[corona_frame$`Country/Region` == "China", ]
+        } else if (country == "Israel") {
           corona_frame <- corona_frame[corona_frame$`Country/Region` == "Israel", ]
-        } else {
-          corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
-        }
+          } else {
+            corona_frame <- corona_frame[unlist(st_contains(country_df, corona_frame)), ]
+          }
         if (country == "Italy") {
           corona_frame <- corona_frame[corona_frame$`Country/Region` == "Italy", ]
         }
@@ -94,7 +96,7 @@ observeEvent(list(
       if (country != "world") {
         if (!ee) {
           country_df2 <- countries[countries$ADMIN != country, ]
-          if (country != "Israel") {
+          if (!country %in% c("China", "Israel")) {
             leafletProxy("mymap") %>%
               # remove stuff from the old map
               clearControls() %>%

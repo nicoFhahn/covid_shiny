@@ -134,8 +134,36 @@ canada_deaths <- deaths_long[deaths_long$`Country/Region` == "Canada", ][, .(
   date = unique(date)
 ), keyby = .(date, `Country/Region`)][, 3:8]
 
-confirmed_long <- rbind(confirmed_long[confirmed_long$`Country/Region` != "Canada"], canada_confirmed)
-deaths_long <- rbind(deaths_long[deaths_long$`Country/Region` != "Canada"], canada_deaths)
+china_confirmed <- confirmed_long[confirmed_long$`Country/Region` == "China", ][, .(
+  `Province/State` = unique(`Country/Region`),
+  `Country/Region` = unique(`Country/Region`),
+  confirmed = sum(confirmed),
+  Lat = mean(Lat),
+  Long = mean(Long),
+  date = unique(date)
+), keyby = .(date, `Country/Region`)][, 3:8]
+
+china_deaths <- deaths_long[deaths_long$`Country/Region` == "China", ][, .(
+  `Province/State` = unique(`Country/Region`),
+  `Country/Region` = unique(`Country/Region`),
+  Lat = mean(Lat),
+  Long = mean(Long),
+  deaths = sum(deaths),
+  date = unique(date)
+), keyby = .(date, `Country/Region`)][, 3:8]
+
+china_recovered <- recovered_long[recovered_long$`Country/Region` == "China", ][, .(
+  `Province/State` = unique(`Country/Region`),
+  `Country/Region` = unique(`Country/Region`),
+  Lat = mean(Lat),
+  Long = mean(Long),
+  recovered = sum(recovered, na.rm = TRUE),
+  date = unique(date)
+), keyby = .(date, `Country/Region`)][, 3:8]
+
+confirmed_long <- rbind(confirmed_long[!confirmed_long$`Country/Region` %in% c("Canada", "China")], canada_confirmed, china_confirmed)
+deaths_long <- rbind(deaths_long[!deaths_long$`Country/Region` %in% c("Canada", "China")], canada_deaths, china_deaths)
+recovered_long <- rbind(recovered_long[!recovered_long$`Country/Region` %in% c("China")], china_recovered)
 
 confirmed_long <- confirmed_long[order(confirmed_long$date, confirmed_long$`Country/Region`, confirmed_long$`Province/State`), ]
 deaths_long <- deaths_long[order(deaths_long$date, deaths_long$`Country/Region`, deaths_long$`Province/State`), ]
@@ -145,6 +173,8 @@ confirmed_long[, deaths := deaths_long[, "deaths"]]
 confirmed_long[, recovered := recovered_long[, "recovered"]]
 confirmed_long[confirmed_long$`Country/Region` == "Canada", ]$Lat <- 53.91469
 confirmed_long[confirmed_long$`Country/Region` == "Canada", ]$Long <- -106.48272
+confirmed_long[confirmed_long$`Country/Region` == "China", ]$Lat <- 34.89679
+confirmed_long[confirmed_long$`Country/Region` == "China", ]$Long <- 104.75355
 confirmed_long[confirmed_long$`Country/Region` == "Holy See", ]$`Country/Region` <- "Vatican"
 corona <- confirmed_long
 # add a day 0 frame
@@ -157,6 +187,19 @@ corona_0$date <- min(corona$date) - 1
 corona <- rbind(corona_0, corona)
 # save the first and last date for later
 dates <- c(min(corona$date), max(corona$date))
+corona = corona[corona$`Province/State` != "Unknown"]
+if (nrow(corona[corona$recovered == 0 & corona$date == Sys.Date() - 1]) > 0) {
+  corona$temp <- paste(corona$`Province/State`, corona$`Country/Region`)
+  missing <- corona[corona$recovered == 0 & corona$date == Sys.Date() - 1]$temp
+  for(x in missing) {
+    if (!all(corona[corona$temp == x]$recovered == 0)) {
+      last_ind <- max(which(corona[corona$temp == x]$recovered != 0))
+      corona[corona$temp == x]$recovered[(last_ind + 1):nrow(corona[corona$temp == x])] <- corona[corona$temp == x]$recovered[last_ind]
+    }
+  }
+  corona$temp <- NULL
+  
+}
 # turn into a geo data.frame
 corona_sf <- data.table(st_as_sf(corona, coords = c("Long", "Lat"), crs = 4326))
 # replace empty province with the country/region
